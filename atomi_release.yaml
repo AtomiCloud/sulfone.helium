@@ -59,14 +59,14 @@ types:
         desc: Update CI configuration
         release: false
   - type: docs
-    section: Documentation Updates
+    section: 📜 Documentation 📜
     desc: Documentation only changes
     scopes:
       default:
         desc: Update documentation such as README file
         release: false
   - type: feat
-    section: New Features
+    section: 🚀 Features 🚀
     desc: A new feature
     vae:
       verb: add
@@ -77,7 +77,7 @@ types:
         desc: Release a new features
         release: minor
   - type: fix
-    section: Bug Fixes
+    section: 🐛 Bug Fixes 🐛
     desc: A bug fix
     vae:
       verb: fix
@@ -88,7 +88,7 @@ types:
         desc: Generic fixes
         release: patch
   - type: perf
-    section: Performance Improvement
+    section: 🚄 Performance Improvement 🚄
     desc: A code change that improves performance
     vae:
       verb: improve
@@ -99,7 +99,6 @@ types:
         desc: Generic improvement statement
         release: patch
   - type: refactor
-    section: Refactored Code
     desc: A code change that neither fixes a bug nor adds a feature
     vae:
       verb: refactor
@@ -120,7 +119,7 @@ types:
         desc: Generic improvement statement
         release: patch
   - type: test
-    section: Update test
+    section: 🧪 Tests 🧪
     desc: Adding missing tests or correcting existing tests
     vae:
       verb: test

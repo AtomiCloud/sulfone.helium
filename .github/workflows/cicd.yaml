@@ -3,8 +3,6 @@ name: CI-CD
 on:
   push:
 
-env:
-  # Docker
 jobs:
   precommit:
     name: Pre-commit Check
