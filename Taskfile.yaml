@@ -1,0 +1,8 @@
+version: "3"
+
+vars:
+  PLATFORM: sulfone
+  SERVICE: helium
+
+includes:
+  dotnet: sdks/dotnet/Taskfile.yaml

@@ -1,0 +1,60 @@
+name: CI-CD
+
+on:
+  push:
+
+env:
+  # Docker
+jobs:
+  precommit:
+    name: Pre-commit Check
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Run pre-commit
+        run: nix develop .#ci -c ./scripts/ci/pre-commit.sh
+  publishdotnet:
+    name: Publish .NET
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: rlespinasse/github-slug-action@v3.x
+      - name: Publish
+        env:
+          GITHUB_REPO_REF: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
+
+          MAIN_BRANCH: "main"
+
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: nix develop .#ci -c sdks/dotnet/scripts/ci/publish.sh
+
+  release:
+    name: Semantic Release
+    needs:
+      - precommit
+      - publishdotnet
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: rlespinasse/github-slug-action@v3.x
+      - name: Release
+        env:
+          GITHUB_REPO_REF: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
+
+          MAIN_BRANCH: "main"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
+        run: nix develop .#releaser -c scripts/ci/release.sh

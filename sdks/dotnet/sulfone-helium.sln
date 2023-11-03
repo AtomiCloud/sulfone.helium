@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sulfone-helium-template-api", "sulfone-helium-template-api\sulfone-helium-template-api.csproj", "{583AE0FF-6C9E-4D3B-8802-1FA894896D3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sulfone-helium", "sulfone-helium\sulfone-helium.csproj", "{DA4DE69C-1598-4D25-821B-97B10524FF09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sulfone-helium-extension-api", "sulfone-helium-extension-api\sulfone-helium-extension-api.csproj", "{91D8647B-4D2B-4F80-A9CD-34704137D559}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sulfone-helium-processor-api", "sulfone-helium-processor-api\sulfone-helium-processor-api.csproj", "{FDFA27C7-2A90-46AD-87AE-E1556E619CC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{583AE0FF-6C9E-4D3B-8802-1FA894896D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583AE0FF-6C9E-4D3B-8802-1FA894896D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583AE0FF-6C9E-4D3B-8802-1FA894896D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583AE0FF-6C9E-4D3B-8802-1FA894896D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA4DE69C-1598-4D25-821B-97B10524FF09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA4DE69C-1598-4D25-821B-97B10524FF09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA4DE69C-1598-4D25-821B-97B10524FF09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA4DE69C-1598-4D25-821B-97B10524FF09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D8647B-4D2B-4F80-A9CD-34704137D559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D8647B-4D2B-4F80-A9CD-34704137D559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D8647B-4D2B-4F80-A9CD-34704137D559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D8647B-4D2B-4F80-A9CD-34704137D559}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDFA27C7-2A90-46AD-87AE-E1556E619CC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDFA27C7-2A90-46AD-87AE-E1556E619CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDFA27C7-2A90-46AD-87AE-E1556E619CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDFA27C7-2A90-46AD-87AE-E1556E619CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

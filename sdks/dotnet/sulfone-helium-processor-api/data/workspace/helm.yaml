@@ -1,0 +1,7 @@
+a: b
+c:
+  d: e
+  f: 123123
+  h: [1, 2, 3, 4]
+
+landscape: "lapras"

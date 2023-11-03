@@ -1,0 +1,4 @@
+.direnv
+.fleet
+.pre-commit-config.yaml
+nupkgs
