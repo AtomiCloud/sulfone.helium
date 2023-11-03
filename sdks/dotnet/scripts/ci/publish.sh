@@ -16,7 +16,7 @@ BRANCH="$(echo "${GITHUB_BRANCH}" | sed 's/[._-]*$//')"
 RELEASE_VERSION="${SHA}-${BRANCH}"
 
 echo "🪵 Current Branch: $BRANCH"
-ehco "🪵 Main Branch: ${MAIN_BRANCH}"
+echo "🪵 Main Branch: ${MAIN_BRANCH}"
 
 if [ "$BRANCH" == "$MAIN_BRANCH" ]; then
   echo "🔍 Full release detected, building with version"
