@@ -54,8 +54,8 @@ let
           xmlstarlet
           ;
 
-        pnpm = nodePackages.pnpm;
-        nodejs = nodejs_18;
+        npm = nodePackages.npm;
+        nodejs = nodejs_20;
         dotnet = dotnet-sdk_8;
       }
     );

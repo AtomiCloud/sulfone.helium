@@ -24,7 +24,6 @@ with packages;
     dotnet
     nodejs
     infisical
-    pnpm
   ];
 
   lint = [
@@ -39,6 +38,12 @@ with packages;
 
   ci = [
 
+  ];
+
+  releaser = [
+    nodejs
+    sg
+    npm
   ];
 
 }
