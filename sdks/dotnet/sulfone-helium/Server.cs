@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using sulfone_helium_domain;
 using sulfone_helium_domain.Core;
 using sulfone_helium_domain.Core.FileSystem;
 using sulfone_helium_domain.Extension;
@@ -13,6 +12,13 @@ using sulfone_helium.Api.Processor;
 using sulfone_helium.Api.Template;
 
 namespace sulfone_helium;
+
+
+public struct StatusMessage
+{
+    public string Message { get; set; }
+    public string Status { get; set; }
+}
 
 public static class CyanEngine
 {
@@ -34,6 +40,8 @@ public static class CyanEngine
         app.UseSwaggerUI();
 
 
+        app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
+        
         app.MapPost("/api/plug", async Task<PluginRes> (PluginReq req) =>
         {
             var resp = await p.Plug(req.ToDomain());
@@ -65,7 +73,7 @@ public static class CyanEngine
         app.UseSwagger();
         app.UseSwaggerUI();
 
-
+        app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
         app.MapPost("/api/process", async Task<ProcessorRes> (ProcessorReq req) =>
         {
             var resp = await p.Process(req.ToDomain());
@@ -97,7 +105,7 @@ public static class CyanEngine
         app.UseSwagger();
         app.UseSwaggerUI();
 
-
+        app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
         app.MapPost("/api/template/init", async Task<TemplateRes> (TemplateAnswerReq answers) =>
         {
             var resp = await h.Template(answers.ToDomain());
@@ -135,7 +143,8 @@ public static class CyanEngine
         app.UseSwagger();
         app.UseSwaggerUI();
 
-
+        app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
+        
         app.MapPost("/api/extension/init", async Task<ExtensionRes> (ExtensionAnswerReq answers) =>
         {
             var resp = await h.Extend(answers.ToDomain());
