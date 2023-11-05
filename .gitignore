@@ -2,3 +2,4 @@
 .fleet
 .pre-commit-config.yaml
 nupkgs
+.DS_Store
