@@ -69,7 +69,7 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
 
-          RELEASE: "true"
+          RELEASE: "false"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           NPM_API_KEY: ${{ secrets.NPM_API_KEY }}

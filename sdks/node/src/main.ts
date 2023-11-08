@@ -54,6 +54,7 @@ import type {
   SelectQ,
   TextQ,
 } from "./domain/core/question.js";
+import { GlobType } from "./domain/core/cyan.js";
 
 function createApp(): Application {
   const app = express();
@@ -187,6 +188,7 @@ export {
 };
 
 export type {
+  GlobType,
   ICyanTemplate,
   ICyanExtension,
   ICyanProcessor,

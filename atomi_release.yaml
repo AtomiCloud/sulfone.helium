@@ -32,7 +32,7 @@ plugins:
 
   - module: "@semantic-release/git"
     config:
-      message: "release: ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      message: "release(no-release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       assets:
         - sdks/dotnet/sulfone-helium/sulfone-helium.csproj
         - sdks/node/package.json
@@ -42,6 +42,7 @@ plugins:
   - module: "@semantic-release/exec"
     config:
       publishCmd: scripts/ci/publish.sh
+
   - module: "@semantic-release/github"
 
 # Angular Conventional Commit Example: https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines
