@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.1.0...v1.1.1) (2023-11-08)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **node:** incorrect manifest ([2f1919a](https://github.com/AtomiCloud/sulfone.helium/commit/2f1919ab1a475e7377b8a2fa11ef9cae64b5426d))
+
 ## [1.1.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.0.0...v1.1.0) (2023-11-08)
 
 
