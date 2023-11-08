@@ -26,6 +26,7 @@ CyanEngine.StartProcessor(args, Task<ProcessorOutput> (i, fileHelper) =>
         {
             return x with
             {
+                BaseWrite = Handlebars.Compile(x.BaseWrite)(handleBarsConfig?.Vars ?? new Dictionary<string, string>()),
                 Content = Handlebars.Compile(x.Content)(handleBarsConfig?.Vars ?? new Dictionary<string, string>())
             };
         }

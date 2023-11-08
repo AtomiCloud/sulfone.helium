@@ -78,7 +78,7 @@ function StartPlugin(plugin: ICyanPlugin): void {
     res.json(PluginMapper.ToRes(result));
   });
 
-  app.listen(port, () => {
+  app.listen(port, "0.0.0.0", () => {
     console.log(`Plugin listening on port ${port}`);
   });
 }
@@ -100,7 +100,7 @@ function StartProcessor(processor: ICyanProcessor): void {
     res.json(ProcessorMapper.toRes(result));
   });
 
-  app.listen(port, () => {
+  app.listen(port, "0.0.0.0", () => {
     console.log(`Processor listening on port ${port}`);
   });
 }
@@ -132,7 +132,7 @@ function StartTemplate(template: ICyanTemplate): void {
     res.json(r);
   });
 
-  app.listen(port, () => {
+  app.listen(port, "0.0.0.0", () => {
     console.log(`Template listening on port ${port}`);
   });
 }
@@ -165,7 +165,7 @@ function StartExtension(ext: ICyanExtension): void {
     res.json(r);
   });
 
-  app.listen(port, () => {
+  app.listen(port, "0.0.0.0", () => {
     console.log(`Extension listening on port ${port}`);
   });
 }
