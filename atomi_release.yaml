@@ -38,6 +38,7 @@ plugins:
         - sdks/node/package.json
         - docs/developer/Changelog.md
         - docs/developer/CommitConventions.md
+
   - module: "@semantic-release/exec"
     config:
       publishCmd: scripts/ci/publish.sh
