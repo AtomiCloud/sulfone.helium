@@ -13,7 +13,7 @@ set -eou pipefail
 SHA="$(echo "${GITHUB_SHA}" | head -c 6)"
 # shellcheck disable=SC2001
 BRANCH="$(echo "${GITHUB_BRANCH}" | sed 's/[._-]*$//')"
-RELEASE_VERSION="${SHA}-${BRANCH}"
+RELEASE_VERSION="${BRANCH}-${SHA}"
 
 echo "🪵 Current Branch: $BRANCH"
 
