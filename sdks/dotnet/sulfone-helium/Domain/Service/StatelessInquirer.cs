@@ -1,8 +1,8 @@
 using System.Globalization;
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Core.Questions;
+using sulfone_helium.Domain.Core;
+using sulfone_helium.Domain.Core.Questions;
 
-namespace sulfone_helium_domain.Service;
+namespace sulfone_helium.Domain.Service;
 
 public class StatelessInquirer : IInquirer
 {

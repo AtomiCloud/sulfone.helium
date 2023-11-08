@@ -1,4 +1,4 @@
-using sulfone_helium_domain.Core;
+using sulfone_helium.Domain.Core;
 
 namespace sulfone_helium.Api.Template;
 

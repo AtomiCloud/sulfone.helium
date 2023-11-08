@@ -1,7 +1,7 @@
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Service;
+using sulfone_helium.Domain.Core;
+using sulfone_helium.Domain.Service;
 
-namespace sulfone_helium_domain.Extension;
+namespace sulfone_helium.Domain.Extension;
 
 public class ExtensionService
 {
@@ -14,10 +14,12 @@ public class ExtensionService
         var d = new StatelessDeterminism(answer.DeterministicState, ref pointer);
         try
         {
-            var input = new CyanExtensionInput()
+            var input = new CyanExtensionInput
             {
                 PrevAnswers = answer.PrevAnswers,
-                Prev = answer.Prev,
+                PrevCyan = answer.PrevCyan,
+                PrevExtensionAnswers = answer.PrevExtensionAnswers,
+                PrevExtensionCyans = answer.PrevExtensionCyans,
             };
             var r = await Ext.Extension(i, d, input);
             return new ExtensionFinalOutput(r);
@@ -38,7 +40,9 @@ public class ExtensionService
             var input = new CyanExtensionInput()
             {
                 PrevAnswers = answer.PrevAnswers,
-                Prev = answer.Prev,
+                PrevCyan = answer.PrevCyan,
+                PrevExtensionAnswers = answer.PrevExtensionAnswers,
+                PrevExtensionCyans = answer.PrevExtensionCyans,
             };
             var r = await Ext.Extension(i, d, input);
             throw new ApplicationException("Not supposed to reach here for validation!");

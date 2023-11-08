@@ -8,6 +8,7 @@ with packages;
     findutils
     xmlstarlet
     yq-go
+    jq
   ];
 
   dev = [
@@ -23,6 +24,7 @@ with packages;
     go
     dotnet
     nodejs
+    bun
     infisical
   ];
 

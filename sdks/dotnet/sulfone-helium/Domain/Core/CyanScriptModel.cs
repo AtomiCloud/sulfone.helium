@@ -1,18 +1,22 @@
 using Newtonsoft.Json.Linq;
 
-namespace sulfone_helium_domain.Core;
+namespace sulfone_helium.Domain.Core;
 
 // User-viewed input
 public readonly struct CyanExtensionInput
 {
-    public void Deconstruct(out IEnumerable<IAnswer> prevAnswers, out Cyan prev)
+    public void Deconstruct(out IEnumerable<IAnswer> prevAnswers, out Cyan prevCyan, out Dictionary<string, IEnumerable<IAnswer>> prevExtensionAnswers, out Dictionary<string, Cyan> prevExtensionCyans)
     {
         prevAnswers = PrevAnswers;
-        prev = Prev;
+        prevCyan = PrevCyan;
+        prevExtensionAnswers = PrevExtensionAnswers;
+        prevExtensionCyans = PrevExtensionCyans;
     }
 
     public required IEnumerable<IAnswer> PrevAnswers { get; init; }
-    public required Cyan Prev { get; init; }
+    public required Cyan PrevCyan { get; init; }
+    public required Dictionary<string, IEnumerable<IAnswer>> PrevExtensionAnswers { get; init; }
+    public required Dictionary<string, Cyan> PrevExtensionCyans { get; init; }
 }
 
 public readonly struct CyanProcessorInput

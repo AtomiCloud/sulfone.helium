@@ -1,19 +1,23 @@
-using sulfone_helium_domain.Core;
+using sulfone_helium.Domain.Core;
 
-namespace sulfone_helium_domain.Extension;
+namespace sulfone_helium.Domain.Extension;
 
 // Server Inputs (Exposed as requests)
 public record ExtensionAnswerInput(
     IAnswer[] Answers,
     Dictionary<string, string>[] DeterministicState,
     IAnswer[] PrevAnswers,
-    Cyan Prev
+    Cyan PrevCyan,
+    Dictionary<string, IEnumerable<IAnswer>> PrevExtensionAnswers,
+    Dictionary<string, Cyan> PrevExtensionCyans
 );
 
 public record ExtensionValidateInput(
     IAnswer[] Answers,
     Dictionary<string, string>[] DeterministicState,
     IAnswer[] PrevAnswers,
-    Cyan Prev,
+    Cyan PrevCyan,
+    Dictionary<string, IEnumerable<IAnswer>> PrevExtensionAnswers,
+    Dictionary<string, Cyan> PrevExtensionCyans,
     string Validate
 );

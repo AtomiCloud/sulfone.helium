@@ -1,5 +1,5 @@
-using sulfone_helium_domain.Template;
 using sulfone_helium.Api.Core;
+using sulfone_helium.Domain.Template;
 
 namespace sulfone_helium.Api.Template;
 

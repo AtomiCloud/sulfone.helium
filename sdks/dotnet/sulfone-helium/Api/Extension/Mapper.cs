@@ -1,5 +1,6 @@
-using sulfone_helium_domain.Extension;
 using sulfone_helium.Api.Core;
+using sulfone_helium.Domain.Core;
+using sulfone_helium.Domain.Extension;
 
 namespace sulfone_helium.Api.Extension;
 
@@ -11,7 +12,14 @@ public static class ExtensionMapper
             req.Answers.Select(x => x.ToDomain()).ToArray(),
             req.DeterministicStates,
             req.PrevAnswers.Select(x => x.ToDomain()).ToArray(),
-            req.PrevCyan.ToDomain()
+            req.PrevCyan.ToDomain(),
+            req.PrevExtensionAnswers
+                .Select(kv =>
+                    new KeyValuePair<string, IEnumerable<IAnswer>>(kv.Key, kv.Value.Select(a => a.ToDomain())))
+                .ToDictionary(kv => kv.Key, kv => kv.Value),
+            req.PrevExtensionCyans
+                .Select(kv => new KeyValuePair<string, Cyan>(kv.Key, kv.Value.ToDomain()))
+                .ToDictionary(kv => kv.Key, kv => kv.Value)
         );
     }
 
@@ -22,6 +30,13 @@ public static class ExtensionMapper
             req.DeterministicStates,
             req.PrevAnswers.Select(x => x.ToDomain()).ToArray(),
             req.PrevCyan.ToDomain(),
+            req.PrevExtensionAnswers
+                .Select(kv =>
+                    new KeyValuePair<string, IEnumerable<IAnswer>>(kv.Key, kv.Value.Select(a => a.ToDomain())))
+                .ToDictionary(kv => kv.Key, kv => kv.Value),
+            req.PrevExtensionCyans
+                .Select(kv => new KeyValuePair<string, Cyan>(kv.Key, kv.Value.ToDomain()))
+                .ToDictionary(kv => kv.Key, kv => kv.Value),
             req.Validate
         );
     }

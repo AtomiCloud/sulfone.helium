@@ -12,6 +12,11 @@ public struct ExtensionValidateReq
 
     public CyanReq PrevCyan { get; set; }
 
+    public Dictionary<string, AnswerReq[]> PrevExtensionAnswers { get; set; }
+
+    public Dictionary<string, CyanReq> PrevExtensionCyans { get; set; }
+
+
     public string Validate { get; set; }
 }
 
@@ -20,8 +25,12 @@ public struct ExtensionAnswerReq
     public AnswerReq[] Answers { get; set; }
 
     public Dictionary<string, string>[] DeterministicStates { get; set; }
-    
+
     public AnswerReq[] PrevAnswers { get; set; }
 
     public CyanReq PrevCyan { get; set; }
+    
+    public Dictionary<string, AnswerReq[]> PrevExtensionAnswers { get; set; }
+
+    public Dictionary<string, CyanReq> PrevExtensionCyans { get; set; }
 }

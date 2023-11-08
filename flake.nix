@@ -9,6 +9,7 @@
     nixpkgs.url = "nixpkgs/d816b5ab44187a2dd84806630ce77a733724f95f";
     nixpkgs-2305.url = "nixpkgs/nixos-23.05";
     nixpkgs-sep-04-23.url = "nixpkgs/d816b5ab44187a2dd84806630ce77a733724f95f";
+    nixpkgs-nov-08-23.url = "nixpkgs/85f1ba3e51676fa8cc604a3d863d729026a6b8eb";
     atomipkgs.url = "github:kirinnee/test-nix-repo/v18.3.0";
     atomipkgs_classic.url = "github:kirinnee/test-nix-repo/classic";
   };
@@ -26,6 +27,7 @@
     , nixpkgs
     , nixpkgs-2305
     , nixpkgs-sep-04-23
+    , nixpkgs-nov-08-23
 
     } @inputs:
     flake-utils.lib.eachDefaultSystem
@@ -34,6 +36,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
         pkgs-2305 = nixpkgs-2305.legacyPackages.${system};
         pkgs-sep-04-23 = nixpkgs-sep-04-23.legacyPackages.${system};
+        pkgs-nov-08-23 = nixpkgs-nov-08-23.legacyPackages.${system};
         atomi = atomipkgs.packages.${system};
         atomi_classic = atomipkgs_classic.packages.${system};
         pre-commit-lib = pre-commit-hooks.lib.${system};
@@ -47,7 +50,7 @@
             inherit treefmt-nix pkgs;
           };
           packages = import ./nix/packages.nix {
-            inherit pkgs atomi atomi_classic pkgs-2305 pkgs-sep-04-23;
+            inherit pkgs atomi atomi_classic pkgs-2305 pkgs-sep-04-23 pkgs-nov-08-23;
           };
           env = import ./nix/env.nix {
             inherit pkgs packages;

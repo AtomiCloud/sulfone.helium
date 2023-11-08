@@ -1,4 +1,4 @@
-namespace sulfone_helium_domain.Core.Questions;
+namespace sulfone_helium.Domain.Core.Questions;
 
 public enum QuestionType
 {

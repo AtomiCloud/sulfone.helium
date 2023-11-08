@@ -1,6 +1,6 @@
-using sulfone_helium_domain.Core.Questions;
+using sulfone_helium.Domain.Core.Questions;
 
-namespace sulfone_helium_domain.Core;
+namespace sulfone_helium.Domain.Core;
 
 public interface IInquirer
 {

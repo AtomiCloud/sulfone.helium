@@ -1,8 +1,7 @@
-using Newtonsoft.Json.Linq;
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Core.FileSystem;
+using sulfone_helium.Domain.Core;
+using sulfone_helium.Domain.Core.FileSystem;
 
-namespace sulfone_helium_domain.Processor;
+namespace sulfone_helium.Domain.Processor;
 
 public class ProcessorService
 {

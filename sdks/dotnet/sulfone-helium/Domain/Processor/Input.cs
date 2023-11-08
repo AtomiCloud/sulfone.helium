@@ -1,7 +1,7 @@
 using Newtonsoft.Json.Linq;
-using sulfone_helium_domain.Core;
+using sulfone_helium.Domain.Core;
 
-namespace sulfone_helium_domain.Processor;
+namespace sulfone_helium.Domain.Processor;
 
 public record ProcessorInput(
     string ReadDirectory,

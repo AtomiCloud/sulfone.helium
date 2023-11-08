@@ -1,13 +1,9 @@
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Service;
+using sulfone_helium.Domain.Core;
+using sulfone_helium.Domain.Service;
 
-namespace sulfone_helium_domain.Template;
+namespace sulfone_helium.Domain.Template;
 
-public interface ITemplateService
-{
-}
-
-public class TemplateService : ITemplateService
+public class TemplateService
 {
     private readonly ICyanTemplate _template;
 
@@ -41,7 +37,6 @@ public class TemplateService : ITemplateService
         {
             var r = await _template.Template(i, d);
             throw new ApplicationException("Not supposed to reach here for validation!");
-
         }
         catch (OutOfAnswerException e)
         {

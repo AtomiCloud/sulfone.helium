@@ -1,4 +1,4 @@
-namespace sulfone_helium_domain.Core.FileSystem;
+namespace sulfone_helium.Domain.Core.FileSystem;
 
 public record VirtualFileStream(StreamReader Reader, StreamWriter Writer);
 

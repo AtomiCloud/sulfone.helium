@@ -13,6 +13,24 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Run pre-commit
         run: nix develop .#ci -c ./scripts/ci/pre-commit.sh
+  publishnode:
+    name: Publish NodeJS
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: rlespinasse/github-slug-action@v3.x
+      - name: Publish
+        env:
+          GITHUB_REPO_REF: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
+
+          RELEASE: "false"
+
+          NPM_API_KEY: ${{ secrets.NPM_API_KEY }}
+        run: nix develop .#ci -c sdks/node/scripts/ci/publish.sh
   publishdotnet:
     name: Publish .NET
     runs-on: ubuntu-22.04
@@ -27,7 +45,7 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
 
-          MAIN_BRANCH: "main"
+          RELEASE: "false"
 
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: nix develop .#ci -c sdks/dotnet/scripts/ci/publish.sh
@@ -37,6 +55,7 @@ jobs:
     needs:
       - precommit
       - publishdotnet
+      - publishnode
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -50,9 +69,10 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
 
-          MAIN_BRANCH: "main"
+          RELEASE: "true"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+          NPM_API_KEY: ${{ secrets.NPM_API_KEY }}
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
         run: nix develop .#releaser -c scripts/ci/release.sh

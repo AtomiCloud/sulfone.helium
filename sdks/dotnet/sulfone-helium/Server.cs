@@ -1,15 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Core.FileSystem;
-using sulfone_helium_domain.Extension;
-using sulfone_helium_domain.Plugin;
-using sulfone_helium_domain.Processor;
-using sulfone_helium_domain.Template;
 using sulfone_helium.Api.Extension;
 using sulfone_helium.Api.Plugin;
 using sulfone_helium.Api.Processor;
 using sulfone_helium.Api.Template;
+using sulfone_helium.Domain;
+using sulfone_helium.Domain.Core;
+using sulfone_helium.Domain.Core.FileSystem;
+using sulfone_helium.Domain.Extension;
+using sulfone_helium.Domain.Plugin;
+using sulfone_helium.Domain.Processor;
+using sulfone_helium.Domain.Template;
 
 namespace sulfone_helium;
 
@@ -76,6 +77,7 @@ public static class CyanEngine
         app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
         app.MapPost("/api/process", async Task<ProcessorRes> (ProcessorReq req) =>
         {
+            Console.WriteLine("Received Request: {0}", req.ToJson());
             var resp = await p.Process(req.ToDomain());
             return resp.ToRes();
         });

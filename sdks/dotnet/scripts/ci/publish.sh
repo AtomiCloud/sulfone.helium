@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[ "${MAIN_BRANCH}" = '' ] && echo "❌ 'MAIN_BRANCH' env var not set" && exit 1
+[ "${RELEASE}" = '' ] && echo "❌ 'RELEASE' env var not set" && exit 1
 
 [ "${GITHUB_SHA}" = '' ] && echo "❌ 'GITHUB_SHA' env var not set" && exit 1
 [ "${GITHUB_BRANCH}" = '' ] && echo "❌ 'GITHUB_BRANCH' env var not set" && exit 1
@@ -16,9 +16,8 @@ BRANCH="$(echo "${GITHUB_BRANCH}" | sed 's/[._-]*$//')"
 RELEASE_VERSION="${SHA}-${BRANCH}"
 
 echo "🪵 Current Branch: $BRANCH"
-echo "🪵 Main Branch: ${MAIN_BRANCH}"
 
-if [ "$BRANCH" == "$MAIN_BRANCH" ]; then
+if [ "${RELEASE}" == "true" ]; then
   echo "🔍 Full release detected, building with version"
   dotnet pack ./sdks/dotnet/sulfone-helium/sulfone-helium.csproj --output nupkgs
 else

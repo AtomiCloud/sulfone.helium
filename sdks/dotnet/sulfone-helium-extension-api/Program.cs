@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using sulfone_helium;
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Core.Questions;
+using sulfone_helium.Domain.Core;
+using sulfone_helium.Domain.Core.Questions;
 
 CyanEngine.StartExtension(args, async Task<Cyan> (inquirer, determinism, input) =>
 {
@@ -15,7 +15,7 @@ CyanEngine.StartExtension(args, async Task<Cyan> (inquirer, determinism, input) 
         };
     }
 
-    var p = input.Prev.Processors.ToArray();
+    var p = input.PrevExtensionCyans[""].Processors.ToArray();
     if (p.Length > 0 && p[0].Name == "default")
     {
         var c = (JObject) p[0].Config;

@@ -1,4 +1,4 @@
-namespace sulfone_helium_domain.Core;
+namespace sulfone_helium.Domain.Core;
 
 public interface IDeterminism
 {

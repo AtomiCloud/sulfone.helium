@@ -1,5 +1,4 @@
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Plugin;
+using sulfone_helium.Domain.Plugin;
 
 namespace sulfone_helium.Api.Plugin;
 

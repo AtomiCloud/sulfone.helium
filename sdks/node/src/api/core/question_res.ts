@@ -1,0 +1,68 @@
+interface ConfirmQuestionRes {
+  message: string;
+  desc?: string | null;
+  default?: string | null;
+  errorMessage?: string | null;
+  type: "confirm"; // Type discriminator value
+}
+
+interface DateQuestionRes {
+  message: string;
+  default?: string | null;
+  desc?: string | null;
+  minDate?: string | null;
+  maxDate?: string | null;
+  type: "date"; // Type discriminator value
+}
+
+interface CheckboxQuestionRes {
+  type: string;
+  message: string;
+  desc?: string | null;
+  options: string[];
+  type: "checkbox"; // Type discriminator value
+}
+
+interface PasswordQuestionRes {
+  type: string;
+  message: string;
+  desc?: string | null;
+  confirmation?: boolean | null;
+  type: "password"; // Type discriminator value
+}
+
+interface SelectQuestionRes {
+  type: string;
+  message: string;
+  options: string[];
+  desc?: string | null;
+  type: "select"; // Type discriminator value
+}
+
+interface TextQuestionRes {
+  type: string;
+  message: string;
+  default?: string | null;
+  desc?: string | null;
+  initial?: string | null;
+  type: "text"; // Type discriminator value
+}
+
+type QuestionRes =
+  | ConfirmQuestionRes
+  | DateQuestionRes
+  | CheckboxQuestionRes
+  | PasswordQuestionRes
+  | SelectQuestionRes
+  | TextQuestionRes;
+
+// export all
+export type {
+  QuestionRes,
+  ConfirmQuestionRes,
+  DateQuestionRes,
+  CheckboxQuestionRes,
+  PasswordQuestionRes,
+  SelectQuestionRes,
+  TextQuestionRes,
+};

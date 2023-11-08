@@ -1,6 +1,5 @@
 using sulfone_helium;
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Core.Questions;
+using sulfone_helium.Domain.Core;
 
 CyanEngine.StartTemplate(args, async Task<Cyan> (inquirer, determinism) =>
 {

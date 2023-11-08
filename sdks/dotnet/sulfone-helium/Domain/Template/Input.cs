@@ -1,6 +1,6 @@
-using sulfone_helium_domain.Core;
+using sulfone_helium.Domain.Core;
 
-namespace sulfone_helium_domain.Template;
+namespace sulfone_helium.Domain.Template;
 
 public record TemplateInput(
     IAnswer[] Answers,

@@ -1,3 +1,3 @@
-namespace sulfone_helium_domain.Processor;
+namespace sulfone_helium.Domain.Processor;
 
 public record ProcessorOutput(string Directory);

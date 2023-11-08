@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace sulfone_helium_domain;
+namespace sulfone_helium.Domain;
 
 public static class Utility
 {

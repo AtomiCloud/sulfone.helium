@@ -1,8 +1,8 @@
-using sulfone_helium_domain.Core.FileSystem;
-using sulfone_helium_domain.Plugin;
-using sulfone_helium_domain.Processor;
+using sulfone_helium.Domain.Core.FileSystem;
+using sulfone_helium.Domain.Plugin;
+using sulfone_helium.Domain.Processor;
 
-namespace sulfone_helium_domain.Core;
+namespace sulfone_helium.Domain.Core;
 
 public interface ICyanTemplate
 {

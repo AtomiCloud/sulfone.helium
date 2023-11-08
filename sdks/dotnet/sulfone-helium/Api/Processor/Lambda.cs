@@ -1,7 +1,6 @@
-using sulfone_helium_domain;
-using sulfone_helium_domain.Core;
-using sulfone_helium_domain.Core.FileSystem;
-using sulfone_helium_domain.Processor;
+using sulfone_helium.Domain.Core;
+using sulfone_helium.Domain.Core.FileSystem;
+using sulfone_helium.Domain.Processor;
 
 namespace sulfone_helium.Api.Processor;
 
