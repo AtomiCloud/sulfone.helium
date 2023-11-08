@@ -44,6 +44,7 @@ import type {
   CyanProcessorInput,
 } from "./domain/core/cyan_script_model.js";
 import type { Cyan, CyanGlob } from "./domain/core/cyan.js";
+import { GlobType } from "./domain/core/cyan.js";
 import type { ProcessorOutput } from "./domain/processor/output.js";
 import type { PluginOutput } from "./domain/plugin/output.js";
 import type {
@@ -54,7 +55,7 @@ import type {
   SelectQ,
   TextQ,
 } from "./domain/core/question.js";
-import { GlobType } from "./domain/core/cyan.js";
+import { QuestionType } from "./domain/core/question.js";
 
 function createApp(): Application {
   const app = express();
@@ -185,10 +186,11 @@ export {
   StartPlugin,
   StartPluginWithLambda,
   CyanFileHelper,
+  GlobType,
+  QuestionType,
 };
 
 export type {
-  GlobType,
   ICyanTemplate,
   ICyanExtension,
   ICyanProcessor,
