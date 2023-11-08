@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.0.0...v1.1.0) (2023-11-08)
+
+
+### 🚀 Features 🚀
+
+* release with semver ([8ad7044](https://github.com/AtomiCloud/sulfone.helium/commit/8ad704459325cd7eddda6dea4a64656e9c3d2a5d))
+
 ## 1.0.0 (2023-11-08)
 
 
