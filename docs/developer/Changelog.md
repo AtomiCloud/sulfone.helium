@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/AtomiCloud/sulfone.helium/compare/v1.1.2...v1.1.3) (2023-11-08)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **node:** missing export for QuestionType ([7a72f25](https://github.com/AtomiCloud/sulfone.helium/commit/7a72f25453d2217fa0b7e7e716240b73e83a8568))
+
 ## [1.1.2](https://github.com/AtomiCloud/sulfone.helium/compare/v1.1.1...v1.1.2) (2023-11-08)
 
 
