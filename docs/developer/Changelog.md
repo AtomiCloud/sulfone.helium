@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.2.0...v1.2.1) (2023-11-09)
+
+
+### 🐛 Bug Fixes 🐛
+
+* close stream, since proxy streams ([e66c75f](https://github.com/AtomiCloud/sulfone.helium/commit/e66c75f29cd013d9d2fd4a5ebf62f20525b82cfa))
+
 ## [1.2.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.1.4...v1.2.0) (2023-11-09)
 
 
