@@ -77,6 +77,7 @@ function StartPlugin(plugin: ICyanPlugin): void {
     console.log(req.body);
     const result = await pluginService.plug(PluginMapper.ToDomain(req.body));
     res.json(PluginMapper.ToRes(result));
+    res.end();
   });
 
   app.listen(port, "0.0.0.0", () => {
@@ -100,6 +101,7 @@ function StartProcessor(processor: ICyanProcessor): void {
       ProcessorMapper.toDomain(req.body),
     );
     res.json(ProcessorMapper.toRes(result));
+    res.end();
   });
 
   app.listen(port, "0.0.0.0", () => {
@@ -123,6 +125,7 @@ function StartTemplate(template: ICyanTemplate): void {
       TemplateInputMapper.answerToDomain(req.body),
     );
     res.json(TemplateOutputMapper.ToResp(result));
+    res.end();
   });
 
   app.post("/api/template/validate", async (req: Request, res: Response) => {
@@ -134,6 +137,7 @@ function StartTemplate(template: ICyanTemplate): void {
       valid: result,
     } satisfies TemplateValidRes;
     res.json(r);
+    res.end();
   });
 
   app.listen(port, "0.0.0.0", () => {
@@ -158,6 +162,7 @@ function StartExtension(ext: ICyanExtension): void {
       ExtensionMapper.extensionAnswerToDomain(req.body),
     );
     res.json(ExtensionOutputMapper.toResp(result));
+    res.end();
   });
 
   app.post("/api/extension/validate", async (req: Request, res: Response) => {
@@ -169,6 +174,7 @@ function StartExtension(ext: ICyanExtension): void {
       valid: result,
     } satisfies ExtensionValidRes;
     res.json(r);
+    res.end();
   });
 
   app.listen(port, "0.0.0.0", () => {
