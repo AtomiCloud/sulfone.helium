@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.1.4...v1.2.0) (2023-11-09)
+
+
+### 🚀 Features 🚀
+
+* add console logs ([1777b24](https://github.com/AtomiCloud/sulfone.helium/commit/1777b24b5da018ed6212eb3b659c24c3bdd9bce0))
+
 ## [1.1.4](https://github.com/AtomiCloud/sulfone.helium/compare/v1.1.3...v1.1.4) (2023-11-08)
 
 
