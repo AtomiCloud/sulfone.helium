@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.5...v1.3.6) (2023-11-13)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **python:** remove dead code ([7edf28f](https://github.com/AtomiCloud/sulfone.helium/commit/7edf28f943fa84957cc3afbd235b4dfa84ab3f66))
+
 ## [1.3.5](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.4...v1.3.5) (2023-11-13)
 
 
