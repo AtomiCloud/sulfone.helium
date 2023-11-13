@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.1...v1.3.2) (2023-11-13)
+
+
+### 🐛 Bug Fixes 🐛
+
+* incorrect publish script ([f358ea8](https://github.com/AtomiCloud/sulfone.helium/commit/f358ea8aa593a7818a8f71d853ef8ddc6808464b))
+
 ## [1.3.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.0...v1.3.1) (2023-11-13)
 
 
