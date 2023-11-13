@@ -20,8 +20,6 @@ from cyanprintsdk.api.template.mapper import TemplateInputMapper, TemplateOutput
 from cyanprintsdk.api.template.req import TemplateAnswerReq, TemplateValidateReq
 from cyanprintsdk.api.template.res import TemplateRes, TemplateValidRes
 from cyanprintsdk.domain.core.cyan_script import ICyanPlugin, ICyanProcessor, ICyanTemplate, ICyanExtension
-from cyanprintsdk.domain.core.cyan_script_model import CyanProcessorInput
-from cyanprintsdk.domain.core.fs.cyan_fs_helper import CyanFileHelper
 from cyanprintsdk.domain.extension.input import ExtensionAnswerInput, ExtensionValidateInput
 from cyanprintsdk.domain.extension.output import ExtensionOutput
 from cyanprintsdk.domain.extension.service import ExtensionService
@@ -193,14 +191,3 @@ def start_extension(extension: ICyanExtension):
     app.add_routes([web.post('/api/extension/validate', ext_validate)])
 
     web.run_app(app, port=5550)
-
-
-async def simple_output(i: CyanProcessorInput, fs: CyanFileHelper) -> ProcessorOutput:
-    templates = fs.resolve_all()
-    for t in templates:
-        t.relative = t.relative + ".tpl"
-        t.write_file()
-    return ProcessorOutput(directory=i.write_dir)
-
-
-start_processor_with_fn(simple_output)
