@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cyan-sdk"
+name = "cyanprintsdk"
 version = "1.3.4"
 description = "CyanPrint SDK for building templates, extensions, plugins or processors"
 authors = ["Ernest Ng <ernest@atomi.cloud>"]

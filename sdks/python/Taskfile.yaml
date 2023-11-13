@@ -5,3 +5,11 @@ tasks:
     desc: Run the service
     cmds:
       - poetry run python main.py
+  build:
+    desc: Build the package
+    cmds:
+      - poetry build
+  publish:
+    desc: Publish the package
+    cmds:
+      - poetry publish
