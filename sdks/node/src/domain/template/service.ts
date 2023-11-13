@@ -45,7 +45,7 @@ class TemplateService {
     const d = new StatelessDeterminism(answer.deterministicState, pointer);
 
     try {
-      const r = await this._template.template(i, d);
+      await this._template.template(i, d);
       throw new Error("Not supposed to reach here for validation!");
     } catch (e) {
       if (e instanceof OutOfAnswerException) {

@@ -16,7 +16,6 @@ interface DateQuestionRes {
 }
 
 interface CheckboxQuestionRes {
-  type: string;
   message: string;
   desc?: string | null;
   options: string[];
@@ -24,7 +23,6 @@ interface CheckboxQuestionRes {
 }
 
 interface PasswordQuestionRes {
-  type: string;
   message: string;
   desc?: string | null;
   confirmation?: boolean | null;
@@ -32,7 +30,6 @@ interface PasswordQuestionRes {
 }
 
 interface SelectQuestionRes {
-  type: string;
   message: string;
   options: string[];
   desc?: string | null;
@@ -40,7 +37,6 @@ interface SelectQuestionRes {
 }
 
 interface TextQuestionRes {
-  type: string;
   message: string;
   default?: string | null;
   desc?: string | null;

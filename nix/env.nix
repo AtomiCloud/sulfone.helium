@@ -21,10 +21,16 @@ with packages;
   ];
 
   main = [
+    python
+    poetry
+
     go
+
     dotnet
+
     nodejs
     bun
+
     infisical
   ];
 

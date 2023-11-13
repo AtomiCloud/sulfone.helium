@@ -2,12 +2,10 @@ interface StringArrayAnswer {
   answer: string[];
 }
 
-// TypeScript equivalent of the C# record StringAnswer
 interface StringAnswer {
   answer: string;
 }
 
-// TypeScript equivalent of the C# record BoolAnswer
 interface BoolAnswer {
   answer: boolean;
 }

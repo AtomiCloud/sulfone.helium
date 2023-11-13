@@ -42,10 +42,13 @@ class StatelessInquirer implements IInquirer {
   checkbox(q: CheckboxQ): Promise<string[]>;
   async checkbox(
     q: CheckboxQ | string,
-    options: string[],
+    options?: string[],
     help?: string | null,
   ): Promise<string[]> {
     if (typeof q === "string") {
+      if (options == null) {
+        throw new Error("options cannot be null");
+      }
       return this.checkbox({
         message: q,
         options,
@@ -103,10 +106,13 @@ class StatelessInquirer implements IInquirer {
   select(q: string, options: string[], help?: string | null): Promise<string>;
   async select(
     q: SelectQ | string,
-    options: string[],
+    options?: string[],
     help?: string | null,
   ): Promise<string> {
     if (typeof q === "string") {
+      if (options == null) {
+        throw new Error("options cannot be null");
+      }
       return this.select({
         type: QuestionType.Select,
         options,

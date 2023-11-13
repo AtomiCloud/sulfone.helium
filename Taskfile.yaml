@@ -6,3 +6,5 @@ vars:
 
 includes:
   dotnet: sdks/dotnet/Taskfile.yaml
+  node: sdks/node/Taskfile.yaml
+  python: sdks/python/Taskfile.yaml

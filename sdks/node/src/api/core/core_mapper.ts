@@ -26,7 +26,7 @@ import type {
   SelectQ,
   TextQ,
 } from "../../domain/core/question.js";
-import { QuestionType } from "../../domain/core/question.js";
+
 import type {
   CheckboxQuestionRes,
   ConfirmQuestionRes,
@@ -44,6 +44,7 @@ import {
 } from "../../domain/core/answer.js";
 import { AnswerRes } from "./answer_res.js";
 import { AnswerReq, isBoolAnswerReq, isStringAnswerReq } from "./answer_req.js";
+import { QuestionType } from "../../domain/core/question.js";
 
 export class CyanMapper {
   static pluginReqToDomain(req: CyanPluginReq): CyanPlugin {
@@ -65,6 +66,7 @@ export class CyanMapper {
       }
     })();
     return {
+      root: req.root,
       glob: req.glob,
       exclude: req.exclude,
       type,
@@ -121,6 +123,7 @@ export class CyanMapper {
 
   static globToResp(data: CyanGlob): CyanGlobRes {
     return {
+      root: data.root,
       glob: data.glob,
       exclude: data.exclude,
       type: this.globTypeToResp(data.type),

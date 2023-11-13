@@ -24,6 +24,10 @@ export class CyanFileHelper {
     return path.resolve(this._writeDir);
   }
 
+  private globDir(g: CyanGlob): string {
+    return path.resolve(this.readDir, g.root ?? ".");
+  }
+
   private copyFile(from: string, to: string): void {
     const parent = path.dirname(to);
     if (!fs.existsSync(parent)) fs.mkdirSync(parent, { recursive: true });
@@ -40,24 +44,27 @@ export class CyanFileHelper {
   }
 
   readAsStream(g: CyanGlob): VirtualFileStream[] {
+    const globRoot = this.globDir(g);
     const matched = glob
-      .globSync(g.glob, { cwd: this.readDir, ignore: g.exclude })
-      .map((x) => path.relative(this.readDir, x));
+      .globSync(g.glob, { cwd: globRoot, ignore: g.exclude })
+      .map((x) => path.relative(globRoot, x));
 
     return matched.map(
       (x) =>
         new VirtualFileStream(
-          fs.createReadStream(path.join(this.readDir, x)),
+          fs.createReadStream(path.join(globRoot, x)),
           fs.createWriteStream(path.join(this.writeDir, x)),
         ),
     );
   }
 
   get(g: CyanGlob): VirtualFileReference[] {
+    const globRoot = this.globDir(g);
+
     return glob
-      .globSync(g.glob, { cwd: this.readDir, ignore: g.exclude })
-      .map((x) => path.relative(this.readDir, x))
-      .map((x) => new VirtualFileReference(this.readDir, this.writeDir, x));
+      .globSync(g.glob, { cwd: globRoot, ignore: g.exclude })
+      .map((x) => path.relative(globRoot, x))
+      .map((x) => new VirtualFileReference(globRoot, this.writeDir, x));
   }
 
   read(g: CyanGlob): VirtualFile[] {
@@ -65,10 +72,12 @@ export class CyanFileHelper {
   }
 
   copy(copy: CyanGlob): void {
+    const globRoot = this.globDir(copy);
+
     const files = glob
-      .globSync(copy.glob, { cwd: this.readDir, ignore: copy.exclude })
-      .map((x) => path.relative(this.readDir, x))
-      .map((x) => [path.join(this.readDir, x), path.join(this.writeDir, x)]);
+      .globSync(copy.glob, { cwd: globRoot, ignore: copy.exclude })
+      .map((x) => path.relative(globRoot, x))
+      .map((x) => [path.join(globRoot, x), path.join(this.writeDir, x)]);
 
     for (const [read, write] of files) {
       console.log(`copy: ${read} -> ${write}`);

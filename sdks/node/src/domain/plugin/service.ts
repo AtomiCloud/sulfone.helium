@@ -10,10 +10,10 @@ class PluginService {
   }
 
   async plug(input: PluginInput): Promise<PluginOutput> {
-    const { dir, config } = input;
+    const { directory, config } = input;
     return await this.#plugin.plugin({
-      directory: dir,
-      config: config,
+      directory,
+      config,
     });
   }
 }

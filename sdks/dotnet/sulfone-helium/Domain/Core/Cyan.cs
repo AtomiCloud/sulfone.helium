@@ -8,6 +8,7 @@ public enum GlobType
 
 public class CyanGlob
 {
+    public string? Root { get; init; }
     public required string Glob { get; init; }
     public required string[] Exclude { get; init; }
     public required GlobType Type { get; init; }
@@ -30,6 +31,4 @@ public class Cyan
 {
     public required IEnumerable<CyanProcessor> Processors { get; init; }
     public required IEnumerable<CyanPlugin> Plugins { get; init; }
-    
 }
-    

@@ -4,6 +4,7 @@ namespace sulfone_helium.Api.Core;
 
 public struct CyanGlobRes
 {
+    public string? Root { get; init; }
     public string Glob { get; init; }
     public string[] Exclude { get; init; }
     public string Type { get; init; }

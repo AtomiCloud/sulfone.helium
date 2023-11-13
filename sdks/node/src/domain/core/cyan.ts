@@ -4,6 +4,7 @@ enum GlobType {
 }
 
 interface CyanGlob {
+  root?: string;
   glob: string;
   exclude: string[];
   type: GlobType;

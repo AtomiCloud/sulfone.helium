@@ -42,16 +42,20 @@ public class CyanFileHelper
         matcher.AddIncludePatterns(new[] { glob.Glob });
         matcher.AddExcludePatterns(glob.Exclude);
 
-        var matchingFiles = matcher.GetResultsInFullPath(this.ReadDir)
-            .Select(x => Path.GetRelativePath(this.ReadDir, x))
+        var globRoot = this.GlobDir(glob);
+
+        var matchingFiles = matcher.GetResultsInFullPath(globRoot)
+            .Select(x => Path.GetRelativePath(globRoot, x))
             .ToArray();
         return matchingFiles.Select(x =>
             new VirtualFileStream(
-                File.OpenText(Path.Combine(this.ReadDir, x)),
+                File.OpenText(Path.Combine(globRoot, x)),
                 File.CreateText(Path.Combine(this.WriteDir, x))
             )
         );
     }
+
+    private string GlobDir(CyanGlob glob) => Path.Combine(this.ReadDir, glob.Root ?? ".");
 
     public IEnumerable<VirtualFileReference> Get(CyanGlob glob)
     {
@@ -59,11 +63,13 @@ public class CyanFileHelper
         matcher.AddIncludePatterns(new[] { glob.Glob });
         matcher.AddExcludePatterns(glob.Exclude);
 
-        var matchingFiles = matcher.GetResultsInFullPath(this.ReadDir)
-            .Select(x => Path.GetRelativePath(this.ReadDir, x))
+        var globRoot = this.GlobDir(glob);
+        var matchingFiles = matcher.GetResultsInFullPath(globRoot)
+            .Select(x => Path.GetRelativePath(globRoot, x))
             .ToArray();
+
         return matchingFiles.Select(x =>
-            new VirtualFileReference(this.ReadDir, this.WriteDir, x)
+            new VirtualFileReference(globRoot, this.WriteDir, x)
         );
     }
 
@@ -78,12 +84,14 @@ public class CyanFileHelper
         matcher.AddIncludePatterns(new[] { copy.Glob });
         matcher.AddExcludePatterns(copy.Exclude);
 
-        var matchingFiles = matcher.GetResultsInFullPath(this.ReadDir)
-            .Select(x => Path.GetRelativePath(this.ReadDir, x))
+        var globRoot = this.GlobDir(copy);
+
+        var matchingFiles = matcher.GetResultsInFullPath(globRoot)
+            .Select(x => Path.GetRelativePath(globRoot, x))
             .ToArray();
 
         var files = matchingFiles.Select(x =>
-            (Path.Join(this.ReadDir, x), Path.Join(this.WriteDir, x))
+            (Path.Join(globRoot, x), Path.Join(this.WriteDir, x))
         );
 
         foreach (var (read, write) in files)

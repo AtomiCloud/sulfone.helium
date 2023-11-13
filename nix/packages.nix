@@ -42,9 +42,16 @@ let
 
           # dotnet
           xmlstarlet
+          # go
+          golangci-lint
+          go
+
 
           #infra
           docker;
+
+        python = python312;
+        poetry = (poetry.override { python3 = python311; });
 
         npm = nodePackages.npm;
         nodejs = nodejs_20;
@@ -53,10 +60,6 @@ let
     sep-04-23 = (
       with pkgs-sep-04-23;
       {
-        inherit
-          # go
-          golangci-lint
-          go;
         dotnet = dotnet-sdk_8;
       }
     );

@@ -1,13 +1,11 @@
 import type { Question } from "../core/question.js";
 import type { Cyan } from "../core/cyan.js";
 
-// TypeScript equivalent of the C# record ExtensionQnAOutput
 interface ExtensionQnAOutput {
   deterministicState: Record<string, string>[];
   question: Question;
 }
 
-// TypeScript equivalent of the C# record ExtensionFinalOutput
 interface ExtensionFinalOutput {
   data: Cyan;
 }
@@ -23,5 +21,4 @@ function isQnA(output: ExtensionOutput): output is ExtensionQnAOutput {
 type ExtensionOutput = ExtensionQnAOutput | ExtensionFinalOutput;
 
 export { isFinal, isQnA };
-// export all
 export type { ExtensionOutput, ExtensionFinalOutput, ExtensionQnAOutput };

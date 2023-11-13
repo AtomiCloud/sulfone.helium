@@ -8,11 +8,10 @@ public static class CyanMapper
 {
     public static CyanPlugin ToDomain(this CyanPluginReq req)
     {
-        
         return new CyanPlugin
         {
             Name = req.Name,
-            Config = req.Config.ToDynamic(), 
+            Config = req.Config.ToDynamic(),
         };
     }
 
@@ -20,6 +19,7 @@ public static class CyanMapper
     {
         return new CyanGlob
         {
+            Root = req.Root,
             Glob = req.Glob,
             Exclude = req.Exclude,
             Type = req.Type switch
@@ -96,6 +96,7 @@ public static class CyanMapper
     {
         return new CyanGlobRes()
         {
+            Root = data.Root,
             Glob = data.Glob,
             Exclude = data.Exclude,
             Type = data.Type.ToResp(),

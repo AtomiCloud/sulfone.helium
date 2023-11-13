@@ -19,15 +19,15 @@ CyanEngine.StartProcessor(args, Task<ProcessorOutput> (i, fileHelper) =>
     Console.WriteLine("HandleBarsConfig: {0}", handleBarsConfig.ToJson());
 
     var files = fileHelper.ResolveAll();
-
+    var handlebars = Handlebars.CreateSharedEnvironment(new HandlebarsConfiguration { TextEncoder = null });
     var parsed = files.Select(x =>
     {
         try
         {
             return x with
             {
-                BaseWrite = Handlebars.Compile(x.BaseWrite)(handleBarsConfig?.Vars ?? new Dictionary<string, string>()),
-                Content = Handlebars.Compile(x.Content)(handleBarsConfig?.Vars ?? new Dictionary<string, string>())
+                Relative = handlebars.Compile(x.Relative)(handleBarsConfig?.Vars ?? new Dictionary<string, string>()),
+                Content = handlebars.Compile(x.Content)(handleBarsConfig?.Vars ?? new Dictionary<string, string>())
             };
         }
         catch (Exception e)

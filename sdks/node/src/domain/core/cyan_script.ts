@@ -14,7 +14,6 @@ interface ICyanTemplate {
   template(inquirer: IInquirer, determinism: IDeterminism): Promise<Cyan>;
 }
 
-// TypeScript equivalent of the C# interface ICyanExtension
 interface ICyanExtension {
   extension(
     inquirer: IInquirer,
@@ -23,7 +22,6 @@ interface ICyanExtension {
   ): Promise<Cyan>;
 }
 
-// TypeScript equivalent of the C# interface ICyanProcessor
 interface ICyanProcessor {
   process(
     input: CyanProcessorInput,
@@ -31,10 +29,8 @@ interface ICyanProcessor {
   ): Promise<ProcessorOutput>;
 }
 
-// TypeScript equivalent of the C# interface ICyanPlugin
 interface ICyanPlugin {
   plugin(input: CyanPluginInput): Promise<PluginOutput>;
 }
 
-// export all
 export type { ICyanTemplate, ICyanExtension, ICyanProcessor, ICyanPlugin };
