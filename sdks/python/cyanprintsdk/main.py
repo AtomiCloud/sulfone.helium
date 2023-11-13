@@ -34,6 +34,13 @@ from cyanprintsdk.domain.template.output import TemplateOutput
 from cyanprintsdk.domain.template.service import TemplateService
 
 
+async def health_check(request):
+    return web.json_response({
+        "Message": "OK",
+        "Status": "OK",
+    })
+
+
 def start_plugin_with_fn(f: LambdaPluginFn):
     start_plugin(LambdaPlugin(f))
 
@@ -59,7 +66,11 @@ def start_plugin(plugin: ICyanPlugin):
 
         return web.json_response(res.model_dump())
 
-    app.add_routes([web.post('/api/plug', plug)])
+    app.add_routes([
+        web.get("/", health_check),
+        web.post('/api/plug', plug),
+
+    ])
 
     web.run_app(app, port=5552)
 
@@ -89,7 +100,10 @@ def start_processor(processor: ICyanProcessor):
 
         return web.json_response(res.model_dump())
 
-    app.add_routes([web.post('/api/process', process)])
+    app.add_routes([
+        web.get("/", health_check),
+        web.post('/api/process', process),
+    ])
 
     web.run_app(app, port=5551)
 
@@ -140,8 +154,11 @@ def start_template(template: ICyanTemplate):
 
         return web.json_response(res_model)
 
-    app.add_routes([web.post('/api/template/init', template_answer)])
-    app.add_routes([web.post('/api/template/validate', template_validate)])
+    app.add_routes([
+        web.get("/", health_check),
+        web.post('/api/template/init', template_answer),
+        web.post('/api/template/validate', template_validate),
+    ])
 
     web.run_app(app, port=5550)
 
@@ -187,7 +204,10 @@ def start_extension(extension: ICyanExtension):
 
         return web.json_response(res.model_dump())
 
-    app.add_routes([web.post('/api/extension/init', ext_answer)])
-    app.add_routes([web.post('/api/extension/validate', ext_validate)])
+    app.add_routes([
+        web.get("/", health_check),
+        web.post('/api/extension/init', ext_answer),
+        web.post('/api/extension/validate', ext_validate),
+    ])
 
     web.run_app(app, port=5550)
