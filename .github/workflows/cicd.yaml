@@ -84,4 +84,4 @@ jobs:
           NPM_API_KEY: ${{ secrets.NPM_API_KEY }}
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-        run: nix develop .#ci -c sdks/node/scripts/ci/publish.sh
+        run: nix develop .#ci -c scripts/ci/publish.sh
