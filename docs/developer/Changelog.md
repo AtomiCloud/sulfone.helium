@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.6...v1.3.7) (2023-11-13)
+
+
+### 🐛 Bug Fixes 🐛
+
+* python not having healthcheck ([95fc05b](https://github.com/AtomiCloud/sulfone.helium/commit/95fc05b2a6f3bf7d9494ce8c56ba76994022b844))
+
 ## [1.3.6](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.5...v1.3.6) (2023-11-13)
 
 
