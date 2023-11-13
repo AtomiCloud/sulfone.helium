@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.0...v1.3.1) (2023-11-13)
+
+
+### 🐛 Bug Fixes 🐛
+
+* missing version commit ([725c0c2](https://github.com/AtomiCloud/sulfone.helium/commit/725c0c27d26ad73c09953a829adf02e1af76b1db))
+
 ## [1.3.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.2.1...v1.3.0) (2023-11-13)
 
 
