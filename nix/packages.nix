@@ -12,6 +12,7 @@ let
       with atomi;
       {
         inherit
+          toml-cli
           infisical
           pls;
       }

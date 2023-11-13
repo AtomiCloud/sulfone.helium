@@ -9,6 +9,7 @@ with packages;
     xmlstarlet
     yq-go
     jq
+    toml-cli
   ];
 
   dev = [
