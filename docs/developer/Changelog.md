@@ -1,3 +1,15 @@
+## [1.3.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.2.1...v1.3.0) (2023-11-13)
+
+
+### 🚀 Features 🚀
+
+* **python:** initial release ([3ca5aaa](https://github.com/AtomiCloud/sulfone.helium/commit/3ca5aaa723001a495b95bb5b5af5fdc8b673e3a8))
+
+
+### 🐛 Bug Fixes 🐛
+
+* incorrect publishing for python ([435cf03](https://github.com/AtomiCloud/sulfone.helium/commit/435cf0397ef3a6ef5f0460c2b0f9a91215db843c))
+
 ## [1.2.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.2.0...v1.2.1) (2023-11-09)
 
 
