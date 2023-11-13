@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.2...v1.3.3) (2023-11-13)
+
+
+### 🐛 Bug Fixes 🐛
+
+* used package name ([8c3d465](https://github.com/AtomiCloud/sulfone.helium/commit/8c3d465bd99a8c27ff1f1b5a7e4671d226688757))
+
 ## [1.3.2](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.1...v1.3.2) (2023-11-13)
 
 
