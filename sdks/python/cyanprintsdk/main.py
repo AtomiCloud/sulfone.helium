@@ -64,7 +64,7 @@ def start_plugin(plugin: ICyanPlugin):
         o: PluginOutput = await plugin_service.plug(i)
         res: PluginRes = PluginMapper.to_res(o)
 
-        return web.json_response(res.model_dump())
+        return web.json_response(res.model_dump(by_alias=True))
 
     app.add_routes([
         web.get("/", health_check),
@@ -98,7 +98,7 @@ def start_processor(processor: ICyanProcessor):
         o: ProcessorOutput = await proc_service.process(i)
         res: ProcessorRes = ProcessorMapper.to_res(o)
 
-        return web.json_response(res.model_dump())
+        return web.json_response(res.model_dump(by_alias=True))
 
     app.add_routes([
         web.get("/", health_check),
