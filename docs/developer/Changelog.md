@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.1...v1.4.2) (2023-11-14)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **node:** glob search to include dot files ([4822005](https://github.com/AtomiCloud/sulfone.helium/commit/48220059e431bc7e8df58908364f4278dfcfe1cb))
+
 ## [1.4.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.0...v1.4.1) (2023-11-14)
 
 
