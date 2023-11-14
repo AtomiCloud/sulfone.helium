@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.2...v1.4.3) (2023-11-14)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **node:** no-dir when globbing ([27a15bd](https://github.com/AtomiCloud/sulfone.helium/commit/27a15bdb6e63d3cc9f847e1d4bb7138b8f12e599))
+
 ## [1.4.2](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.1...v1.4.2) (2023-11-14)
 
 
