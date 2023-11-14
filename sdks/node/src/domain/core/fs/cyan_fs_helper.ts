@@ -45,9 +45,7 @@ export class CyanFileHelper {
 
   readAsStream(g: CyanGlob): VirtualFileStream[] {
     const globRoot = this.globDir(g);
-    const matched = glob
-      .globSync(g.glob, { cwd: globRoot, ignore: g.exclude })
-      .map((x) => path.relative(globRoot, x));
+    const matched = glob.globSync(g.glob, { cwd: globRoot, ignore: g.exclude });
 
     return matched.map(
       (x) =>
@@ -63,7 +61,6 @@ export class CyanFileHelper {
 
     return glob
       .globSync(g.glob, { cwd: globRoot, ignore: g.exclude })
-      .map((x) => path.relative(globRoot, x))
       .map((x) => new VirtualFileReference(globRoot, this.writeDir, x));
   }
 
@@ -76,7 +73,6 @@ export class CyanFileHelper {
 
     const files = glob
       .globSync(copy.glob, { cwd: globRoot, ignore: copy.exclude })
-      .map((x) => path.relative(globRoot, x))
       .map((x) => [path.join(globRoot, x), path.join(this.writeDir, x)]);
 
     for (const [read, write] of files) {
