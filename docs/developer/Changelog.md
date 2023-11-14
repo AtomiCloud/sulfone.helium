@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.3...v1.4.4) (2023-11-14)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **python:** conversion to camel case for processors and plugins ([b59a85c](https://github.com/AtomiCloud/sulfone.helium/commit/b59a85cc49ed47018e99823a80479b7b7f09fb7b))
+
 ## [1.4.3](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.2...v1.4.3) (2023-11-14)
 
 

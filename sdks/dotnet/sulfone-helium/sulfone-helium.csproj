@@ -10,7 +10,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>RepositoryUrl</RepositoryUrl>
     <Authors>Ernest Ng</Authors>
-    <VersionPrefix>1.4.3</VersionPrefix>
+    <VersionPrefix>1.4.4</VersionPrefix>
     <PackageId>AtomiCloud.CyanPrint</PackageId>
     <PackageReadmeFile>README.MD</PackageReadmeFile>
   </PropertyGroup>
