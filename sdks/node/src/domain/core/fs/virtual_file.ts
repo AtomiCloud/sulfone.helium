@@ -10,9 +10,9 @@ export class VirtualFileStream {
 
 export class VirtualFileReference {
   constructor(
-    private baseRead: string,
-    private baseWrite: string,
-    private relative: string,
+    public baseRead: string,
+    public baseWrite: string,
+    public relative: string,
   ) {}
 
   get read(): string {
@@ -36,10 +36,10 @@ export class VirtualFileReference {
 
 export class VirtualFile {
   constructor(
-    private baseRead: string,
-    private baseWrite: string,
-    private relative: string,
-    private content: string,
+    public baseRead: string,
+    public baseWrite: string,
+    public relative: string,
+    public content: string,
   ) {}
 
   get read(): string {
