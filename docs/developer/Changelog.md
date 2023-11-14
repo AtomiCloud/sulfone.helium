@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.0...v1.4.1) (2023-11-14)
+
+
+### 🐛 Bug Fixes 🐛
+
+* incorrect relative path calculations ([d63577d](https://github.com/AtomiCloud/sulfone.helium/commit/d63577d545fb60d52aaa364d2d27713461638067))
+
 ## [1.4.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.3.7...v1.4.0) (2023-11-14)
 
 
