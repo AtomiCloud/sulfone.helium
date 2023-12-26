@@ -20,6 +20,7 @@ from cyanprintsdk.api.template.mapper import TemplateInputMapper, TemplateOutput
 from cyanprintsdk.api.template.req import TemplateAnswerReq, TemplateValidateReq
 from cyanprintsdk.api.template.res import TemplateRes, TemplateValidRes
 from cyanprintsdk.domain.core.cyan_script import ICyanPlugin, ICyanProcessor, ICyanTemplate, ICyanExtension
+from cyanprintsdk.domain.core.cyan_script_model import CyanPluginInput
 from cyanprintsdk.domain.extension.input import ExtensionAnswerInput, ExtensionValidateInput
 from cyanprintsdk.domain.extension.output import ExtensionOutput
 from cyanprintsdk.domain.extension.service import ExtensionService
