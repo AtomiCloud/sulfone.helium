@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.4...v1.5.0) (2023-12-26)
+
+
+### 🚀 Features 🚀
+
+* include secret scanning ([e583ff2](https://github.com/AtomiCloud/sulfone.helium/commit/e583ff2e26cc886e9ac4223e36010378720620f0))
+
 ## [1.4.4](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.3...v1.4.4) (2023-11-14)
 
 
