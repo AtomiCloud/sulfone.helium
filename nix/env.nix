@@ -26,6 +26,7 @@ with packages;
     poetry
 
     go
+    gcc
 
     dotnet
 

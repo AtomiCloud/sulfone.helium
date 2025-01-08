@@ -25,6 +25,7 @@ let
           git
           yq-go
           jq
+          gcc
           # lint
           treefmt
           gitlint
