@@ -15,10 +15,7 @@ public struct TemplateValidRes
 [SwaggerSubType(typeof(TemplateFinalRes), DiscriminatorValue = "final")]
 [JsonDerivedType(typeof(TemplateQnARes), typeDiscriminator: "questionnaire")]
 [SwaggerSubType(typeof(TemplateQnARes), DiscriminatorValue = "questionnaire")]
-
-public abstract class TemplateRes
-{
-}
+public abstract class TemplateRes { }
 
 public class TemplateFinalRes : TemplateRes
 {
@@ -30,4 +27,3 @@ public class TemplateQnARes : TemplateRes
     public required Dictionary<string, string>[] DeterministicState { get; set; }
     public required QuestionRes Question { get; set; }
 }
-

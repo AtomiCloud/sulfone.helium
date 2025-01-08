@@ -1,4 +1,4 @@
-import type { Question } from "../core/question.js";
+import type { Question } from '../core/question.js';
 
 class OutOfAnswerException extends Error {
   constructor(

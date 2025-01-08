@@ -3,7 +3,7 @@ interface ConfirmQuestionRes {
   desc?: string | null;
   default?: string | null;
   errorMessage?: string | null;
-  type: "confirm"; // Type discriminator value
+  type: 'confirm'; // Type discriminator value
 }
 
 interface DateQuestionRes {
@@ -12,28 +12,28 @@ interface DateQuestionRes {
   desc?: string | null;
   minDate?: string | null;
   maxDate?: string | null;
-  type: "date"; // Type discriminator value
+  type: 'date'; // Type discriminator value
 }
 
 interface CheckboxQuestionRes {
   message: string;
   desc?: string | null;
   options: string[];
-  type: "checkbox"; // Type discriminator value
+  type: 'checkbox'; // Type discriminator value
 }
 
 interface PasswordQuestionRes {
   message: string;
   desc?: string | null;
   confirmation?: boolean | null;
-  type: "password"; // Type discriminator value
+  type: 'password'; // Type discriminator value
 }
 
 interface SelectQuestionRes {
   message: string;
   options: string[];
   desc?: string | null;
-  type: "select"; // Type discriminator value
+  type: 'select'; // Type discriminator value
 }
 
 interface TextQuestionRes {
@@ -41,7 +41,7 @@ interface TextQuestionRes {
   default?: string | null;
   desc?: string | null;
   initial?: string | null;
-  type: "text"; // Type discriminator value
+  type: 'text'; // Type discriminator value
 }
 
 type QuestionRes =

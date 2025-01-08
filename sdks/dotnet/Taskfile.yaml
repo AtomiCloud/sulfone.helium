@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 tasks:
   version:
@@ -13,7 +13,7 @@ tasks:
     desc: Run a sample dotnet template
     dir: sdks/dotnet/sulfone-helium-template-api
     env:
-      DOTNET_WATCH_RESTART_ON_RUDE_EDIT: "true"
+      DOTNET_WATCH_RESTART_ON_RUDE_EDIT: 'true'
       ASPNETCORE_URLS: http://+:5001
     cmds:
       - dotnet watch
@@ -21,7 +21,7 @@ tasks:
     desc: Run a sample dotnet extension
     dir: sdks/dotnet/sulfone-helium-extension-api
     env:
-      DOTNET_WATCH_RESTART_ON_RUDE_EDIT: "true"
+      DOTNET_WATCH_RESTART_ON_RUDE_EDIT: 'true'
       ASPNETCORE_URLS: http://+:5002
     cmds:
       - dotnet watch

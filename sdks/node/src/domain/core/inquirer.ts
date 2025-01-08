@@ -1,20 +1,9 @@
-import type {
-  CheckboxQ,
-  ConfirmQ,
-  DateQ,
-  PasswordQ,
-  SelectQ,
-  TextQ,
-} from "./question.js";
+import type { CheckboxQ, ConfirmQ, DateQ, PasswordQ, SelectQ, TextQ } from './question.js';
 
 interface IInquirer {
   checkbox(q: CheckboxQ): Promise<string[]>;
 
-  checkbox(
-    q: string,
-    options: string[],
-    help?: string | null,
-  ): Promise<string[]>;
+  checkbox(q: string, options: string[], help?: string | null): Promise<string[]>;
 
   confirm(q: ConfirmQ): Promise<boolean>;
 

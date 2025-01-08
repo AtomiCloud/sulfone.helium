@@ -10,8 +10,12 @@ public class LambdaExtension : ICyanExtension
     {
         _f = f;
     }
-    
-    public Task<Cyan> Extension(IInquirer inquirer, IDeterminism determinism, CyanExtensionInput prev)
+
+    public Task<Cyan> Extension(
+        IInquirer inquirer,
+        IDeterminism determinism,
+        CyanExtensionInput prev
+    )
     {
         return this._f(inquirer, determinism, prev);
     }

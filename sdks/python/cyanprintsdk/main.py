@@ -4,7 +4,10 @@ from aiohttp import web
 from pydantic import ValidationError
 
 from cyanprintsdk.api.extension.fn import LambdaExtensionFn, LambdaExtension
-from cyanprintsdk.api.extension.mapper import ExtensionInputMapper, ExtensionOutputMapper
+from cyanprintsdk.api.extension.mapper import (
+    ExtensionInputMapper,
+    ExtensionOutputMapper,
+)
 from cyanprintsdk.api.extension.req import ExtensionAnswerReq, ExtensionValidateReq
 from cyanprintsdk.api.extension.res import ExtensionRes, ExtensionValidRes
 from cyanprintsdk.api.plugin.fn import LambdaPluginFn, LambdaPlugin
@@ -19,9 +22,17 @@ from cyanprintsdk.api.template.fn import LambdaTemplate, LambdaTemplateFn
 from cyanprintsdk.api.template.mapper import TemplateInputMapper, TemplateOutputMapper
 from cyanprintsdk.api.template.req import TemplateAnswerReq, TemplateValidateReq
 from cyanprintsdk.api.template.res import TemplateRes, TemplateValidRes
-from cyanprintsdk.domain.core.cyan_script import ICyanPlugin, ICyanProcessor, ICyanTemplate, ICyanExtension
+from cyanprintsdk.domain.core.cyan_script import (
+    ICyanPlugin,
+    ICyanProcessor,
+    ICyanTemplate,
+    ICyanExtension,
+)
 from cyanprintsdk.domain.core.cyan_script_model import CyanPluginInput
-from cyanprintsdk.domain.extension.input import ExtensionAnswerInput, ExtensionValidateInput
+from cyanprintsdk.domain.extension.input import (
+    ExtensionAnswerInput,
+    ExtensionValidateInput,
+)
 from cyanprintsdk.domain.extension.output import ExtensionOutput
 from cyanprintsdk.domain.extension.service import ExtensionService
 from cyanprintsdk.domain.plugin.input import PluginInput
@@ -36,10 +47,12 @@ from cyanprintsdk.domain.template.service import TemplateService
 
 
 async def health_check(request):
-    return web.json_response({
-        "Message": "OK",
-        "Status": "OK",
-    })
+    return web.json_response(
+        {
+            "Message": "OK",
+            "Status": "OK",
+        }
+    )
 
 
 def start_plugin_with_fn(f: LambdaPluginFn):
@@ -58,7 +71,7 @@ def start_plugin(plugin: ICyanPlugin):
             pprint.pprint(req)
         except ValidationError as e:
             print(e)
-            return web.json_response({'error': str(e)}, status=400)
+            return web.json_response({"error": str(e)}, status=400)
 
         # translate to domain
         i: PluginInput = PluginMapper.to_domain(req)
@@ -67,11 +80,12 @@ def start_plugin(plugin: ICyanPlugin):
 
         return web.json_response(res.model_dump(by_alias=True))
 
-    app.add_routes([
-        web.get("/", health_check),
-        web.post('/api/plug', plug),
-
-    ])
+    app.add_routes(
+        [
+            web.get("/", health_check),
+            web.post("/api/plug", plug),
+        ]
+    )
 
     web.run_app(app, port=5552)
 
@@ -92,7 +106,7 @@ def start_processor(processor: ICyanProcessor):
             pprint.pprint(req)
         except ValidationError as e:
             print(e)
-            return web.json_response({'error': str(e)}, status=400)
+            return web.json_response({"error": str(e)}, status=400)
 
         # translate to domain
         i: ProcessorInput = ProcessorMapper.to_domain(req)
@@ -101,10 +115,12 @@ def start_processor(processor: ICyanProcessor):
 
         return web.json_response(res.model_dump(by_alias=True))
 
-    app.add_routes([
-        web.get("/", health_check),
-        web.post('/api/process', process),
-    ])
+    app.add_routes(
+        [
+            web.get("/", health_check),
+            web.post("/api/process", process),
+        ]
+    )
 
     web.run_app(app, port=5551)
 
@@ -126,7 +142,7 @@ def start_template(template: ICyanTemplate):
             pprint.pprint(req)
         except ValidationError as e:
             print(e)
-            return web.json_response({'error': str(e)}, status=400)
+            return web.json_response({"error": str(e)}, status=400)
 
         # translate to domain
         i: TemplateInput = TemplateInputMapper.answer_to_domain(req)
@@ -144,7 +160,7 @@ def start_template(template: ICyanTemplate):
             pprint.pprint(req)
         except ValidationError as e:
             print(e)
-            return web.json_response({'error': str(e)}, status=400)
+            return web.json_response({"error": str(e)}, status=400)
 
         # translate to domain
         i: TemplateValidateInput = TemplateInputMapper.validate_to_domain(req)
@@ -155,11 +171,13 @@ def start_template(template: ICyanTemplate):
 
         return web.json_response(res_model)
 
-    app.add_routes([
-        web.get("/", health_check),
-        web.post('/api/template/init', template_answer),
-        web.post('/api/template/validate', template_validate),
-    ])
+    app.add_routes(
+        [
+            web.get("/", health_check),
+            web.post("/api/template/init", template_answer),
+            web.post("/api/template/validate", template_validate),
+        ]
+    )
 
     web.run_app(app, port=5550)
 
@@ -180,7 +198,7 @@ def start_extension(extension: ICyanExtension):
             pprint.pprint(req)
         except ValidationError as e:
             print(e)
-            return web.json_response({'error': str(e)}, status=400)
+            return web.json_response({"error": str(e)}, status=400)
 
         # translate to domain
         i: ExtensionAnswerInput = ExtensionInputMapper.extension_answer_to_domain(req)
@@ -196,19 +214,23 @@ def start_extension(extension: ICyanExtension):
             pprint.pprint(req)
         except ValidationError as e:
             print(e)
-            return web.json_response({'error': str(e)}, status=400)
+            return web.json_response({"error": str(e)}, status=400)
 
         # translate to domain
-        i: ExtensionValidateInput = ExtensionInputMapper.extension_validate_to_domain(req)
+        i: ExtensionValidateInput = ExtensionInputMapper.extension_validate_to_domain(
+            req
+        )
         o: str = await ext_service.validate(i)
         res: ExtensionValidRes = ExtensionValidRes(valid=o)
 
         return web.json_response(res.model_dump())
 
-    app.add_routes([
-        web.get("/", health_check),
-        web.post('/api/extension/init', ext_answer),
-        web.post('/api/extension/validate', ext_validate),
-    ])
+    app.add_routes(
+        [
+            web.get("/", health_check),
+            web.post("/api/extension/init", ext_answer),
+            web.post("/api/extension/validate", ext_validate),
+        ]
+    )
 
     web.run_app(app, port=5550)

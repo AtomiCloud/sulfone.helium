@@ -50,5 +50,10 @@ class TextQuestionRes(CyanBaseModel):
 
 
 QuestionRes = Union[
-    ConfirmQuestionRes, DateQuestionRes, CheckboxQuestionRes, PasswordQuestionRes, SelectQuestionRes, TextQuestionRes]
-
+    ConfirmQuestionRes,
+    DateQuestionRes,
+    CheckboxQuestionRes,
+    PasswordQuestionRes,
+    SelectQuestionRes,
+    TextQuestionRes,
+]

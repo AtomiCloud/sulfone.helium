@@ -13,12 +13,15 @@ public static class ExtensionMapper
             req.DeterministicStates,
             req.PrevAnswers.Select(x => x.ToDomain()).ToArray(),
             req.PrevCyan.ToDomain(),
-            req.PrevExtensionAnswers
-                .Select(kv =>
-                    new KeyValuePair<string, IEnumerable<IAnswer>>(kv.Key, kv.Value.Select(a => a.ToDomain())))
+            req.PrevExtensionAnswers.Select(kv => new KeyValuePair<string, IEnumerable<IAnswer>>(
+                    kv.Key,
+                    kv.Value.Select(a => a.ToDomain())
+                ))
                 .ToDictionary(kv => kv.Key, kv => kv.Value),
-            req.PrevExtensionCyans
-                .Select(kv => new KeyValuePair<string, Cyan>(kv.Key, kv.Value.ToDomain()))
+            req.PrevExtensionCyans.Select(kv => new KeyValuePair<string, Cyan>(
+                    kv.Key,
+                    kv.Value.ToDomain()
+                ))
                 .ToDictionary(kv => kv.Key, kv => kv.Value)
         );
     }
@@ -30,12 +33,15 @@ public static class ExtensionMapper
             req.DeterministicStates,
             req.PrevAnswers.Select(x => x.ToDomain()).ToArray(),
             req.PrevCyan.ToDomain(),
-            req.PrevExtensionAnswers
-                .Select(kv =>
-                    new KeyValuePair<string, IEnumerable<IAnswer>>(kv.Key, kv.Value.Select(a => a.ToDomain())))
+            req.PrevExtensionAnswers.Select(kv => new KeyValuePair<string, IEnumerable<IAnswer>>(
+                    kv.Key,
+                    kv.Value.Select(a => a.ToDomain())
+                ))
                 .ToDictionary(kv => kv.Key, kv => kv.Value),
-            req.PrevExtensionCyans
-                .Select(kv => new KeyValuePair<string, Cyan>(kv.Key, kv.Value.ToDomain()))
+            req.PrevExtensionCyans.Select(kv => new KeyValuePair<string, Cyan>(
+                    kv.Key,
+                    kv.Value.ToDomain()
+                ))
                 .ToDictionary(kv => kv.Key, kv => kv.Value),
             req.Validate
         );
@@ -57,7 +63,7 @@ public static class ExtensionOutputMapper
                 DeterministicState = qnAOutput.DeterministicState,
                 Question = qnAOutput.Question.ToResp(),
             },
-            _ => throw new ArgumentOutOfRangeException(nameof(output))
+            _ => throw new ArgumentOutOfRangeException(nameof(output)),
         };
     }
 }

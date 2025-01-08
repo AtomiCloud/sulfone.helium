@@ -1,8 +1,6 @@
 namespace sulfone_helium.Domain.Core;
 
-public interface IAnswer
-{
-}
+public interface IAnswer { }
 
 public record StringArrayAnswer(string[] Answer) : IAnswer;
 

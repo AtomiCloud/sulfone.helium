@@ -12,12 +12,15 @@ public class ProcessorService
         var (read, write, globs, config) = input;
         var cyanGlobs = globs as CyanGlob[] ?? globs.ToArray();
         var helper = new CyanFileHelper(read, write, cyanGlobs);
-        return await Processor.Process(new CyanProcessorInput
-        {
-            ReadDir = read,
-            WriteDir = write,
-            Globs = cyanGlobs,
-            Config = config,
-        }, helper);
+        return await Processor.Process(
+            new CyanProcessorInput
+            {
+                ReadDir = read,
+                WriteDir = write,
+                Globs = cyanGlobs,
+                Config = config,
+            },
+            helper
+        );
     }
 }

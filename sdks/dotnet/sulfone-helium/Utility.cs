@@ -11,11 +11,11 @@ public static class Utility
         var json = System.Text.Json.JsonSerializer.Serialize(d);
         return JObject.Parse(json);
     }
+
     public static ExpandoObject ToDynamic(dynamic d)
     {
         var json = JsonConvert.SerializeObject(d);
-        return JsonConvert.DeserializeObject<ExpandoObject>(json) ?? throw new InvalidOperationException();
+        return JsonConvert.DeserializeObject<ExpandoObject>(json)
+            ?? throw new InvalidOperationException();
     }
-
-    
 }

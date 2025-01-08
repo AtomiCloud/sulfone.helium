@@ -38,7 +38,7 @@ public static class TemplateOutputMapper
                 DeterministicState = qnAOutput.DeterministicState,
                 Question = qnAOutput.Question.ToResp(),
             },
-            _ => throw new ArgumentOutOfRangeException(nameof(output))
+            _ => throw new ArgumentOutOfRangeException(nameof(output)),
         };
     }
 }

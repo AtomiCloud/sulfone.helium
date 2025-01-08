@@ -13,7 +13,7 @@ interface BoolAnswer {
 type Answer = StringAnswer | StringArrayAnswer | BoolAnswer;
 
 function isStringAnswer(a: Answer): a is StringAnswer {
-  return typeof a.answer === "string";
+  return typeof a.answer === 'string';
 }
 
 function isStringArrayAnswer(a: Answer): a is StringArrayAnswer {
@@ -21,7 +21,7 @@ function isStringArrayAnswer(a: Answer): a is StringArrayAnswer {
 }
 
 function isBoolAnswer(a: Answer): a is BoolAnswer {
-  return typeof a.answer === "boolean";
+  return typeof a.answer === 'boolean';
 }
 
 export { isStringAnswer, isStringArrayAnswer, isBoolAnswer };

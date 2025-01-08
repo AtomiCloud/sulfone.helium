@@ -13,7 +13,7 @@ class ProcessorMapper:
             read_directory=req.read_dir,
             write_directory=req.write_dir,
             config=req.config,
-            globs=globs
+            globs=globs,
         )
 
     @staticmethod

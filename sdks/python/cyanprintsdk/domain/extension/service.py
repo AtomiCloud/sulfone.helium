@@ -3,8 +3,15 @@ from typing import Optional
 from cyanprintsdk.domain.core.cyan_script import ICyanExtension
 from cyanprintsdk.domain.core.cyan_script_model import CyanExtensionInput
 from cyanprintsdk.domain.core.question import Question
-from cyanprintsdk.domain.extension.input import ExtensionAnswerInput, ExtensionValidateInput
-from cyanprintsdk.domain.extension.output import ExtensionOutput, ExtensionFinalOutput, ExtensionQnAOutput
+from cyanprintsdk.domain.extension.input import (
+    ExtensionAnswerInput,
+    ExtensionValidateInput,
+)
+from cyanprintsdk.domain.extension.output import (
+    ExtensionOutput,
+    ExtensionFinalOutput,
+    ExtensionQnAOutput,
+)
 from cyanprintsdk.domain.service.out_of_answer_error import OutOfAnswerException
 from cyanprintsdk.domain.service.stateless_determinism import StatelessDeterminism
 from cyanprintsdk.domain.service.stateless_inquirer import StatelessInquirer
@@ -54,5 +61,6 @@ class ExtensionService:
             return q.validate(answer.validate)
         except Exception as e:
             raise e
+
 
 # In Python, no need to explicitly export classes

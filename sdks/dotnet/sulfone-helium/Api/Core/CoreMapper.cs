@@ -8,11 +8,7 @@ public static class CyanMapper
 {
     public static CyanPlugin ToDomain(this CyanPluginReq req)
     {
-        return new CyanPlugin
-        {
-            Name = req.Name,
-            Config = req.Config.ToDynamic(),
-        };
+        return new CyanPlugin { Name = req.Name, Config = req.Config.ToDynamic() };
     }
 
     public static CyanGlob ToDomain(this CyanGlobReq req)
@@ -26,8 +22,8 @@ public static class CyanMapper
             {
                 "template" => GlobType.Template,
                 "copy" => GlobType.Copy,
-                _ => throw new ArgumentOutOfRangeException(nameof(req.Type), req.Type, null)
-            }
+                _ => throw new ArgumentOutOfRangeException(nameof(req.Type), req.Type, null),
+            },
         };
     }
 
@@ -54,12 +50,8 @@ public static class CyanMapper
     {
         return new CyanRes
         {
-            Processors = data.Processors
-                .Select(x => x.ToResp())
-                .ToArray(),
-            Plugins = data.Plugins
-                .Select(x => x.ToResp())
-                .ToArray(),
+            Processors = data.Processors.Select(x => x.ToResp()).ToArray(),
+            Plugins = data.Plugins.Select(x => x.ToResp()).ToArray(),
         };
     }
 
@@ -75,11 +67,7 @@ public static class CyanMapper
 
     public static CyanPluginRes ToResp(this CyanPlugin data)
     {
-        return new CyanPluginRes()
-        {
-            Name = data.Name,
-            Config = Utility.ToDynamic(data.Config),
-        };
+        return new CyanPluginRes() { Name = data.Name, Config = Utility.ToDynamic(data.Config) };
     }
 
     public static string ToResp(this GlobType type)
@@ -88,7 +76,7 @@ public static class CyanMapper
         {
             GlobType.Template => "template",
             GlobType.Copy => "copy",
-            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
     }
 
@@ -116,7 +104,7 @@ public static class QuestionMapper
             PasswordQ password => password.ToResp(),
             SelectQ select => select.ToResp(),
             TextQ text => text.ToResp(),
-            _ => throw new ArgumentOutOfRangeException(nameof(q))
+            _ => throw new ArgumentOutOfRangeException(nameof(q)),
         };
     }
 
@@ -193,8 +181,10 @@ public static class AnswerMapper
         {
             BoolAnswerReq boolAnswer => new BoolAnswer(boolAnswer.Answer),
             StringAnswerReq stringAnswer => new StringAnswer(stringAnswer.Answer),
-            StringArrayAnswerReq stringArrayAnswer => new StringArrayAnswer(stringArrayAnswer.Answer),
-            _ => throw new ArgumentOutOfRangeException(nameof(req))
+            StringArrayAnswerReq stringArrayAnswer => new StringArrayAnswer(
+                stringArrayAnswer.Answer
+            ),
+            _ => throw new ArgumentOutOfRangeException(nameof(req)),
         };
     }
 
@@ -204,8 +194,11 @@ public static class AnswerMapper
         {
             BoolAnswer boolAnswer => new BoolAnswerRes() { Answer = boolAnswer.Answer },
             StringAnswer stringAnswer => new StringAnswerRes() { Answer = stringAnswer.Answer },
-            StringArrayAnswer stringArrayAnswer => new StringArrayAnswerRes() { Answer = stringArrayAnswer.Answer },
-            _ => throw new ArgumentOutOfRangeException(nameof(answer))
+            StringArrayAnswer stringArrayAnswer => new StringArrayAnswerRes()
+            {
+                Answer = stringArrayAnswer.Answer,
+            },
+            _ => throw new ArgumentOutOfRangeException(nameof(answer)),
         };
     }
 }

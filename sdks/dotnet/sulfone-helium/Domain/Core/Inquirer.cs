@@ -5,7 +5,7 @@ namespace sulfone_helium.Domain.Core;
 public interface IInquirer
 {
     Task<string[]> Checkbox(CheckboxQ q);
-    Task<string[]> Checkbox(string q, string[] options, string? help  = null);
+    Task<string[]> Checkbox(string q, string[] options, string? help = null);
     Task<bool> Confirm(ConfirmQ q);
     Task<bool> Confirm(string q, string? help = null);
     Task<string> Password(PasswordQ q);

@@ -1,34 +1,23 @@
-{ pkgs, atomi, atomi_classic, pkgs-2305, pkgs-sep-04-23, pkgs-nov-08-23 }:
+{ pkgs, atomi, pkgs-2411 }:
 let
   all = {
-    atomipkgs_classic = (
-      with atomi_classic;
-      {
-        inherit
-          sg;
-      }
-    );
     atomipkgs = (
       with atomi;
       {
         inherit
           toml-cli
-          infisical
+          sg
           pls;
       }
     );
-    nix-2305 = (
-      with pkgs-2305;
+    nix-2411 = (
+      with pkgs-2411;
       {
         inherit
+          infisical
           hadolint
-          k3d;
-      }
-    );
-    nov-08-23 = (
-      with pkgs-nov-08-23;
-      {
-        inherit bun
+          k3d
+          bun
           coreutils
           findutils
           sd
@@ -47,28 +36,21 @@ let
           golangci-lint
           go
 
-
           #infra
-          docker;
+          docker
+          ;
 
         python = python312;
-        poetry = (poetry.override { python3 = python311; });
-
+        poetry = (poetry.override { python3 = python312; });
         npm = nodePackages.npm;
-        nodejs = nodejs_20;
-      }
-    );
-    sep-04-23 = (
-      with pkgs-sep-04-23;
-      {
-        dotnet = dotnet-sdk_8;
+        nodejs = nodejs_22;
+        dotnet = dotnet-sdk_9;
       }
     );
   };
 in
 with all;
+
 atomipkgs //
-atomipkgs_classic //
-nix-2305 //
-sep-04-23 //
-nov-08-23
+nix-2411
+

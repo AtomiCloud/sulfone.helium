@@ -1,7 +1,11 @@
 from abc import abstractmethod, ABC
 
 from cyanprintsdk.domain.core.cyan import Cyan
-from cyanprintsdk.domain.core.cyan_script_model import CyanExtensionInput, CyanProcessorInput, CyanPluginInput
+from cyanprintsdk.domain.core.cyan_script_model import (
+    CyanExtensionInput,
+    CyanProcessorInput,
+    CyanPluginInput,
+)
 from cyanprintsdk.domain.core.deterministic import IDeterminism
 from cyanprintsdk.domain.core.fs.cyan_fs_helper import CyanFileHelper
 from cyanprintsdk.domain.core.inquirer import IInquirer
@@ -17,13 +21,17 @@ class ICyanTemplate(ABC):
 
 class ICyanExtension(ABC):
     @abstractmethod
-    async def extension(self, inquirer: IInquirer, determinism: IDeterminism, i: CyanExtensionInput) -> Cyan:
+    async def extension(
+        self, inquirer: IInquirer, determinism: IDeterminism, i: CyanExtensionInput
+    ) -> Cyan:
         pass
 
 
 class ICyanProcessor(ABC):
     @abstractmethod
-    async def process(self, i: CyanProcessorInput, file_helper: CyanFileHelper) -> ProcessorOutput:
+    async def process(
+        self, i: CyanProcessorInput, file_helper: CyanFileHelper
+    ) -> ProcessorOutput:
         pass
 
 

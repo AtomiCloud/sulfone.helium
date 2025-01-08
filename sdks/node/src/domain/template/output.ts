@@ -1,5 +1,5 @@
-import { Question } from "../core/question.js";
-import { Cyan } from "../core/cyan.js";
+import { Question } from '../core/question.js';
+import { Cyan } from '../core/cyan.js';
 
 interface TemplateQnAOutput {
   readonly deterministicState: Record<string, string>[];

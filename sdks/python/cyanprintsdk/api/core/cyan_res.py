@@ -25,4 +25,5 @@ class CyanRes(CyanBaseModel):
     processors: List[CyanProcessorRes]
     plugins: List[CyanPluginRes]
 
+
 # No need for explicit export statements in Python

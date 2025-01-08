@@ -11,9 +11,6 @@ public static class PluginMapper
 
     public static PluginRes ToRes(this PluginOutput res)
     {
-        return new PluginRes
-        {
-            OutputDir = res.Directory,
-        };
+        return new PluginRes { OutputDir = res.Directory };
     }
 }

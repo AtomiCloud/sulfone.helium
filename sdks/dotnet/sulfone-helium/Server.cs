@@ -14,7 +14,6 @@ using sulfone_helium.Domain.Template;
 
 namespace sulfone_helium;
 
-
 public struct StatusMessage
 {
     public string Message { get; set; }
@@ -31,23 +30,27 @@ public static class CyanEngine
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(c =>
-            c.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true));
-
+            c.EnableAnnotations(
+                enableAnnotationsForInheritance: true,
+                enableAnnotationsForPolymorphism: true
+            )
+        );
 
         var app = builder.Build();
-
 
         app.UseSwagger();
         app.UseSwaggerUI();
 
+        app.MapGet("/", StatusMessage () => new StatusMessage { Status = "OK", Message = "OK" });
 
-        app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
-        
-        app.MapPost("/api/plug", async Task<PluginRes> (PluginReq req) =>
-        {
-            var resp = await p.Plug(req.ToDomain());
-            return resp.ToRes();
-        });
+        app.MapPost(
+            "/api/plug",
+            async Task<PluginRes> (PluginReq req) =>
+            {
+                var resp = await p.Plug(req.ToDomain());
+                return resp.ToRes();
+            }
+        );
         app.Run();
     }
 
@@ -65,26 +68,34 @@ public static class CyanEngine
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(c =>
-            c.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true));
-
+            c.EnableAnnotations(
+                enableAnnotationsForInheritance: true,
+                enableAnnotationsForPolymorphism: true
+            )
+        );
 
         var app = builder.Build();
-
 
         app.UseSwagger();
         app.UseSwaggerUI();
 
-        app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
-        app.MapPost("/api/process", async Task<ProcessorRes> (ProcessorReq req) =>
-        {
-            Console.WriteLine("Received Request: {0}", req.ToJson());
-            var resp = await p.Process(req.ToDomain());
-            return resp.ToRes();
-        });
+        app.MapGet("/", StatusMessage () => new StatusMessage { Status = "OK", Message = "OK" });
+        app.MapPost(
+            "/api/process",
+            async Task<ProcessorRes> (ProcessorReq req) =>
+            {
+                Console.WriteLine("Received Request: {0}", req.ToJson());
+                var resp = await p.Process(req.ToDomain());
+                return resp.ToRes();
+            }
+        );
         app.Run();
     }
 
-    public static void StartProcessor(string[] args, Func<CyanProcessorInput, CyanFileHelper, Task<ProcessorOutput>> f)
+    public static void StartProcessor(
+        string[] args,
+        Func<CyanProcessorInput, CyanFileHelper, Task<ProcessorOutput>> f
+    )
     {
         var lambda = new LambdaProcessor(f);
         StartProcessor(args, lambda);
@@ -98,30 +109,35 @@ public static class CyanEngine
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(c =>
-            c.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true));
-
+            c.EnableAnnotations(
+                enableAnnotationsForInheritance: true,
+                enableAnnotationsForPolymorphism: true
+            )
+        );
 
         var app = builder.Build();
-
 
         app.UseSwagger();
         app.UseSwaggerUI();
 
-        app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
-        app.MapPost("/api/template/init", async Task<TemplateRes> (TemplateAnswerReq answers) =>
-        {
-            var resp = await h.Template(answers.ToDomain());
-            return resp.ToResp();
-        });
-
-        app.MapPost("/api/template/validate", async Task<TemplateValidRes> (TemplateValidateReq req) =>
-        {
-            var a = await h.Validate(req.ToDomain());
-            return new TemplateValidRes()
+        app.MapGet("/", StatusMessage () => new StatusMessage { Status = "OK", Message = "OK" });
+        app.MapPost(
+            "/api/template/init",
+            async Task<TemplateRes> (TemplateAnswerReq answers) =>
             {
-                Valid = a,
-            };
-        });
+                var resp = await h.Template(answers.ToDomain());
+                return resp.ToResp();
+            }
+        );
+
+        app.MapPost(
+            "/api/template/validate",
+            async Task<TemplateValidRes> (TemplateValidateReq req) =>
+            {
+                var a = await h.Validate(req.ToDomain());
+                return new TemplateValidRes() { Valid = a };
+            }
+        );
         app.Run();
     }
 
@@ -138,33 +154,42 @@ public static class CyanEngine
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(c =>
-            c.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true));
+            c.EnableAnnotations(
+                enableAnnotationsForInheritance: true,
+                enableAnnotationsForPolymorphism: true
+            )
+        );
         var app = builder.Build();
-
 
         app.UseSwagger();
         app.UseSwaggerUI();
 
-        app.MapGet("/", StatusMessage () => new StatusMessage{Status = "OK", Message = "OK"});
-        
-        app.MapPost("/api/extension/init", async Task<ExtensionRes> (ExtensionAnswerReq answers) =>
-        {
-            var resp = await h.Extend(answers.ToDomain());
-            return resp.ToResp();
-        });
+        app.MapGet("/", StatusMessage () => new StatusMessage { Status = "OK", Message = "OK" });
 
-        app.MapPost("/api/extension/validate", async Task<ExtensionValidRes> (ExtensionValidateReq req) =>
-        {
-            var a = await h.Validate(req.ToDomain());
-            return new ExtensionValidRes()
+        app.MapPost(
+            "/api/extension/init",
+            async Task<ExtensionRes> (ExtensionAnswerReq answers) =>
             {
-                Valid = a,
-            };
-        });
+                var resp = await h.Extend(answers.ToDomain());
+                return resp.ToResp();
+            }
+        );
+
+        app.MapPost(
+            "/api/extension/validate",
+            async Task<ExtensionValidRes> (ExtensionValidateReq req) =>
+            {
+                var a = await h.Validate(req.ToDomain());
+                return new ExtensionValidRes() { Valid = a };
+            }
+        );
         app.Run();
     }
 
-    public static void StartExtension(string[] args, Func<IInquirer, IDeterminism, CyanExtensionInput, Task<Cyan>> f)
+    public static void StartExtension(
+        string[] args,
+        Func<IInquirer, IDeterminism, CyanExtensionInput, Task<Cyan>> f
+    )
     {
         StartExtension(args, new LambdaExtension(f));
     }

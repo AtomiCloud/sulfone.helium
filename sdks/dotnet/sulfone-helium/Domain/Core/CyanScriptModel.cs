@@ -5,7 +5,12 @@ namespace sulfone_helium.Domain.Core;
 // User-viewed input
 public readonly struct CyanExtensionInput
 {
-    public void Deconstruct(out IEnumerable<IAnswer> prevAnswers, out Cyan prevCyan, out Dictionary<string, IEnumerable<IAnswer>> prevExtensionAnswers, out Dictionary<string, Cyan> prevExtensionCyans)
+    public void Deconstruct(
+        out IEnumerable<IAnswer> prevAnswers,
+        out Cyan prevCyan,
+        out Dictionary<string, IEnumerable<IAnswer>> prevExtensionAnswers,
+        out Dictionary<string, Cyan> prevExtensionCyans
+    )
     {
         prevAnswers = PrevAnswers;
         prevCyan = PrevCyan;
@@ -21,7 +26,12 @@ public readonly struct CyanExtensionInput
 
 public readonly struct CyanProcessorInput
 {
-    public void Deconstruct(out string readDir, out string writeDir, out IEnumerable<CyanGlob> globs, out JObject config)
+    public void Deconstruct(
+        out string readDir,
+        out string writeDir,
+        out IEnumerable<CyanGlob> globs,
+        out JObject config
+    )
     {
         readDir = ReadDir;
         writeDir = WriteDir;

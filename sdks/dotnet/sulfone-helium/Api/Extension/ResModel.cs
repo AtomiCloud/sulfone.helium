@@ -15,10 +15,7 @@ public struct ExtensionValidRes
 [SwaggerSubType(typeof(ExtensionFinalRes), DiscriminatorValue = "final")]
 [JsonDerivedType(typeof(ExtensionQnARes), typeDiscriminator: "questionnaire")]
 [SwaggerSubType(typeof(ExtensionQnARes), DiscriminatorValue = "questionnaire")]
-
-public abstract class ExtensionRes
-{
-}
+public abstract class ExtensionRes { }
 
 public class ExtensionFinalRes : ExtensionRes
 {
@@ -30,4 +27,3 @@ public class ExtensionQnARes : ExtensionRes
     public required Dictionary<string, string>[] DeterministicState { get; set; }
     public required QuestionRes Question { get; set; }
 }
-

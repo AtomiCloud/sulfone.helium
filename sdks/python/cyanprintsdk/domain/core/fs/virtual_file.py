@@ -16,7 +16,7 @@ class VirtualFileReference:
         return str(Path(self.base_write) / self.relative)
 
     def read_file(self):
-        with open(self.read, 'r', encoding='utf-8') as file:
+        with open(self.read, "r", encoding="utf-8") as file:
             content = file.read()
         return VirtualFile(self.base_read, self.base_write, self.relative, content)
 
@@ -39,6 +39,5 @@ class VirtualFile:
     def write_file(self):
         parent_directory = Path(self.write).parent
         parent_directory.mkdir(parents=True, exist_ok=True)
-        with open(self.write, 'w', encoding='utf-8') as file:
+        with open(self.write, "w", encoding="utf-8") as file:
             file.write(self.content)
-

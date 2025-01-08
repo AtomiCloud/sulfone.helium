@@ -1,15 +1,11 @@
-import type { ExtensionAnswerInput, ExtensionValidateInput } from "./input.js";
-import type { ICyanExtension } from "../core/cyan_script.js";
-import type { CyanExtensionInput } from "../core/cyan_script_model.js";
-import type {
-  ExtensionFinalOutput,
-  ExtensionOutput,
-  ExtensionQnAOutput,
-} from "./output.js";
-import type { Question } from "../core/question.js";
-import { StatelessDeterminism } from "../service/stateless_determinism.js";
-import { StatelessInquirer } from "../service/stateless_inquirer.js";
-import { OutOfAnswerException } from "../service/out_of_answer_error.js";
+import type { ExtensionAnswerInput, ExtensionValidateInput } from './input.js';
+import type { ICyanExtension } from '../core/cyan_script.js';
+import type { CyanExtensionInput } from '../core/cyan_script_model.js';
+import type { ExtensionFinalOutput, ExtensionOutput, ExtensionQnAOutput } from './output.js';
+import type { Question } from '../core/question.js';
+import { StatelessDeterminism } from '../service/stateless_determinism.js';
+import { StatelessInquirer } from '../service/stateless_inquirer.js';
+import { OutOfAnswerException } from '../service/out_of_answer_error.js';
 
 class ExtensionService {
   private ext!: ICyanExtension;
@@ -59,7 +55,7 @@ class ExtensionService {
         prevExtensionCyans: answer.prevExtensionCyans,
       };
       await this.ext.extension(i, d, input);
-      throw new Error("Not supposed to reach here for validation!");
+      throw new Error('Not supposed to reach here for validation!');
     } catch (e) {
       if (e instanceof OutOfAnswerException) {
         const q: Question = e.question;

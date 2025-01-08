@@ -28,4 +28,3 @@ def is_string_array_answer_req(a: AnswerReq) -> bool:
 
 def is_bool_answer_req(a: AnswerReq) -> bool:
     return isinstance(a, BoolAnswerReq)
-

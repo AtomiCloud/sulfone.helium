@@ -1,7 +1,7 @@
-import type { ICyanProcessor } from "../core/cyan_script.js";
-import type { ProcessorInput } from "./input.js";
-import type { ProcessorOutput } from "./output.js";
-import { CyanFileHelper } from "../core/fs/cyan_fs_helper.js";
+import type { ICyanProcessor } from '../core/cyan_script.js';
+import type { ProcessorInput } from './input.js';
+import type { ProcessorOutput } from './output.js';
+import { CyanFileHelper } from '../core/fs/cyan_fs_helper.js';
 
 class ProcessorService {
   private _processor: ICyanProcessor;

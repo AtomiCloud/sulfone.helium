@@ -1,5 +1,5 @@
-import type { CyanRes } from "../core/cyan_res.js";
-import type { QuestionRes } from "../core/question_res.js";
+import type { CyanRes } from '../core/cyan_res.js';
+import type { QuestionRes } from '../core/question_res.js';
 
 interface TemplateValidRes {
   valid?: string | null; // Use optional property for nullability
@@ -7,13 +7,13 @@ interface TemplateValidRes {
 
 interface TemplateFinalRes {
   cyan: CyanRes;
-  type: "final";
+  type: 'final';
 }
 
 interface TemplateQnARes {
   deterministicState: Record<string, string>[];
   question: QuestionRes;
-  type: "questionnaire";
+  type: 'questionnaire';
 }
 
 type TemplateRes = TemplateQnARes | TemplateFinalRes;

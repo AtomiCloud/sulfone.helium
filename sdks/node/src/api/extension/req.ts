@@ -1,5 +1,5 @@
-import type { AnswerReq } from "../core/answer_req.js";
-import type { CyanReq } from "../core/cyan_req.js";
+import type { AnswerReq } from '../core/answer_req.js';
+import type { CyanReq } from '../core/cyan_req.js';
 
 interface ExtensionValidateReq {
   answers: AnswerReq[];

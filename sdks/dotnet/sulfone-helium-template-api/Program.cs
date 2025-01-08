@@ -1,32 +1,31 @@
 using sulfone_helium;
 using sulfone_helium.Domain.Core;
 
-CyanEngine.StartTemplate(args, async Task<Cyan> (inquirer, determinism) =>
-{
-    var name = await inquirer.Text("What is your name?");
-    return new Cyan
+CyanEngine.StartTemplate(
+    args,
+    async Task<Cyan> (inquirer, determinism) =>
     {
-        Processors = new CyanProcessor[]
+        var name = await inquirer.Text("What is your name?");
+        return new Cyan
         {
-            new()
+            Processors = new CyanProcessor[]
             {
-                Name = "hello",
-                Files = new []
+                new()
                 {
-                    new CyanGlob
+                    Name = "hello",
+                    Files = new[]
                     {
-                        Glob = "**/*.*",
-                        Exclude = new string[]
+                        new CyanGlob
                         {
-                            
+                            Glob = "**/*.*",
+                            Exclude = new string[] { },
+                            Type = GlobType.Template,
                         },
-                        Type = GlobType.Template
-                    }
+                    },
+                    Config = null,
                 },
-                Config = null
-            }
-        },
-        Plugins = new List<CyanPlugin>(),
-    };
-
-});
+            },
+            Plugins = new List<CyanPlugin>(),
+        };
+    }
+);

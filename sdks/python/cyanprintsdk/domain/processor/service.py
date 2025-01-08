@@ -7,7 +7,9 @@ from cyanprintsdk.domain.processor.output import ProcessorOutput
 
 class ProcessorService:
     def __init__(self, processor: ICyanProcessor):
-        self._processor = processor  # Leading underscore indicates a "private" attribute
+        self._processor = (
+            processor  # Leading underscore indicates a "private" attribute
+        )
 
     async def process(self, i: ProcessorInput) -> ProcessorOutput:
         read_directory = i.read_directory
@@ -17,6 +19,11 @@ class ProcessorService:
 
         helper = CyanFileHelper(read_directory, write_directory, globs)
         return await self._processor.process(
-            CyanProcessorInput(read_dir=read_directory, write_dir=write_directory, globs=globs, config=config),
+            CyanProcessorInput(
+                read_dir=read_directory,
+                write_dir=write_directory,
+                globs=globs,
+                config=config,
+            ),
             helper,
         )

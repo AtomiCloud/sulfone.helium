@@ -9,10 +9,6 @@ public class PluginService
     public async Task<PluginOutput> Plug(PluginInput input)
     {
         var (dir, config) = input;
-        return await Plugin.Plugin(new Core.CyanPluginInput
-        {
-            Directory = dir,
-            Config = config,
-        });
+        return await Plugin.Plugin(new Core.CyanPluginInput { Directory = dir, Config = config });
     }
 }

@@ -1,7 +1,14 @@
 from cyanprintsdk.api.core.core_mapper import AnswerMapper, CyanMapper, QuestionMapper
 from cyanprintsdk.api.extension.req import ExtensionAnswerReq, ExtensionValidateReq
-from cyanprintsdk.api.extension.res import ExtensionRes, ExtensionQnARes, ExtensionFinalRes
-from cyanprintsdk.domain.extension.input import ExtensionAnswerInput, ExtensionValidateInput
+from cyanprintsdk.api.extension.res import (
+    ExtensionRes,
+    ExtensionQnARes,
+    ExtensionFinalRes,
+)
+from cyanprintsdk.domain.extension.input import (
+    ExtensionAnswerInput,
+    ExtensionValidateInput,
+)
 from cyanprintsdk.domain.extension.output import ExtensionOutput, is_final
 
 
@@ -26,11 +33,13 @@ class ExtensionInputMapper:
             deterministic_state=req.deterministic_states,
             prev_cyan=prev_cyan,
             prev_extension_answers=prev_extension_answers,
-            prev_extension_cyans=prev_extension_cyans
+            prev_extension_cyans=prev_extension_cyans,
         )
 
     @staticmethod
-    def extension_validate_to_domain(req: ExtensionValidateReq) -> ExtensionValidateInput:
+    def extension_validate_to_domain(
+        req: ExtensionValidateReq,
+    ) -> ExtensionValidateInput:
         return ExtensionValidateInput(
             answers=[AnswerMapper.to_domain(x) for x in req.answers],
             deterministic_state=req.deterministic_states,
@@ -44,7 +53,7 @@ class ExtensionInputMapper:
                 key: CyanMapper.cyan_req_to_domain(value)
                 for key, value in req.prev_extension_cyans.items()
             },
-            validate=req.validate
+            validate=req.validate,
         )
 
 
@@ -53,12 +62,11 @@ class ExtensionOutputMapper:
     def to_resp(output: ExtensionOutput) -> ExtensionRes:
         if is_final(output):
             return ExtensionQnARes(
-                cyan=CyanMapper.cyan_to_resp(output.data),
-                type="final"
+                cyan=CyanMapper.cyan_to_resp(output.data), type="final"
             )
         else:
             return ExtensionFinalRes(
                 deterministic_state=output.deterministic_state,
                 question=QuestionMapper.question_to_resp(output.question),
-                type="questionnaire"
+                type="questionnaire",
             )

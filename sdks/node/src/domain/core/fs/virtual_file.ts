@@ -1,5 +1,5 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from 'fs';
+import * as path from 'path';
 
 export class VirtualFileStream {
   constructor(
@@ -24,13 +24,8 @@ export class VirtualFileReference {
   }
 
   readFile(): VirtualFile {
-    const content = fs.readFileSync(this.read, "utf-8");
-    return new VirtualFile(
-      this.baseRead,
-      this.baseWrite,
-      this.relative,
-      content,
-    );
+    const content = fs.readFileSync(this.read, 'utf-8');
+    return new VirtualFile(this.baseRead, this.baseWrite, this.relative, content);
   }
 }
 
@@ -55,6 +50,6 @@ export class VirtualFile {
     if (!fs.existsSync(parent)) {
       fs.mkdirSync(parent, { recursive: true });
     }
-    fs.writeFileSync(this.write, this.content, "utf-8");
+    fs.writeFileSync(this.write, this.content, 'utf-8');
   }
 }

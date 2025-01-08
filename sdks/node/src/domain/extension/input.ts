@@ -1,5 +1,5 @@
-import type { Answer } from "../core/answer.js";
-import type { Cyan } from "../core/cyan.js";
+import type { Answer } from '../core/answer.js';
+import type { Cyan } from '../core/cyan.js';
 
 interface ExtensionAnswerInput {
   answers: Answer[];

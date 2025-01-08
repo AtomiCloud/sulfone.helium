@@ -17,8 +17,10 @@ public class StatelessDeterminism : IDeterminism
     public string Get(string key, Func<string> origin)
     {
         var states = this.States[this._pointer + 1];
-        if (states == null) throw new NullReferenceException("");
-        if (states.TryGetValue(key, out var state)) return state;
+        if (states == null)
+            throw new NullReferenceException("");
+        if (states.TryGetValue(key, out var state))
+            return state;
         var val = origin();
         states.Add(key, val);
         Console.WriteLine(JsonSerializer.Serialize(this.States));

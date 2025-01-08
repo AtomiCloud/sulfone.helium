@@ -11,4 +11,6 @@ class PluginService:
     async def plug(self, i: PluginInput) -> PluginOutput:
         directory = i.directory
         config = i.config
-        return await self._plugin.plugin(CyanPluginInput(directory=directory, config=config))
+        return await self._plugin.plugin(
+            CyanPluginInput(directory=directory, config=config)
+        )

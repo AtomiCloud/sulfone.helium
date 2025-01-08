@@ -1,7 +1,7 @@
-import type { PluginRes } from "./res.js";
-import type { PluginOutput } from "../../domain/plugin/output.js";
-import type { PluginReq } from "./req.js";
-import type { PluginInput } from "../../domain/plugin/input.js";
+import type { PluginRes } from './res.js';
+import type { PluginOutput } from '../../domain/plugin/output.js';
+import type { PluginReq } from './req.js';
+import type { PluginInput } from '../../domain/plugin/input.js';
 
 class PluginMapper {
   public static ToDomain(req: PluginReq): PluginInput {

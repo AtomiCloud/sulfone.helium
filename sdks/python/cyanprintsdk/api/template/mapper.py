@@ -20,7 +20,7 @@ class TemplateInputMapper:
         return TemplateValidateInput(
             deterministic_state=req.deterministic_states,
             answers=answers,
-            validate=req.validate
+            validate=req.validate,
         )
 
 
@@ -31,12 +31,11 @@ class TemplateOutputMapper:
             return TemplateQnARes(
                 type="questionnaire",
                 deterministic_state=output.deterministic_state,
-                question=QuestionMapper.question_to_resp(output.question)
+                question=QuestionMapper.question_to_resp(output.question),
             )
         elif is_final(output):
             return TemplateFinalRes(
-                cyan=CyanMapper.cyan_to_resp(output.data),
-                type="final"
+                cyan=CyanMapper.cyan_to_resp(output.data), type="final"
             )
         else:
             raise ValueError(f"Invalid output type {output}")

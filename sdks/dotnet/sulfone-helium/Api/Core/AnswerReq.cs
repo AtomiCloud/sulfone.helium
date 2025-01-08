@@ -11,9 +11,7 @@ namespace sulfone_helium.Api.Core;
 [SwaggerSubType(typeof(BoolAnswerReq), DiscriminatorValue = "boolean")]
 [JsonDerivedType(typeof(StringArrayAnswerReq), typeDiscriminator: "str_array")]
 [SwaggerSubType(typeof(StringArrayAnswerReq), DiscriminatorValue = "str_array")]
-public abstract class AnswerReq
-{
-}
+public abstract class AnswerReq { }
 
 public class StringArrayAnswerReq : AnswerReq
 {

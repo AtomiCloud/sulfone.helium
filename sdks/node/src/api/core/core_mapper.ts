@@ -1,31 +1,8 @@
-import type {
-  CyanGlobReq,
-  CyanPluginReq,
-  CyanProcessorReq,
-  CyanReq,
-} from "./cyan_req.js";
-import type {
-  Cyan,
-  CyanGlob,
-  CyanPlugin,
-  CyanProcessor,
-} from "../../domain/core/cyan.js";
-import { GlobType } from "../../domain/core/cyan.js";
-import type {
-  CyanGlobRes,
-  CyanPluginRes,
-  CyanProcessorRes,
-  CyanRes,
-} from "./cyan_res.js";
-import type {
-  CheckboxQ,
-  ConfirmQ,
-  DateQ,
-  PasswordQ,
-  Question,
-  SelectQ,
-  TextQ,
-} from "../../domain/core/question.js";
+import type { CyanGlobReq, CyanPluginReq, CyanProcessorReq, CyanReq } from './cyan_req.js';
+import type { Cyan, CyanGlob, CyanPlugin, CyanProcessor } from '../../domain/core/cyan.js';
+import { GlobType } from '../../domain/core/cyan.js';
+import type { CyanGlobRes, CyanPluginRes, CyanProcessorRes, CyanRes } from './cyan_res.js';
+import type { CheckboxQ, ConfirmQ, DateQ, PasswordQ, Question, SelectQ, TextQ } from '../../domain/core/question.js';
 
 import type {
   CheckboxQuestionRes,
@@ -35,16 +12,11 @@ import type {
   QuestionRes,
   SelectQuestionRes,
   TextQuestionRes,
-} from "./question_res.js";
-import {
-  Answer,
-  isBoolAnswer,
-  isStringAnswer,
-  isStringArrayAnswer,
-} from "../../domain/core/answer.js";
-import { AnswerRes } from "./answer_res.js";
-import { AnswerReq, isBoolAnswerReq, isStringAnswerReq } from "./answer_req.js";
-import { QuestionType } from "../../domain/core/question.js";
+} from './question_res.js';
+import { Answer, isBoolAnswer, isStringAnswer, isStringArrayAnswer } from '../../domain/core/answer.js';
+import { AnswerRes } from './answer_res.js';
+import { AnswerReq, isBoolAnswerReq, isStringAnswerReq } from './answer_req.js';
+import { QuestionType } from '../../domain/core/question.js';
 
 export class CyanMapper {
   static pluginReqToDomain(req: CyanPluginReq): CyanPlugin {
@@ -57,9 +29,9 @@ export class CyanMapper {
   static globReqToDomain(req: CyanGlobReq): CyanGlob {
     const type = (() => {
       switch (req.type) {
-        case "template":
+        case 'template':
           return GlobType.Template;
-        case "copy":
+        case 'copy':
           return GlobType.Copy;
         default:
           throw new Error(`Invalid req.type: ${req.type}`);
@@ -77,21 +49,21 @@ export class CyanMapper {
     return {
       name: req.name,
       config: req.config,
-      files: req.files.map((x) => this.globReqToDomain(x)),
+      files: req.files.map(x => this.globReqToDomain(x)),
     };
   }
 
   static cyanReqToDomain(req: CyanReq): Cyan {
     return {
-      processors: req.processors.map((x) => this.processorReqToDomain(x)),
-      plugins: req.plugins.map((x) => this.pluginReqToDomain(x)),
+      processors: req.processors.map(x => this.processorReqToDomain(x)),
+      plugins: req.plugins.map(x => this.pluginReqToDomain(x)),
     };
   }
 
   static cyanToResp(data: Cyan): CyanRes {
     return {
-      processors: data.processors.map((x) => this.processorToResp(x)),
-      plugins: data.plugins.map((x) => this.pluginToResp(x)),
+      processors: data.processors.map(x => this.processorToResp(x)),
+      plugins: data.plugins.map(x => this.pluginToResp(x)),
     };
   }
 
@@ -99,7 +71,7 @@ export class CyanMapper {
     return {
       name: data.name,
       config: data.config,
-      files: data.files.map((x) => this.globToResp(x)),
+      files: data.files.map(x => this.globToResp(x)),
     };
   }
 
@@ -113,9 +85,9 @@ export class CyanMapper {
   static globTypeToResp(type: GlobType): string {
     switch (type) {
       case GlobType.Template:
-        return "template";
+        return 'template';
       case GlobType.Copy:
-        return "copy";
+        return 'copy';
       default:
         throw new Error(`Invalid GlobType: ${type}`);
     }
@@ -157,7 +129,7 @@ export class QuestionMapper {
       message: q.message,
       errorMessage: q.errorMessage,
       desc: q.desc,
-      type: "confirm",
+      type: 'confirm',
     };
   }
 
@@ -166,7 +138,7 @@ export class QuestionMapper {
       message: q.message,
       desc: q.desc,
       options: q.options,
-      type: "checkbox",
+      type: 'checkbox',
     };
   }
 
@@ -175,7 +147,7 @@ export class QuestionMapper {
       message: q.message,
       desc: q.desc,
       options: q.options,
-      type: "select",
+      type: 'select',
     };
   }
 
@@ -185,7 +157,7 @@ export class QuestionMapper {
       desc: q.desc,
       default: q.default,
       initial: q.initial,
-      type: "text",
+      type: 'text',
     };
   }
 
@@ -194,7 +166,7 @@ export class QuestionMapper {
       message: q.message,
       desc: q.desc,
       confirmation: q.confirmation,
-      type: "password",
+      type: 'password',
     };
   }
 
@@ -205,7 +177,7 @@ export class QuestionMapper {
       default: q.default?.toISOString(),
       maxDate: q.maxDate?.toDateString(),
       minDate: q.minDate?.toISOString(),
-      type: "date",
+      type: 'date',
     };
   }
 }

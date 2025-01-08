@@ -1,4 +1,4 @@
-import type { Answer } from "../core/answer.js";
+import type { Answer } from '../core/answer.js';
 
 interface TemplateInput {
   readonly answers: Answer[];

@@ -1,5 +1,5 @@
-import type { Question } from "../core/question.js";
-import type { Cyan } from "../core/cyan.js";
+import type { Question } from '../core/question.js';
+import type { Cyan } from '../core/cyan.js';
 
 interface ExtensionQnAOutput {
   deterministicState: Record<string, string>[];

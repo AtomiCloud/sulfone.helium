@@ -1,14 +1,10 @@
-import type { ICyanTemplate } from "../core/cyan_script.js";
-import type { TemplateInput, TemplateValidateInput } from "./input.js";
-import type {
-  TemplateFinalOutput,
-  TemplateOutput,
-  TemplateQnAOutput,
-} from "./output.js";
-import { StatelessInquirer } from "../service/stateless_inquirer.js";
-import { StatelessDeterminism } from "../service/stateless_determinism.js";
-import { OutOfAnswerException } from "../service/out_of_answer_error.js";
-import type { Question } from "../core/question.js";
+import type { ICyanTemplate } from '../core/cyan_script.js';
+import type { TemplateInput, TemplateValidateInput } from './input.js';
+import type { TemplateFinalOutput, TemplateOutput, TemplateQnAOutput } from './output.js';
+import { StatelessInquirer } from '../service/stateless_inquirer.js';
+import { StatelessDeterminism } from '../service/stateless_determinism.js';
+import { OutOfAnswerException } from '../service/out_of_answer_error.js';
+import type { Question } from '../core/question.js';
 
 class TemplateService {
   private readonly _template: ICyanTemplate;
@@ -46,7 +42,7 @@ class TemplateService {
 
     try {
       await this._template.template(i, d);
-      throw new Error("Not supposed to reach here for validation!");
+      throw new Error('Not supposed to reach here for validation!');
     } catch (e) {
       if (e instanceof OutOfAnswerException) {
         const q: Question = e.question;

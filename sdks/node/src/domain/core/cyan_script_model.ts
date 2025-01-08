@@ -1,5 +1,5 @@
-import type { Answer } from "./answer.js";
-import type { Cyan, CyanGlob } from "./cyan.js";
+import type { Answer } from './answer.js';
+import type { Cyan, CyanGlob } from './cyan.js';
 
 interface CyanExtensionInput {
   prevAnswers: Answer[];

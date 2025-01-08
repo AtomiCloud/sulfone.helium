@@ -41,8 +41,8 @@ with packages;
     hadolint
     gitlint
     shellcheck
-    sg
     golangci-lint
+    sg
   ];
 
   ci = [
@@ -50,9 +50,7 @@ with packages;
   ];
 
   releaser = [
-    nodejs
     sg
-    npm
   ];
 
 }

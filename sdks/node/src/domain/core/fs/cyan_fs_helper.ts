@@ -1,13 +1,9 @@
-import type { CyanGlob } from "../cyan.js";
-import { GlobType } from "../cyan.js";
-import * as path from "path";
-import * as fs from "fs";
-import {
-  VirtualFile,
-  VirtualFileReference,
-  VirtualFileStream,
-} from "./virtual_file.js";
-import { glob } from "glob";
+import type { CyanGlob } from '../cyan.js';
+import { GlobType } from '../cyan.js';
+import * as path from 'path';
+import * as fs from 'fs';
+import { VirtualFile, VirtualFileReference, VirtualFileStream } from './virtual_file.js';
+import { glob } from 'glob';
 
 export class CyanFileHelper {
   constructor(
@@ -25,7 +21,7 @@ export class CyanFileHelper {
   }
 
   private globDir(g: CyanGlob): string {
-    return path.resolve(this.readDir, g.root ?? ".");
+    return path.resolve(this.readDir, g.root ?? '.');
   }
 
   private copyFile(from: string, to: string): void {
@@ -35,12 +31,12 @@ export class CyanFileHelper {
   }
 
   resolveAll(): VirtualFile[] {
-    const copy = this.globs.filter((x) => x.type === GlobType.Copy);
-    const template = this.globs.filter((x) => x.type === GlobType.Template);
+    const copy = this.globs.filter(x => x.type === GlobType.Copy);
+    const template = this.globs.filter(x => x.type === GlobType.Template);
 
     for (const c of copy) this.copy(c);
 
-    return template.flatMap((x) => this.read(x));
+    return template.flatMap(x => this.read(x));
   }
 
   readAsStream(g: CyanGlob): VirtualFileStream[] {
@@ -53,7 +49,7 @@ export class CyanFileHelper {
     });
 
     return matched.map(
-      (x) =>
+      x =>
         new VirtualFileStream(
           fs.createReadStream(path.join(globRoot, x)),
           fs.createWriteStream(path.join(this.writeDir, x)),
@@ -71,11 +67,11 @@ export class CyanFileHelper {
         dot: true,
         nodir: true,
       })
-      .map((x) => new VirtualFileReference(globRoot, this.writeDir, x));
+      .map(x => new VirtualFileReference(globRoot, this.writeDir, x));
   }
 
   read(g: CyanGlob): VirtualFile[] {
-    return this.get(g).map((x) => x.readFile());
+    return this.get(g).map(x => x.readFile());
   }
 
   copy(copy: CyanGlob): void {
@@ -88,7 +84,7 @@ export class CyanFileHelper {
         dot: true,
         nodir: true,
       })
-      .map((x) => [path.join(globRoot, x), path.join(this.writeDir, x)]);
+      .map(x => [path.join(globRoot, x), path.join(this.writeDir, x)]);
 
     for (const [read, write] of files) {
       console.log(`copy: ${read} -> ${write}`);

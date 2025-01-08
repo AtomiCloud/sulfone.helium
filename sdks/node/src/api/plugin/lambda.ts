@@ -1,6 +1,6 @@
-import type { ICyanPlugin } from "../../domain/core/cyan_script.js";
-import type { PluginOutput } from "../../domain/plugin/output.js";
-import type { CyanPluginInput } from "../../domain/core/cyan_script_model.js";
+import type { ICyanPlugin } from '../../domain/core/cyan_script.js';
+import type { PluginOutput } from '../../domain/plugin/output.js';
+import type { CyanPluginInput } from '../../domain/core/cyan_script_model.js';
 
 type LambdaPluginFn = (input: CyanPluginInput) => Promise<PluginOutput>;
 

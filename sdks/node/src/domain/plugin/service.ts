@@ -1,6 +1,6 @@
-import type { ICyanPlugin } from "../core/cyan_script.js";
-import type { PluginInput } from "./input.js";
-import type { PluginOutput } from "./output.js";
+import type { ICyanPlugin } from '../core/cyan_script.js';
+import type { PluginInput } from './input.js';
+import type { PluginOutput } from './output.js';
 
 class PluginService {
   readonly #plugin: ICyanPlugin;

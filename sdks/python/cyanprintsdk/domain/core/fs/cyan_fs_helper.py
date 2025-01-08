@@ -41,10 +41,15 @@ class CyanFileHelper:
     def get(self, g: CyanGlob) -> List[VirtualFileReference]:
         gr: str = self._glob_dir(g)
         includes = set(glob.glob(g.glob, recursive=True, root_dir=gr))
-        excludes = set.union(*[set(glob.glob(ex, recursive=True, root_dir=gr)) for ex in g.exclude])
+        excludes = set.union(
+            *[set(glob.glob(ex, recursive=True, root_dir=gr)) for ex in g.exclude]
+        )
         matched = [Path(gr, x) for x in list(includes - excludes)]
 
-        return [VirtualFileReference(gr, self.write_dir, str(Path(x).relative_to(gr))) for x in matched]
+        return [
+            VirtualFileReference(gr, self.write_dir, str(Path(x).relative_to(gr)))
+            for x in matched
+        ]
 
     def read(self, g: CyanGlob) -> List[VirtualFile]:
         return [ref.read_file() for ref in self.get(g)]
@@ -52,7 +57,12 @@ class CyanFileHelper:
     def copy(self, copy: CyanGlob) -> None:
         glob_root = self._glob_dir(copy)
         includes = set(glob.glob(copy.glob, recursive=True, root_dir=glob_root))
-        excludes = set.union(*[set(glob.glob(ex, recursive=True, root_dir=glob_root)) for ex in copy.exclude])
+        excludes = set.union(
+            *[
+                set(glob.glob(ex, recursive=True, root_dir=glob_root))
+                for ex in copy.exclude
+            ]
+        )
         files = list(includes - excludes)
 
         for read in files:

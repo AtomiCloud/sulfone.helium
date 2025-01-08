@@ -6,7 +6,11 @@ from cyanprintsdk.domain.service.out_of_answer_error import OutOfAnswerException
 from cyanprintsdk.domain.service.stateless_determinism import StatelessDeterminism
 from cyanprintsdk.domain.service.stateless_inquirer import StatelessInquirer
 from cyanprintsdk.domain.template.input import TemplateInput, TemplateValidateInput
-from cyanprintsdk.domain.template.output import TemplateQnAOutput, TemplateOutput, TemplateFinalOutput
+from cyanprintsdk.domain.template.output import (
+    TemplateQnAOutput,
+    TemplateOutput,
+    TemplateFinalOutput,
+)
 
 
 class TemplateService:

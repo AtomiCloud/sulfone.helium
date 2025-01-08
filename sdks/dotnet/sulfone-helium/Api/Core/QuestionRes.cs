@@ -17,12 +17,9 @@ namespace sulfone_helium.Api.Core;
 [SwaggerSubType(typeof(TextQuestionRes), DiscriminatorValue = "text")]
 [JsonDerivedType(typeof(SelectQuestionRes), typeDiscriminator: "select")]
 [SwaggerSubType(typeof(SelectQuestionRes), DiscriminatorValue = "select")]
-public abstract class QuestionRes
-{
-    
-}
+public abstract class QuestionRes { }
 
-public class ConfirmQuestionRes:QuestionRes
+public class ConfirmQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
     public string? Desc { get; set; }
@@ -30,7 +27,7 @@ public class ConfirmQuestionRes:QuestionRes
     public string? ErrorMessage { get; set; }
 }
 
-public class DateQuestionRes:QuestionRes
+public class DateQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
     public string? Default { get; set; }
@@ -39,33 +36,33 @@ public class DateQuestionRes:QuestionRes
     public string? MaxDate { get; set; }
 }
 
-public class CheckboxQuestionRes:QuestionRes
+public class CheckboxQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
     public string? Desc { get; set; }
     public required string[] Options { get; set; }
 }
 
-public class PasswordQuestionRes:QuestionRes
+public class PasswordQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
     public string? Desc { get; set; }
     public bool? Confirmation { get; set; }
 }
 
-public class SelectQuestionRes:QuestionRes
+public class SelectQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
     public required string[] Options { get; set; }
-    
+
     public string? Desc { get; set; }
 }
 
-public class TextQuestionRes:QuestionRes
+public class TextQuestionRes : QuestionRes
 {
-    public required string Message { get; set;  }
-    
-    public string? Default { get; set;  }
-    public string? Desc { get; set;  }
-    public string? Initial { get; set;  }
+    public required string Message { get; set; }
+
+    public string? Default { get; set; }
+    public string? Desc { get; set; }
+    public string? Initial { get; set; }
 }

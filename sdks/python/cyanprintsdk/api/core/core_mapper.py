@@ -1,13 +1,61 @@
-from cyanprintsdk.api.core.answer_req import AnswerReq, is_bool_answer_req, is_string_answer_req, is_string_array_answer_req
-from cyanprintsdk.api.core.answer_res import AnswerRes, BoolAnswerRes, StringAnswerRes, StringArrayAnswerRes
-from cyanprintsdk.api.core.cyan_req import CyanPluginReq, CyanGlobReq, CyanProcessorReq, CyanReq
-from cyanprintsdk.api.core.cyan_res import CyanRes, CyanProcessorRes, CyanPluginRes, CyanGlobRes
-from cyanprintsdk.api.core.question_res import QuestionRes, ConfirmQuestionRes, CheckboxQuestionRes, SelectQuestionRes, \
-    DateQuestionRes, PasswordQuestionRes, TextQuestionRes
-from cyanprintsdk.domain.core.answer import Answer, is_string_array_answer, is_bool_answer, is_string_answer, BoolAnswer, \
-    StringAnswer, StringArrayAnswer
-from cyanprintsdk.domain.core.cyan import CyanPlugin, CyanGlob, GlobType, CyanProcessor, Cyan
-from cyanprintsdk.domain.core.question import Question, ConfirmQ, CheckboxQ, SelectQ, DateQ, PasswordQ, TextQ
+from cyanprintsdk.api.core.answer_req import (
+    AnswerReq,
+    is_bool_answer_req,
+    is_string_answer_req,
+    is_string_array_answer_req,
+)
+from cyanprintsdk.api.core.answer_res import (
+    AnswerRes,
+    BoolAnswerRes,
+    StringAnswerRes,
+    StringArrayAnswerRes,
+)
+from cyanprintsdk.api.core.cyan_req import (
+    CyanPluginReq,
+    CyanGlobReq,
+    CyanProcessorReq,
+    CyanReq,
+)
+from cyanprintsdk.api.core.cyan_res import (
+    CyanRes,
+    CyanProcessorRes,
+    CyanPluginRes,
+    CyanGlobRes,
+)
+from cyanprintsdk.api.core.question_res import (
+    QuestionRes,
+    ConfirmQuestionRes,
+    CheckboxQuestionRes,
+    SelectQuestionRes,
+    DateQuestionRes,
+    PasswordQuestionRes,
+    TextQuestionRes,
+)
+from cyanprintsdk.domain.core.answer import (
+    Answer,
+    is_string_array_answer,
+    is_bool_answer,
+    is_string_answer,
+    BoolAnswer,
+    StringAnswer,
+    StringArrayAnswer,
+)
+from cyanprintsdk.domain.core.cyan import (
+    CyanPlugin,
+    CyanGlob,
+    GlobType,
+    CyanProcessor,
+    Cyan,
+)
+from cyanprintsdk.domain.core.question import (
+    Question,
+    ConfirmQ,
+    CheckboxQ,
+    SelectQ,
+    DateQ,
+    PasswordQ,
+    TextQ,
+)
 
 
 class CyanMapper:
@@ -24,7 +72,9 @@ class CyanMapper:
         else:
             raise ValueError(f"Invalid req.type: {req.type}")
 
-        return CyanGlob(root=req.root, glob=req.glob, exclude=req.exclude, type=glob_type)
+        return CyanGlob(
+            root=req.root, glob=req.glob, exclude=req.exclude, type=glob_type
+        )
 
     @staticmethod
     def processor_req_to_domain(req: CyanProcessorReq) -> CyanProcessor:
@@ -63,8 +113,12 @@ class CyanMapper:
 
     @staticmethod
     def glob_to_resp(data: CyanGlob) -> CyanGlobRes:
-        return CyanGlobRes(root=data.root, glob=data.glob, exclude=data.exclude,
-                           type=CyanMapper.glob_type_to_resp(data.type))
+        return CyanGlobRes(
+            root=data.root,
+            glob=data.glob,
+            exclude=data.exclude,
+            type=CyanMapper.glob_type_to_resp(data.type),
+        )
 
 
 class QuestionMapper:
@@ -92,25 +146,19 @@ class QuestionMapper:
             message=q.message,
             error_message=q.error_message,
             desc=q.desc,
-            type="confirm"
+            type="confirm",
         )
 
     @staticmethod
     def checkbox_to_resp(q: CheckboxQ) -> CheckboxQuestionRes:
         return CheckboxQuestionRes(
-            message=q.message,
-            desc=q.desc,
-            options=q.options,
-            type="checkbox"
+            message=q.message, desc=q.desc, options=q.options, type="checkbox"
         )
 
     @staticmethod
     def select_to_resp(q: SelectQ) -> SelectQuestionRes:
         return SelectQuestionRes(
-            message=q.message,
-            desc=q.desc,
-            options=q.options,
-            type="select"
+            message=q.message, desc=q.desc, options=q.options, type="select"
         )
 
     @staticmethod
@@ -120,16 +168,13 @@ class QuestionMapper:
             desc=q.desc,
             default=q.default,
             initial=q.initial,
-            type="text"
+            type="text",
         )
 
     @staticmethod
     def password_to_resp(q: PasswordQ) -> PasswordQuestionRes:
         return PasswordQuestionRes(
-            message=q.message,
-            desc=q.desc,
-            confirmation=q.confirmation,
-            type="password"
+            message=q.message, desc=q.desc, confirmation=q.confirmation, type="password"
         )
 
     @staticmethod
@@ -140,7 +185,7 @@ class QuestionMapper:
             default=q.default.isoformat() if q.default else None,
             maxDate=q.max_date.isoformat() if q.max_date else None,
             minDate=q.min_date.isoformat() if q.min_date else None,
-            type="date"
+            type="date",
         )
 
 

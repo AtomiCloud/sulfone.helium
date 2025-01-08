@@ -1,12 +1,9 @@
-import type { IInquirer } from "../../domain/core/inquirer.js";
-import type { IDeterminism } from "../../domain/core/deterministic.js";
-import type { Cyan } from "../../domain/core/cyan.js";
-import type { ICyanTemplate } from "../../domain/core/cyan_script.js";
+import type { IInquirer } from '../../domain/core/inquirer.js';
+import type { IDeterminism } from '../../domain/core/deterministic.js';
+import type { Cyan } from '../../domain/core/cyan.js';
+import type { ICyanTemplate } from '../../domain/core/cyan_script.js';
 
-type LambdaTemplateFn = (
-  inquirer: IInquirer,
-  determinism: IDeterminism,
-) => Promise<Cyan>;
+type LambdaTemplateFn = (inquirer: IInquirer, determinism: IDeterminism) => Promise<Cyan>;
 
 class LambdaTemplate implements ICyanTemplate {
   private readonly _f: LambdaTemplateFn;

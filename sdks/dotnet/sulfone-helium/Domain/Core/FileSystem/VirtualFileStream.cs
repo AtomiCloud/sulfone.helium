@@ -22,7 +22,8 @@ public record VirtualFile(string BaseRead, string BaseWrite, string Relative, st
     public void WriteFile()
     {
         var parent = Directory.GetParent(this.Write);
-        if (parent != null) Directory.CreateDirectory(parent.FullName);
+        if (parent != null)
+            Directory.CreateDirectory(parent.FullName);
         File.WriteAllText(this.Write, this.Content);
     }
 }

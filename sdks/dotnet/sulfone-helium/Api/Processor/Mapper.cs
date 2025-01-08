@@ -17,9 +17,6 @@ public static class ProcessorMapper
 
     public static ProcessorRes ToRes(this ProcessorOutput res)
     {
-        return new ProcessorRes
-        {
-            OutputDir = res.Directory,
-        };
+        return new ProcessorRes { OutputDir = res.Directory };
     }
 }

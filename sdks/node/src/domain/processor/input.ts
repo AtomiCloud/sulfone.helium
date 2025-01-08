@@ -1,4 +1,4 @@
-import type { CyanGlob } from "../core/cyan.js";
+import type { CyanGlob } from '../core/cyan.js';
 
 interface ProcessorInput {
   readonly readDirectory: string;
