@@ -1,3 +1,18 @@
+## [1.6.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.5.0...v1.6.0) (2025-01-10)
+
+
+### 🚀 Features 🚀
+
+* update flakes to v1 ([0eefcd6](https://github.com/AtomiCloud/sulfone.helium/commit/0eefcd6de064e498cbf098cb254a0b08f5de4a96))
+* upgrade all backing infrastructure ([ca6305a](https://github.com/AtomiCloud/sulfone.helium/commit/ca6305a936ff80202db454f69ace6b57259d23cd))
+
+
+### 🐛 Bug Fixes 🐛
+
+* incorrect release ([44aa30b](https://github.com/AtomiCloud/sulfone.helium/commit/44aa30ba02faebca458ca7e11eb6e64052792183))
+* missing gcc ([9bc253f](https://github.com/AtomiCloud/sulfone.helium/commit/9bc253fb9817a2aee8cb36d6dc72032434c6ea29))
+* missing prettier ([16d84cc](https://github.com/AtomiCloud/sulfone.helium/commit/16d84cc6f987e3dfee7639ac7bd3b0e7235f4f92))
+
 ## [1.5.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.4.4...v1.5.0) (2023-12-26)
 
 
