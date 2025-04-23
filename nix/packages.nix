@@ -5,6 +5,7 @@ let
       with atomi;
       {
         inherit
+          atomiutils
           toml-cli
           sg
           pls;
@@ -18,13 +19,7 @@ let
           hadolint
           k3d
           bun
-          coreutils
-          findutils
-          sd
-          bash
           git
-          yq-go
-          jq
           gcc
           # lint
           treefmt
