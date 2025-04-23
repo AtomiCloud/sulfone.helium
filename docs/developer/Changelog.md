@@ -1,3 +1,10 @@
+## [1.7.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.6.0...v1.7.0) (2025-04-23)
+
+
+### 🚀 Features 🚀
+
+* upgrade infra configuration ([b633ffc](https://github.com/AtomiCloud/sulfone.helium/commit/b633ffc92714c8cbeb967695eb7043ea703117e3))
+
 ## [1.6.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.5.0...v1.6.0) (2025-01-10)
 
 
