@@ -5,10 +5,10 @@ using sulfone_helium.Domain.Core.Questions;
 
 CyanEngine.StartTemplate(
     args,
-    async Task<Cyan> (inquirer, determinism) =>
+    async Task<Cyan> (i, d) =>
     {
-        var name = await inquirer.Text("What is your name?", "q1");
-        var age = await inquirer.Text(
+        var name = await i.Text("What is your name?", "q1");
+        var age = await i.Text(
             new TextQ
             {
                 Validate = x =>
@@ -31,12 +31,12 @@ CyanEngine.StartTemplate(
             }
         );
 
-        var food = await inquirer.Checkbox(
+        var food = await i.Checkbox(
             "What is your food?",
             ["apple", "orange", "pear", "honeydew"],
             "q3"
         );
-        var color = await inquirer.Checkbox(
+        var color = await i.Checkbox(
             new CheckboxQ
             {
                 Message = "What is your color?",
@@ -47,8 +47,8 @@ CyanEngine.StartTemplate(
             }
         );
 
-        var beefOk = await inquirer.Confirm("Is beef ok?", "q5");
-        var porkOk = await inquirer.Confirm(
+        var beefOk = await i.Confirm("Is beef ok?", "q5");
+        var porkOk = await i.Confirm(
             new ConfirmQ
             {
                 Message = "Is pork ok?",
@@ -59,12 +59,8 @@ CyanEngine.StartTemplate(
             }
         );
 
-        var birthday = await inquirer.DateSelect(
-            "What is your birthday",
-            "q7",
-            "State your birthday"
-        );
-        var mumBirthday = await inquirer.DateSelect(
+        var birthday = await i.DateSelect("What is your birthday", "q7", "State your birthday");
+        var mumBirthday = await i.DateSelect(
             new DateQ
             {
                 Message = "What is your mum's birthday?",
@@ -76,8 +72,8 @@ CyanEngine.StartTemplate(
             }
         );
 
-        var password = await inquirer.Password("What is your password?", "q9");
-        var pin = await inquirer.Password(
+        var password = await i.Password("What is your password?", "q9");
+        var pin = await i.Password(
             new PasswordQ
             {
                 Message = "What is your pin?",
@@ -88,7 +84,7 @@ CyanEngine.StartTemplate(
             }
         );
 
-        var car = await inquirer.Select(
+        var car = await i.Select(
             "What is your favourite car?",
             [
                 "BMW",
@@ -120,7 +116,7 @@ CyanEngine.StartTemplate(
             "q11",
             "State your favourite car"
         );
-        var plane = await inquirer.Select(
+        var plane = await i.Select(
             new SelectQ
             {
                 Message = "What is your favourite plane?",
@@ -150,6 +146,8 @@ CyanEngine.StartTemplate(
                 Validate = x => x == "Airbus" ? "You must not select Airbus" : "",
             }
         );
+
+        var time = d.Get("time", () => "7");
 
         return new Cyan
         {
@@ -181,6 +179,7 @@ CyanEngine.StartTemplate(
                         Pin = pin,
                         Car = car,
                         Plane = plane,
+                        Time = time,
                     },
                 },
             ],

@@ -146,6 +146,8 @@ async def template(i: IInquirer, d: IDeterminism) -> Cyan:
         )
     )
 
+    t = d.get("time", lambda: "7")
+
     c = Cyan(
         plugins=[],
         processors=[
@@ -172,6 +174,7 @@ async def template(i: IInquirer, d: IDeterminism) -> Cyan:
                     "Pin": pin,
                     "Car": car,
                     "Plane": plane,
+                    "Time": t,
                 },
             )
         ],

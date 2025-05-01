@@ -1,6 +1,6 @@
 import { QuestionType, StartTemplateWithLambda, GlobType } from './src/main.js';
 
-StartTemplateWithLambda(async i => {
+StartTemplateWithLambda(async (i, d) => {
   const name = await i.text('What is your name?', 'q1');
 
   const age = await i.text({
@@ -127,6 +127,8 @@ StartTemplateWithLambda(async i => {
     validate: x => (x === 'Airbus' ? 'You must not select Airbus' : null),
   });
 
+  const t = d.get('time', () => '7');
+
   return {
     plugins: [],
     processors: [
@@ -152,6 +154,7 @@ StartTemplateWithLambda(async i => {
           Pin: pin,
           Car: car,
           Plane: plane,
+          Time: t,
         },
       },
     ],
