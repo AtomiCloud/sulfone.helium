@@ -150,7 +150,9 @@ def start_template(template: ICyanTemplate):
 
         # translate to domain
         i: TemplateValidateInput = TemplateInputMapper.validate_to_domain(req)
-        o: str = await template_service.validate(i)
+        o: str | None = await template_service.validate(i)
+        if o == "":
+            o = None
         res: TemplateValidRes = TemplateValidRes(valid=o)
 
         res_model = res.model_dump(by_alias=True)

@@ -7,7 +7,7 @@ class ConfirmQuestionRes(CyanBaseModel):
     message: str
     id: str
     desc: Optional[str] = None
-    default: Optional[str] = None
+    default: Optional[bool] = None
     error_message: Optional[str] = None
     type: str = "confirm"
 

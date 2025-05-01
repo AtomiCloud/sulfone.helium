@@ -13,7 +13,7 @@ interface CheckboxQ {
   id: string;
   message: string;
   desc?: string | null;
-  validate?: (input: string) => string | null;
+  validate?: null;
 
   options: string[];
 }
@@ -23,7 +23,7 @@ interface ConfirmQ {
   id: string;
   message: string;
   desc?: string | null;
-  validate?: (input: string) => string | null;
+  validate?: null;
 
   default?: boolean | null;
   errorMessage?: string | null;
@@ -56,7 +56,7 @@ interface SelectQ {
   id: string;
   message: string;
   desc?: string | null;
-  validate?: (input: string) => string | null;
+  validate?: null;
 
   options: string[];
 }

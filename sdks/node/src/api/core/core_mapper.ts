@@ -125,11 +125,11 @@ export class QuestionMapper {
 
   static confirmToResp(q: ConfirmQ): ConfirmQuestionRes {
     return {
-      default: q.default,
+      default: q.default ?? null,
       message: q.message,
       id: q.id,
-      errorMessage: q.errorMessage,
-      desc: q.desc,
+      errorMessage: q.errorMessage ?? null,
+      desc: q.desc ?? null,
       type: 'confirm',
     };
   }
@@ -138,7 +138,7 @@ export class QuestionMapper {
     return {
       message: q.message,
       id: q.id,
-      desc: q.desc,
+      desc: q.desc ?? null,
       options: q.options,
       type: 'checkbox',
     };
@@ -148,7 +148,7 @@ export class QuestionMapper {
     return {
       message: q.message,
       id: q.id,
-      desc: q.desc,
+      desc: q.desc ?? null,
       options: q.options,
       type: 'select',
     };
@@ -158,9 +158,9 @@ export class QuestionMapper {
     return {
       message: q.message,
       id: q.id,
-      desc: q.desc,
-      default: q.default,
-      initial: q.initial,
+      desc: q.desc ?? null,
+      default: q.default ?? null,
+      initial: q.initial ?? null,
       type: 'text',
     };
   }
@@ -169,8 +169,8 @@ export class QuestionMapper {
     return {
       message: q.message,
       id: q.id,
-      desc: q.desc,
-      confirmation: q.confirmation,
+      desc: q.desc ?? null,
+      confirmation: q.confirmation ?? null,
       type: 'password',
     };
   }
@@ -179,10 +179,10 @@ export class QuestionMapper {
     return {
       message: q.message,
       id: q.id,
-      desc: q.desc,
-      default: q.default?.toISOString(),
-      maxDate: q.maxDate?.toDateString(),
-      minDate: q.minDate?.toISOString(),
+      desc: q.desc ?? null,
+      default: q.default ? q.default.toISOString().split('T')[0] : null,
+      maxDate: q.maxDate ? q.maxDate.toISOString().split('T')[0] : null,
+      minDate: q.minDate ? q.minDate.toISOString().split('T')[0] : null,
       type: 'date',
     };
   }

@@ -2,8 +2,8 @@ namespace sulfone_helium.Domain.Core.Questions;
 
 public struct CheckboxQ : IQuestion
 {
-    public QuestionType Type => QuestionType.Checkbox;
-    public Func<string, string?>? Validate { get; set; }
+    public readonly QuestionType Type => QuestionType.Checkbox;
+    public readonly Func<string, string?>? Validate => null;
 
     public string Message { get; set; }
     public string Id { get; set; } // Unique identifier for the question

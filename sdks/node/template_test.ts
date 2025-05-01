@@ -29,7 +29,6 @@ StartTemplateWithLambda(async (i, d) => {
     options: ['red', 'blue', 'green', 'yellow'],
     desc: 'The color of the person',
     type: QuestionType.Checkbox,
-    validate: x => (x.length > 0 ? null : 'You must select at least one color'),
   });
 
   const beefOk = await i.confirm('Is beef ok?', 'q5');
@@ -53,6 +52,15 @@ StartTemplateWithLambda(async (i, d) => {
     default: new Date('1980-01-01'),
     maxDate: new Date('2025-12-31'),
     minDate: new Date('1900-01-01'),
+    validate: x => {
+      try {
+        const date = new Date(x);
+        if (isNaN(date.getTime())) return 'Needs to be a date';
+        return date.getMonth() === 11 ? null : 'Needs to be in December';
+      } catch (e) {
+        return 'Needs to be a date';
+      }
+    },
   });
 
   const password = await i.password('What is your password?', 'q9');
@@ -124,7 +132,6 @@ StartTemplateWithLambda(async (i, d) => {
       'Beechcraft',
       'Gulfstream',
     ],
-    validate: x => (x === 'Airbus' ? 'You must not select Airbus' : null),
   });
 
   const t = d.get('time', () => '7');

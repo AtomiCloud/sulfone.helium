@@ -9,7 +9,8 @@ class CheckboxQ:
     options: List[str]
     id: str  # Unique identifier for the question
     desc: Optional[str] = None
-    validate: Optional[Callable[[str], Optional[str]]] = None
+    validate: None = None
+    # validate: Optional[Callable[[str], Optional[str]]] = None
 
 
 @dataclass
@@ -17,9 +18,10 @@ class ConfirmQ:
     message: str
     id: str  # Unique identifier for the question
     desc: Optional[str] = None
-    validate: Optional[Callable[[str], Optional[str]]] = None
     default: Optional[bool] = None
     error_message: Optional[str] = None
+    validate: None = None
+    # validate: Optional[Callable[[str], Optional[str]]] = None
 
 
 @dataclass
@@ -48,7 +50,8 @@ class SelectQ:
     options: List[str]
     id: str  # Unique identifier for the question
     desc: Optional[str] = None
-    validate: Optional[Callable[[str], Optional[str]]] = None
+    validate: None = None
+    # validate: Optional[Callable[[str], Optional[str]]] = None
 
 
 @dataclass

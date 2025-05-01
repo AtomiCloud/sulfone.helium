@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
 using sulfone_helium;
 using sulfone_helium.Domain.Core;
 using sulfone_helium.Domain.Core.Questions;
@@ -42,7 +41,6 @@ CyanEngine.StartTemplate(
                 Message = "What is your color?",
                 Id = "q4",
                 Options = ["red", "blue", "green", "yellow"],
-                Validate = x => x.Length > 0 ? "" : "You must select at least one color",
                 Desc = "The color of the person",
             }
         );
@@ -69,6 +67,12 @@ CyanEngine.StartTemplate(
                 Default = new DateOnly(1980, 1, 1),
                 MaxDate = new DateOnly(2025, 12, 31),
                 MinDate = new DateOnly(1900, 1, 1),
+                Validate = x =>
+                    DateOnly.TryParse(x, out var date)
+                        ? date.Month == 12
+                            ? null
+                            : "Needs to be in December"
+                        : "Needs to be a date",
             }
         );
 
@@ -143,7 +147,6 @@ CyanEngine.StartTemplate(
                     "Beechcraft",
                     "Gulfstream",
                 ],
-                Validate = x => x == "Airbus" ? "You must not select Airbus" : "",
             }
         );
 

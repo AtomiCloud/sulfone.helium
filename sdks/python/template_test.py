@@ -39,9 +39,6 @@ async def template(i: IInquirer, d: IDeterminism) -> Cyan:
             id="q4",
             options=["red", "blue", "green", "yellow"],
             desc="The color of the person",
-            validate=lambda x: (
-                "" if len(x) > 0 else "You must select at least one color"
-            ),
         )
     )
 
@@ -59,6 +56,22 @@ async def template(i: IInquirer, d: IDeterminism) -> Cyan:
 
     birthday = await i.date_select("What is your birthday", "q7", "State your birthday")
 
+    def validate_december_date(x):
+        # If it's already a date object
+        if isinstance(x, datetime.date):
+            return "" if x.month == 12 else "Needs to be in December"
+
+        # If it's a string, try to parse it
+        if isinstance(x, str):
+            try:
+                date_obj = datetime.datetime.strptime(x, "%Y-%m-%d").date()
+                return "" if date_obj.month == 12 else "Needs to be in December"
+            except ValueError:
+                return "Needs to be a valid date format (YYYY-MM-DD)"
+
+        # Otherwise, it's an invalid type
+        return "Needs to be a date"
+
     mum_birthday = await i.date_selectQ(
         DateQ(
             message="What is your mum's birthday?",
@@ -67,6 +80,7 @@ async def template(i: IInquirer, d: IDeterminism) -> Cyan:
             default=datetime.date(1980, 1, 1),
             max_date=datetime.date(2025, 12, 31),
             min_date=datetime.date(1900, 1, 1),
+            validate=validate_december_date,
         )
     )
 
@@ -142,7 +156,6 @@ async def template(i: IInquirer, d: IDeterminism) -> Cyan:
                 "Beechcraft",
                 "Gulfstream",
             ],
-            validate=lambda x: "" if x != "Airbus" else "You must not select Airbus",
         )
     )
 

@@ -6,6 +6,8 @@ let
       {
         inherit
           atomiutils
+          infrautils
+          infralint
           toml-cli
           sg
           pls;
@@ -16,11 +18,9 @@ let
       {
         inherit
           infisical
-          hadolint
-          k3d
-          bun
           git
           gcc
+          k6
           # lint
           treefmt
           gitlint
@@ -32,8 +32,7 @@ let
           golangci-lint
           go
 
-          #infra
-          docker
+          bun
           ;
 
         python = python312;

@@ -32,7 +32,8 @@ public class TemplateService(ICyanTemplate template)
         catch (OutOfAnswerException e)
         {
             var q = e.Question;
-            return q.Validate?.Invoke(answer.Validate);
+            var r = q.Validate?.Invoke(answer.Validate);
+            return r == "" ? null : r;
         }
     }
 }
