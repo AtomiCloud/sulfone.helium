@@ -18,7 +18,7 @@ class ConfirmQ:
     id: str  # Unique identifier for the question
     desc: Optional[str] = None
     validate: Optional[Callable[[str], Optional[str]]] = None
-    default: Optional[str] = None
+    default: Optional[bool] = None
     error_message: Optional[str] = None
 
 

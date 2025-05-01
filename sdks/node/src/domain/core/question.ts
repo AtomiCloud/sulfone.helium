@@ -25,7 +25,7 @@ interface ConfirmQ {
   desc?: string | null;
   validate?: (input: string) => string | null;
 
-  default?: string | null;
+  default?: boolean | null;
   errorMessage?: string | null;
 }
 
