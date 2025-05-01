@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict, Union
+from typing import Optional, Dict, Union
 
 from cyanprintsdk.api.base_model import CyanBaseModel
 from cyanprintsdk.api.core.cyan_res import CyanRes
@@ -15,7 +15,7 @@ class TemplateFinalRes(CyanBaseModel):
 
 
 class TemplateQnARes(CyanBaseModel):
-    deterministic_state: List[Dict[str, str]]
+    deterministic_state: Dict[str, str]
     question: QuestionRes
     type: str = "questionnaire"
 

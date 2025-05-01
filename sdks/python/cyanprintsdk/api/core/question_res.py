@@ -5,6 +5,7 @@ from cyanprintsdk.api.base_model import CyanBaseModel
 
 class ConfirmQuestionRes(CyanBaseModel):
     message: str
+    id: str
     desc: Optional[str] = None
     default: Optional[str] = None
     error_message: Optional[str] = None
@@ -13,6 +14,7 @@ class ConfirmQuestionRes(CyanBaseModel):
 
 class DateQuestionRes(CyanBaseModel):
     message: str
+    id: str
     default: Optional[str] = None
     desc: Optional[str] = None
     min_date: Optional[str] = None
@@ -22,6 +24,7 @@ class DateQuestionRes(CyanBaseModel):
 
 class CheckboxQuestionRes(CyanBaseModel):
     message: str
+    id: str
     desc: Optional[str] = None
     options: List[str]
     type: str = "checkbox"
@@ -29,6 +32,7 @@ class CheckboxQuestionRes(CyanBaseModel):
 
 class PasswordQuestionRes(CyanBaseModel):
     message: str
+    id: str
     desc: Optional[str] = None
     confirmation: Optional[bool] = None
     type: str = "password"
@@ -36,6 +40,7 @@ class PasswordQuestionRes(CyanBaseModel):
 
 class SelectQuestionRes(CyanBaseModel):
     message: str
+    id: str
     options: List[str]
     desc: Optional[str] = None
     type: str = "select"
@@ -43,6 +48,7 @@ class SelectQuestionRes(CyanBaseModel):
 
 class TextQuestionRes(CyanBaseModel):
     message: str
+    id: str
     default: Optional[str] = None
     desc: Optional[str] = None
     initial: Optional[str] = None

@@ -2,7 +2,7 @@ import { Question } from '../core/question.js';
 import { Cyan } from '../core/cyan.js';
 
 interface TemplateQnAOutput {
-  readonly deterministicState: Record<string, string>[];
+  readonly deterministicState: Record<string, string>;
   readonly question: Question;
 }
 

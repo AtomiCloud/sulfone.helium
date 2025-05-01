@@ -5,6 +5,10 @@ tasks:
     desc: Run the service
     cmds:
       - poetry run python main.py
+  template:
+    desc: Run the template
+    cmds:
+      - poetry run python template_test.py
   build:
     desc: Build the package
     cmds:

@@ -40,7 +40,7 @@ let
         poetry = (poetry.override { python3 = python312; });
         npm = nodePackages.npm;
         nodejs = nodejs_22;
-        dotnet = dotnet-sdk_9;
+        dotnet = dotnet-sdk_8;
       }
     );
   };

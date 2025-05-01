@@ -5,9 +5,10 @@ public struct ConfirmQ : IQuestion
     public QuestionType Type => QuestionType.Confirm;
 
     public string Message { get; set; }
+    public string Id { get; set; }
     public string? Desc { get; set; }
 
-    public string? Default { get; set; }
+    public bool? Default { get; set; }
     public string? ErrorMessage { get; set; }
 
     public Func<string, string?>? Validate => null;

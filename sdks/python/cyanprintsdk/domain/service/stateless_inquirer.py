@@ -1,4 +1,4 @@
-from typing import List, Union, Optional
+from typing import List, Optional, Dict
 
 from cyanprintsdk.domain.core.answer import (
     Answer,
@@ -20,28 +20,26 @@ from cyanprintsdk.domain.service.out_of_answer_error import OutOfAnswerException
 
 
 class StatelessInquirer(IInquirer):
-    def __init__(self, answers: List[Answer], pointer: int):
+    def __init__(self, answers: Dict[str, Answer]):
         self._answers = answers
-        self._pointer = pointer
 
     def _get_answer(self, q: Question) -> Answer:
-        if self._pointer == len(self._answers) - 1:
+        if q.id not in self._answers:
             raise OutOfAnswerException("", q)
 
-        self._pointer += 1
-        return self._answers[self._pointer]
+        return self._answers[q.id]
 
     async def checkbox(
         self,
-        q: Union[CheckboxQ, str],
-        options: Optional[List[str]] = None,
+        message: str,
+        id: str,
+        options: List[str],
         desc: Optional[str] = None,
     ) -> List[str]:
-        if isinstance(q, str):
-            if options is None:
-                raise ValueError("options cannot be null")
-            return await self.checkbox(CheckboxQ(message=q, options=options, desc=desc))
+        checkbox_q = CheckboxQ(message=message, options=options, desc=desc, id=id)
+        return await self.checkboxQ(checkbox_q)
 
+    async def checkboxQ(self, q: CheckboxQ) -> List[str]:
         answer = self._get_answer(q)
         if is_string_array_answer(answer):
             return answer.answer
@@ -51,12 +49,11 @@ class StatelessInquirer(IInquirer):
             + str(type(answer))
         )
 
-    async def confirm(
-        self, q: Union[ConfirmQ, str], desc: Optional[str] = None
-    ) -> bool:
-        if isinstance(q, str):
-            return await self.confirm(ConfirmQ(message=q, desc=desc))
+    async def confirm(self, message: str, id: str, desc: Optional[str] = None) -> bool:
+        confirm_q = ConfirmQ(message=message, desc=desc, id=id)
+        return await self.confirmQ(confirm_q)
 
+    async def confirmQ(self, q: ConfirmQ) -> bool:
         answer = self._get_answer(q)
         if is_bool_answer(answer):
             return answer.answer
@@ -65,12 +62,11 @@ class StatelessInquirer(IInquirer):
             "Incorrect answer type. Expected: BoolAnswer. Got: " + str(type(answer))
         )
 
-    async def password(
-        self, q: Union[PasswordQ, str], desc: Optional[str] = None
-    ) -> str:
-        if isinstance(q, str):
-            return await self.password(PasswordQ(message=q, desc=desc))
+    async def password(self, message: str, id: str, desc: Optional[str] = None) -> str:
+        password_q = PasswordQ(message=message, desc=desc, id=id)
+        return await self.passwordQ(password_q)
 
+    async def passwordQ(self, q: PasswordQ) -> str:
         answer = self._get_answer(q)
         if is_string_answer(answer):
             return answer.answer
@@ -81,15 +77,15 @@ class StatelessInquirer(IInquirer):
 
     async def select(
         self,
-        q: Union[SelectQ, str],
-        options: Optional[List[str]] = None,
+        message: str,
+        id: str,
+        options: List[str],
         desc: Optional[str] = None,
     ) -> str:
-        if isinstance(q, str):
-            if options is None:
-                raise ValueError("options cannot be null")
-            return await self.select(SelectQ(message=q, options=options, desc=desc))
+        select_q = SelectQ(message=message, options=options, desc=desc, id=id)
+        return await self.selectQ(select_q)
 
+    async def selectQ(self, q: SelectQ) -> str:
         answer = self._get_answer(q)
         if is_string_answer(answer):
             return answer.answer
@@ -98,16 +94,16 @@ class StatelessInquirer(IInquirer):
             "Incorrect answer type. Expected: StringAnswer. Got: " + str(type(answer))
         )
 
-    async def text(self, q: Union[TextQ, str], desc: Optional[str] = None) -> str:
-        if isinstance(q, str):
-            return await self.text(
-                TextQ(
-                    message=q,
-                    desc=desc,
-                    validate=None,
-                )
-            )
+    async def text(self, message: str, id: str, desc: Optional[str] = None) -> str:
+        text_q = TextQ(
+            message=message,
+            desc=desc,
+            validate=None,
+            id=id,
+        )
+        return await self.textQ(text_q)
 
+    async def textQ(self, q: TextQ) -> str:
         answer = self._get_answer(q)
         if is_string_answer(answer):
             return answer.answer
@@ -117,11 +113,12 @@ class StatelessInquirer(IInquirer):
         )
 
     async def date_select(
-        self, q: Union[DateQ, str], desc: Optional[str] = None
+        self, message: str, id: str, desc: Optional[str] = None
     ) -> str:
-        if isinstance(q, str):
-            return await self.date_select(DateQ(message=q, desc=desc))
+        date_q = DateQ(message=message, desc=desc, id=id)
+        return await self.date_selectQ(date_q)
 
+    async def date_selectQ(self, q: DateQ) -> str:
         answer = self._get_answer(q)
         if is_string_answer(answer):
             return answer.answer

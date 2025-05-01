@@ -4,8 +4,12 @@ tasks:
   version:
     desc: Update package version
     cmds:
-      - ./sdks/node/scripts/ci/update_version.sh {{.CLI_ARGS}}
+      - ./scripts/ci/update_version.sh {{.CLI_ARGS}}
   package:
     desc: Package the .NET version
     cmds:
-      - ./sdks/node/scripts/ci/publish.sh {{.CLI_ARGS}}
+      - ./scripts/ci/publish.sh {{.CLI_ARGS}}
+  template:
+    desc: Run a test template
+    cmds:
+      - bun template_test.ts

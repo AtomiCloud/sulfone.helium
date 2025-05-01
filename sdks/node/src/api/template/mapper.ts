@@ -6,16 +6,30 @@ import { TemplateFinalRes, TemplateQnARes, TemplateRes } from './res.js';
 
 class TemplateInputMapper {
   public static answerToDomain(req: TemplateAnswerReq): TemplateInput {
+    const answers: Record<string, any> = {};
+
+    // Convert each answer from API format to domain format
+    Object.entries(req.answers).forEach(([id, answer]) => {
+      answers[id] = AnswerMapper.toDomain(answer);
+    });
+
     return {
       deterministicState: req.deterministicStates,
-      answers: req.answers.map(x => AnswerMapper.toDomain(x)),
+      answers,
     } satisfies TemplateInput;
   }
 
   public static validateToDomain(req: TemplateValidateReq): TemplateValidateInput {
+    const answers: Record<string, any> = {};
+
+    // Convert each answer from API format to domain format
+    Object.entries(req.answers).forEach(([id, answer]) => {
+      answers[id] = AnswerMapper.toDomain(answer);
+    });
+
     return {
       deterministicState: req.deterministicStates,
-      answers: req.answers.map(x => AnswerMapper.toDomain(x)),
+      answers,
       validate: req.validate,
     } satisfies TemplateValidateInput;
   }

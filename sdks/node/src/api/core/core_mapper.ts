@@ -127,6 +127,7 @@ export class QuestionMapper {
     return {
       default: q.default,
       message: q.message,
+      id: q.id,
       errorMessage: q.errorMessage,
       desc: q.desc,
       type: 'confirm',
@@ -136,6 +137,7 @@ export class QuestionMapper {
   static checkboxToResp(q: CheckboxQ): CheckboxQuestionRes {
     return {
       message: q.message,
+      id: q.id,
       desc: q.desc,
       options: q.options,
       type: 'checkbox',
@@ -145,6 +147,7 @@ export class QuestionMapper {
   static selectToResp(q: SelectQ): SelectQuestionRes {
     return {
       message: q.message,
+      id: q.id,
       desc: q.desc,
       options: q.options,
       type: 'select',
@@ -154,6 +157,7 @@ export class QuestionMapper {
   static textToResp(q: TextQ): TextQuestionRes {
     return {
       message: q.message,
+      id: q.id,
       desc: q.desc,
       default: q.default,
       initial: q.initial,
@@ -164,6 +168,7 @@ export class QuestionMapper {
   static passwordToResp(q: PasswordQ): PasswordQuestionRes {
     return {
       message: q.message,
+      id: q.id,
       desc: q.desc,
       confirmation: q.confirmation,
       type: 'password',
@@ -173,6 +178,7 @@ export class QuestionMapper {
   static dateToResp(q: DateQ): DateQuestionRes {
     return {
       message: q.message,
+      id: q.id,
       desc: q.desc,
       default: q.default?.toISOString(),
       maxDate: q.maxDate?.toDateString(),

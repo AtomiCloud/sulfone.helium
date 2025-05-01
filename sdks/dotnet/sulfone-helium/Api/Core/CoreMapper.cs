@@ -114,6 +114,7 @@ public static class QuestionMapper
         {
             Default = q.Default,
             Message = q.Message,
+            Id = q.Id,
             ErrorMessage = q.ErrorMessage,
             Desc = q.Desc,
         };
@@ -124,6 +125,7 @@ public static class QuestionMapper
         return new CheckboxQuestionRes()
         {
             Message = q.Message,
+            Id = q.Id,
             Desc = q.Desc,
             Options = q.Options,
         };
@@ -134,6 +136,7 @@ public static class QuestionMapper
         return new SelectQuestionRes()
         {
             Message = q.Message,
+            Id = q.Id,
             Desc = q.Desc,
             Options = q.Options,
         };
@@ -144,6 +147,7 @@ public static class QuestionMapper
         return new TextQuestionRes()
         {
             Message = q.Message,
+            Id = q.Id,
             Desc = q.Desc,
             Default = q.Default,
             Initial = q.Initial,
@@ -155,6 +159,7 @@ public static class QuestionMapper
         return new PasswordQuestionRes()
         {
             Message = q.Message,
+            Id = q.Id,
             Desc = q.Desc,
             Confirmation = q.Confirmation,
         };
@@ -165,8 +170,9 @@ public static class QuestionMapper
         return new DateQuestionRes()
         {
             Message = q.Message,
+            Id = q.Id,
             Desc = q.Desc,
-            Default = q.Default,
+            Default = q.Default?.ToString("o", CultureInfo.InvariantCulture),
             MaxDate = q.MaxDate?.ToString("o", CultureInfo.InvariantCulture),
             MinDate = q.MinDate?.ToString("o", CultureInfo.InvariantCulture),
         };

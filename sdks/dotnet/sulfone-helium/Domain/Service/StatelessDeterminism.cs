@@ -3,27 +3,21 @@ using sulfone_helium.Domain.Core;
 
 namespace sulfone_helium.Domain.Service;
 
-public class StatelessDeterminism : IDeterminism
+public class StatelessDeterminism(Dictionary<string, string> states) : IDeterminism
 {
-    public Dictionary<string, string>[] States { get; }
-    private readonly short _pointer;
-
-    public StatelessDeterminism(Dictionary<string, string>[] states, ref short pointer)
-    {
-        States = states;
-        _pointer = pointer;
-    }
+    public Dictionary<string, string> States { get; } = states;
 
     public string Get(string key, Func<string> origin)
     {
-        var states = this.States[this._pointer + 1];
-        if (states == null)
-            throw new NullReferenceException("");
-        if (states.TryGetValue(key, out var state))
+        if (States == null)
+            throw new NullReferenceException("States dictionary is null");
+
+        if (States.TryGetValue(key, out var state))
             return state;
+
         var val = origin();
-        states.Add(key, val);
-        Console.WriteLine(JsonSerializer.Serialize(this.States));
+        States[key] = val;
+        Console.WriteLine(JsonSerializer.Serialize(States));
         return val;
     }
 }

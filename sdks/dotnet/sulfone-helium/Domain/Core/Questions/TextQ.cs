@@ -6,6 +6,7 @@ public struct TextQ : IQuestion
     public Func<string, string?>? Validate { get; set; }
 
     public string Message { get; set; }
+    public string Id { get; set; }
     public string? Default { get; set; }
     public string? Desc { get; set; }
     public string? Initial { get; set; }

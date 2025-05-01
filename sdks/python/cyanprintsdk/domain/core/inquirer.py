@@ -16,39 +16,61 @@ class IInquirer(ABC):
     @abstractmethod
     async def checkbox(
         self,
-        q: Union[CheckboxQ, str],
-        options: Optional[List[str]] = None,
+        message: str,
+        id: str,
+        options: List[str],
         desc: Optional[str] = None,
     ) -> List[str]:
         pass
 
     @abstractmethod
-    async def confirm(
-        self, q: Union[ConfirmQ, str], desc: Optional[str] = None
-    ) -> bool:
+    async def checkboxQ(self, q: CheckboxQ) -> List[str]:
         pass
 
     @abstractmethod
-    async def password(
-        self, q: Union[PasswordQ, str], desc: Optional[str] = None
-    ) -> str:
+    async def confirm(self, message: str, id: str, desc: Optional[str] = None) -> bool:
+        pass
+
+    @abstractmethod
+    async def confirmQ(self, q: ConfirmQ) -> bool:
+        pass
+
+    @abstractmethod
+    async def password(self, message: str, id: str, desc: Optional[str] = None) -> str:
+        pass
+
+    @abstractmethod
+    async def passwordQ(self, q: PasswordQ) -> str:
         pass
 
     @abstractmethod
     async def select(
         self,
-        q: Union[SelectQ, str],
-        options: Optional[List[str]] = None,
+        message: str,
+        id: str,
+        options: List[str],
         desc: Optional[str] = None,
     ) -> str:
         pass
 
     @abstractmethod
-    async def text(self, q: Union[TextQ, str], desc: Optional[str] = None) -> str:
+    async def selectQ(self, q: SelectQ) -> str:
+        pass
+
+    @abstractmethod
+    async def text(self, message: str, id: str, desc: Optional[str] = None) -> str:
+        pass
+
+    @abstractmethod
+    async def textQ(self, q: TextQ) -> str:
         pass
 
     @abstractmethod
     async def date_select(
-        self, q: Union[DateQ, str], desc: Optional[str] = None
+        self, message: str, id: str, desc: Optional[str] = None
     ) -> str:
+        pass
+
+    @abstractmethod
+    async def date_selectQ(self, q: DateQ) -> str:
         pass

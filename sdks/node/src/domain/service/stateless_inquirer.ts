@@ -6,34 +6,36 @@ import type { CheckboxQ, ConfirmQ, DateQ, PasswordQ, Question, SelectQ, TextQ } 
 import { QuestionType } from '../core/question.js';
 
 class StatelessInquirer implements IInquirer {
-  readonly #answers: Answer[];
-  #pointer: number;
+  readonly #answers: Record<string, Answer>;
 
-  constructor(answers: Answer[], pointer: number) {
+  constructor(answers: Record<string, Answer>) {
     this.#answers = answers;
-    this.#pointer = pointer;
   }
 
   private getAnswer(q: Question): Answer {
-    if (this.#pointer === this.#answers.length - 1) {
+    if (!this.#answers[q.id]) {
       throw new OutOfAnswerException('', q);
     }
 
-    return this.#answers[++this.#pointer];
+    return this.#answers[q.id];
   }
 
-  checkbox(q: string, options: string[], help?: string | null): Promise<string[]>;
+  checkbox(q: string, options: string[], id: string, help?: string | null): Promise<string[]>;
   checkbox(q: CheckboxQ): Promise<string[]>;
-  async checkbox(q: CheckboxQ | string, options?: string[], help?: string | null): Promise<string[]> {
+  async checkbox(q: CheckboxQ | string, options?: string[], id?: string, help?: string | null): Promise<string[]> {
     if (typeof q === 'string') {
       if (options == null) {
         throw new Error('options cannot be null');
+      }
+      if (id == null) {
+        throw new Error('id cannot be null');
       }
       return this.checkbox({
         message: q,
         options,
         desc: help,
         type: QuestionType.Checkbox,
+        id,
       });
     }
     const answer = this.getAnswer(q);
@@ -43,14 +45,18 @@ class StatelessInquirer implements IInquirer {
   }
 
   confirm(q: ConfirmQ): Promise<boolean>;
-  confirm(q: string, help?: string | null): Promise<boolean>;
+  confirm(q: string, id: string, help?: string | null): Promise<boolean>;
 
-  async confirm(q: ConfirmQ | string, help?: string | null): Promise<boolean> {
+  async confirm(q: ConfirmQ | string, id?: string, help?: string | null): Promise<boolean> {
     if (typeof q === 'string') {
+      if (id == null) {
+        throw new Error('id cannot be null');
+      }
       return this.confirm({
         message: q,
         desc: help,
         type: QuestionType.Confirm,
+        id,
       });
     }
     const answer = this.getAnswer(q);
@@ -59,14 +65,18 @@ class StatelessInquirer implements IInquirer {
     throw new Error('Incorrect answer type. Expected: BoolAnswer. Got: ' + typeof answer);
   }
 
-  password(q: string, help?: string | null): Promise<string>;
+  password(q: string, id: string, help?: string | null): Promise<string>;
   password(q: PasswordQ): Promise<string>;
-  async password(q: PasswordQ | string, help?: string | null): Promise<string> {
+  async password(q: PasswordQ | string, id?: string, help?: string | null): Promise<string> {
     if (typeof q === 'string') {
+      if (id == null) {
+        throw new Error('id cannot be null');
+      }
       return this.password({
         type: QuestionType.Password,
         message: q,
         desc: help,
+        id,
       });
     }
     const answer = this.getAnswer(q);
@@ -76,17 +86,21 @@ class StatelessInquirer implements IInquirer {
   }
 
   select(q: SelectQ): Promise<string>;
-  select(q: string, options: string[], help?: string | null): Promise<string>;
-  async select(q: SelectQ | string, options?: string[], help?: string | null): Promise<string> {
+  select(q: string, options: string[], id: string, help?: string | null): Promise<string>;
+  async select(q: SelectQ | string, options?: string[], id?: string, help?: string | null): Promise<string> {
     if (typeof q === 'string') {
       if (options == null) {
         throw new Error('options cannot be null');
+      }
+      if (id == null) {
+        throw new Error('id cannot be null');
       }
       return this.select({
         type: QuestionType.Select,
         options,
         message: q,
         desc: help,
+        id,
       });
     }
     const answer = this.getAnswer(q);
@@ -96,13 +110,17 @@ class StatelessInquirer implements IInquirer {
   }
 
   text(q: TextQ): Promise<string>;
-  text(q: string, help?: string | null): Promise<string>;
-  async text(q: TextQ | string, help?: string | null): Promise<string> {
+  text(q: string, id: string, help?: string | null): Promise<string>;
+  async text(q: TextQ | string, id?: string, help?: string | null): Promise<string> {
     if (typeof q === 'string') {
+      if (id == null) {
+        throw new Error('id cannot be null');
+      }
       return this.text({
         type: QuestionType.Text,
         message: q,
         desc: help,
+        id,
       });
     }
     const answer = this.getAnswer(q);
@@ -112,14 +130,18 @@ class StatelessInquirer implements IInquirer {
   }
 
   dateSelect(q: DateQ): Promise<string>;
-  dateSelect(q: string, help?: string | null): Promise<string>;
+  dateSelect(q: string, id: string, help?: string | null): Promise<string>;
 
-  async dateSelect(q: DateQ | string, help?: string | null): Promise<string> {
+  async dateSelect(q: DateQ | string, id?: string, help?: string | null): Promise<string> {
     if (typeof q === 'string') {
+      if (id == null) {
+        throw new Error('id cannot be null');
+      }
       return this.dateSelect({
         type: QuestionType.DateSelect,
         message: q,
         desc: help,
+        id,
       });
     }
     const answer = this.getAnswer(q);

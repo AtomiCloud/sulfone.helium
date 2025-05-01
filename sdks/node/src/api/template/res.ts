@@ -11,7 +11,7 @@ interface TemplateFinalRes {
 }
 
 interface TemplateQnARes {
-  deterministicState: Record<string, string>[];
+  deterministicState: Record<string, string>;
   question: QuestionRes;
   type: 'questionnaire';
 }

@@ -1,24 +1,22 @@
 import type { Application, Request, Response } from 'express';
 import express from 'express';
-import type { ICyanExtension, ICyanPlugin, ICyanProcessor, ICyanTemplate } from './domain/core/cyan_script.js';
+// The following imports are deprecated as the extension functionality is being removed
+// in favor of composite templates
+import type { ICyanPlugin, ICyanProcessor, ICyanTemplate } from './domain/core/cyan_script.js';
 import { LambdaPlugin, type LambdaPluginFn } from './api/plugin/lambda.js';
 import { LambdaProcessor, type LambdaProcessorFn } from './api/processor/lambda.js';
-import { LambdaExtension, type LambdaExtensionFn } from './api/extension/lambda.js';
 import { LambdaTemplate, type LambdaTemplateFn } from './api/template/lambda.js';
 import { PluginService } from './domain/plugin/service.js';
 import { ProcessorService } from './domain/processor/service.js';
 import { TemplateService } from './domain/template/service.js';
-import { ExtensionService } from './domain/extension/service.js';
 import { PluginMapper } from './api/plugin/mapper.js';
 import { ProcessorMapper } from './api/processor/mapper.js';
 import { TemplateInputMapper, TemplateOutputMapper } from './api/template/mapper.js';
 import type { TemplateValidRes } from './api/template/res.js';
-import type { ExtensionValidRes } from './api/extension/res.js';
-import { ExtensionMapper, ExtensionOutputMapper } from './api/extension/mapper.js';
 import type { IInquirer } from './domain/core/inquirer.js';
 import { CyanFileHelper } from './domain/core/fs/cyan_fs_helper.js';
 import type { IDeterminism } from './domain/core/deterministic.js';
-import type { CyanExtensionInput, CyanPluginInput, CyanProcessorInput } from './domain/core/cyan_script_model.js';
+import type { CyanPluginInput, CyanProcessorInput } from './domain/core/cyan_script_model.js';
 import type { Cyan, CyanGlob } from './domain/core/cyan.js';
 import { GlobType } from './domain/core/cyan.js';
 import type { ProcessorOutput } from './domain/processor/output.js';
@@ -113,47 +111,12 @@ function StartTemplateWithLambda(f: LambdaTemplateFn): void {
   StartTemplate(lambda);
 }
 
-function StartExtension(ext: ICyanExtension): void {
-  const port = 5550;
-  const app = createApp();
-
-  const extService = new ExtensionService(ext);
-
-  app.post('/api/extension/init', async (req: Request, res: Response) => {
-    console.log(req.body);
-    const result = await extService.extend(ExtensionMapper.extensionAnswerToDomain(req.body));
-    res.json(ExtensionOutputMapper.toResp(result));
-    res.end();
-  });
-
-  app.post('/api/extension/validate', async (req: Request, res: Response) => {
-    console.log(req.body);
-    const result = await extService.validate(ExtensionMapper.extensionValidateToDomain(req.body));
-    const r = {
-      valid: result,
-    } satisfies ExtensionValidRes;
-    res.json(r);
-    res.end();
-  });
-
-  app.listen(port, '0.0.0.0', () => {
-    console.log(`Extension listening on port ${port}`);
-  });
-}
-
-function StartExtensionWithLambda(f: LambdaExtensionFn): void {
-  const lambda = new LambdaExtension(f);
-  StartExtension(lambda);
-}
-
 // export all
 export {
   StartProcessor,
   StartProcessorWithLambda,
   StartTemplate,
   StartTemplateWithLambda,
-  StartExtension,
-  StartExtensionWithLambda,
   StartPlugin,
   StartPluginWithLambda,
   CyanFileHelper,
@@ -163,16 +126,12 @@ export {
 
 export type {
   ICyanTemplate,
-  ICyanExtension,
   ICyanProcessor,
   ICyanPlugin,
-  LambdaExtensionFn,
   LambdaTemplateFn,
   LambdaPluginFn,
-  LambdaExtension,
   IInquirer,
   IDeterminism,
-  CyanExtensionInput,
   CyanPluginInput,
   CyanProcessorInput,
   Cyan,

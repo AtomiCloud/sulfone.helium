@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Dict, Union
+from typing import Dict, Union
 
 from cyanprintsdk.domain.core.cyan import Cyan
 from cyanprintsdk.domain.core.question import Question
@@ -7,7 +7,7 @@ from cyanprintsdk.domain.core.question import Question
 
 @dataclass
 class TemplateQnAOutput:
-    deterministic_state: List[Dict[str, str]]
+    deterministic_state: Dict[str, str]
     question: Question
 
 

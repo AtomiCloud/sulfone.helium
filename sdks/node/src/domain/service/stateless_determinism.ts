@@ -1,25 +1,18 @@
 import type { IDeterminism } from '../core/deterministic.js';
 
 class StatelessDeterminism implements IDeterminism {
-  public readonly states: Record<string, string>[]; // Use Record<string, string> for dictionary-like structure
-  readonly #pointer: number;
-
-  constructor(states: Record<string, string>[], pointer: number) {
-    this.states = states;
-    this.#pointer = pointer;
-  }
+  constructor(readonly states: Record<string, string>) {}
 
   get(key: string, origin: () => string): string {
-    const states = this.states[this.#pointer + 1];
-    if (!states) {
-      throw new Error('NullReferenceException');
-    }
-    const state = states[key];
+    if (!this.states) throw new Error('NullReferenceException: States dictionary is null');
+
+    const state = this.states[key];
     if (state != null) {
       return state;
     }
+
     const val = origin();
-    states[key] = val;
+    this.states[key] = val;
     return val;
   }
 }

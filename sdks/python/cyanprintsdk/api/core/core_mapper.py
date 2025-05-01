@@ -144,6 +144,7 @@ class QuestionMapper:
         return ConfirmQuestionRes(
             default=q.default,
             message=q.message,
+            id=q.id,
             error_message=q.error_message,
             desc=q.desc,
             type="confirm",
@@ -152,19 +153,20 @@ class QuestionMapper:
     @staticmethod
     def checkbox_to_resp(q: CheckboxQ) -> CheckboxQuestionRes:
         return CheckboxQuestionRes(
-            message=q.message, desc=q.desc, options=q.options, type="checkbox"
+            message=q.message, id=q.id, desc=q.desc, options=q.options, type="checkbox"
         )
 
     @staticmethod
     def select_to_resp(q: SelectQ) -> SelectQuestionRes:
         return SelectQuestionRes(
-            message=q.message, desc=q.desc, options=q.options, type="select"
+            message=q.message, id=q.id, desc=q.desc, options=q.options, type="select"
         )
 
     @staticmethod
     def text_to_resp(q: TextQ) -> TextQuestionRes:
         return TextQuestionRes(
             message=q.message,
+            id=q.id,
             desc=q.desc,
             default=q.default,
             initial=q.initial,
@@ -174,13 +176,18 @@ class QuestionMapper:
     @staticmethod
     def password_to_resp(q: PasswordQ) -> PasswordQuestionRes:
         return PasswordQuestionRes(
-            message=q.message, desc=q.desc, confirmation=q.confirmation, type="password"
+            message=q.message,
+            id=q.id,
+            desc=q.desc,
+            confirmation=q.confirmation,
+            type="password",
         )
 
     @staticmethod
     def date_to_resp(q: DateQ) -> DateQuestionRes:
         return DateQuestionRes(
             message=q.message,
+            id=q.id,
             desc=q.desc,
             default=q.default.isoformat() if q.default else None,
             maxDate=q.max_date.isoformat() if q.max_date else None,

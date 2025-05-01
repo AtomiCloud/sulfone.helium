@@ -1,23 +1,21 @@
-from typing import List, Dict, Callable
+from typing import Dict, Callable, List, Optional
 
 from cyanprintsdk.domain.core.deterministic import IDeterminism
 
 
 class StatelessDeterminism(IDeterminism):
-    def __init__(self, states: List[Dict[str, str]], pointer: int):
+    def __init__(self, states: Dict[str, str]):
         self.states = states
-        self._pointer = pointer  # Treat _pointer as a private variable
 
     def get(self, key: str, origin: Callable[[], str]) -> str:
-        if self._pointer + 1 >= len(self.states):
-            raise RuntimeError("NullReferenceException")
+        if self.states is None:
+            raise RuntimeError("States dictionary is null")
 
-        states = self.states[self._pointer + 1]
-        state = states.get(key)
+        state = self.states.get(key)
 
         if state is not None:
             return state
 
         val = origin()
-        states[key] = val
+        self.states[key] = val
         return val

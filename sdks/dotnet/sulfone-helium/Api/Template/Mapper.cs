@@ -7,19 +7,26 @@ public static class TemplateInputMapper
 {
     public static TemplateInput ToDomain(this TemplateAnswerReq req)
     {
-        return new TemplateInput(
-            req.Answers.Select(x => x.ToDomain()).ToArray(),
-            req.DeterministicStates
-        );
+        var answers = new Dictionary<string, sulfone_helium.Domain.Core.IAnswer>();
+
+        foreach (var kvp in req.Answers)
+        {
+            answers[kvp.Key] = kvp.Value.ToDomain();
+        }
+
+        return new TemplateInput(answers, req.DeterministicStates);
     }
 
     public static TemplateValidateInput ToDomain(this TemplateValidateReq req)
     {
-        return new TemplateValidateInput(
-            req.Answers.Select(x => x.ToDomain()).ToArray(),
-            req.DeterministicStates,
-            req.Validate
-        );
+        var answers = new Dictionary<string, sulfone_helium.Domain.Core.IAnswer>();
+
+        foreach (var kvp in req.Answers)
+        {
+            answers[kvp.Key] = kvp.Value.ToDomain();
+        }
+
+        return new TemplateValidateInput(answers, req.DeterministicStates, req.Validate);
     }
 }
 

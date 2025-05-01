@@ -5,6 +5,12 @@ vars:
   SERVICE: helium
 
 includes:
-  dotnet: sdks/dotnet/Taskfile.yaml
-  node: sdks/node/Taskfile.yaml
-  python: sdks/python/Taskfile.yaml
+  dotnet:
+    taskfile: sdks/dotnet/Taskfile.yaml
+    dir: sdks/dotnet
+  node:
+    taskfile: sdks/node/Taskfile.yaml
+    dir: sdks/node
+  python:
+    taskfile: sdks/python/Taskfile.yaml
+    dir: sdks/python

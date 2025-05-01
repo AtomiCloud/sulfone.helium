@@ -1,5 +1,6 @@
 interface ConfirmQuestionRes {
   message: string;
+  id: string;
   desc?: string | null;
   default?: string | null;
   errorMessage?: string | null;
@@ -8,6 +9,7 @@ interface ConfirmQuestionRes {
 
 interface DateQuestionRes {
   message: string;
+  id: string;
   default?: string | null;
   desc?: string | null;
   minDate?: string | null;
@@ -17,6 +19,7 @@ interface DateQuestionRes {
 
 interface CheckboxQuestionRes {
   message: string;
+  id: string;
   desc?: string | null;
   options: string[];
   type: 'checkbox'; // Type discriminator value
@@ -24,6 +27,7 @@ interface CheckboxQuestionRes {
 
 interface PasswordQuestionRes {
   message: string;
+  id: string;
   desc?: string | null;
   confirmation?: boolean | null;
   type: 'password'; // Type discriminator value
@@ -31,6 +35,7 @@ interface PasswordQuestionRes {
 
 interface SelectQuestionRes {
   message: string;
+  id: string;
   options: string[];
   desc?: string | null;
   type: 'select'; // Type discriminator value
@@ -38,6 +43,7 @@ interface SelectQuestionRes {
 
 interface TextQuestionRes {
   message: string;
+  id: string;
   default?: string | null;
   desc?: string | null;
   initial?: string | null;

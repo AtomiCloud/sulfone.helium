@@ -8,7 +8,10 @@ from cyanprintsdk.domain.template.output import TemplateOutput, is_qna, is_final
 class TemplateInputMapper:
     @staticmethod
     def answer_to_domain(req: TemplateAnswerReq) -> TemplateInput:
-        answers = [AnswerMapper.to_domain(x) for x in req.answers]
+        answers = {}
+        for id, answer in req.answers.items():
+            answers[id] = AnswerMapper.to_domain(answer)
+
         return TemplateInput(
             answers=answers,
             deterministic_state=req.deterministic_states,
@@ -16,7 +19,10 @@ class TemplateInputMapper:
 
     @staticmethod
     def validate_to_domain(req: TemplateValidateReq) -> TemplateValidateInput:
-        answers = [AnswerMapper.to_domain(x) for x in req.answers]
+        answers = {}
+        for id, answer in req.answers.items():
+            answers[id] = AnswerMapper.to_domain(answer)
+
         return TemplateValidateInput(
             deterministic_state=req.deterministic_states,
             answers=answers,

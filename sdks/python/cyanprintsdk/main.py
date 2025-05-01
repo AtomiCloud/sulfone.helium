@@ -3,13 +3,6 @@ import pprint
 from aiohttp import web
 from pydantic import ValidationError
 
-from cyanprintsdk.api.extension.fn import LambdaExtensionFn, LambdaExtension
-from cyanprintsdk.api.extension.mapper import (
-    ExtensionInputMapper,
-    ExtensionOutputMapper,
-)
-from cyanprintsdk.api.extension.req import ExtensionAnswerReq, ExtensionValidateReq
-from cyanprintsdk.api.extension.res import ExtensionRes, ExtensionValidRes
 from cyanprintsdk.api.plugin.fn import LambdaPluginFn, LambdaPlugin
 from cyanprintsdk.api.plugin.mapper import PluginMapper
 from cyanprintsdk.api.plugin.req import PluginReq
@@ -26,15 +19,8 @@ from cyanprintsdk.domain.core.cyan_script import (
     ICyanPlugin,
     ICyanProcessor,
     ICyanTemplate,
-    ICyanExtension,
 )
-from cyanprintsdk.domain.core.cyan_script_model import CyanPluginInput
-from cyanprintsdk.domain.extension.input import (
-    ExtensionAnswerInput,
-    ExtensionValidateInput,
-)
-from cyanprintsdk.domain.extension.output import ExtensionOutput
-from cyanprintsdk.domain.extension.service import ExtensionService
+
 from cyanprintsdk.domain.plugin.input import PluginInput
 from cyanprintsdk.domain.plugin.output import PluginOutput
 from cyanprintsdk.domain.plugin.service import PluginService
@@ -176,60 +162,6 @@ def start_template(template: ICyanTemplate):
             web.get("/", health_check),
             web.post("/api/template/init", template_answer),
             web.post("/api/template/validate", template_validate),
-        ]
-    )
-
-    web.run_app(app, port=5550)
-
-
-def start_extension_with_fn(f: LambdaExtensionFn):
-    start_extension(LambdaExtension(f))
-
-
-def start_extension(extension: ICyanExtension):
-    app = web.Application()
-
-    ext_service = ExtensionService(extension)
-
-    async def ext_answer(request):
-        try:
-            json = await request.json()
-            req = ExtensionAnswerReq(**json)
-            pprint.pprint(req)
-        except ValidationError as e:
-            print(e)
-            return web.json_response({"error": str(e)}, status=400)
-
-        # translate to domain
-        i: ExtensionAnswerInput = ExtensionInputMapper.extension_answer_to_domain(req)
-        o: ExtensionOutput = await ext_service.extend(i)
-        res: ExtensionRes = ExtensionOutputMapper.to_resp(o)
-
-        return web.json_response(res.model_dump())
-
-    async def ext_validate(request):
-        try:
-            json = await request.json()
-            req = ExtensionValidateReq(**json)
-            pprint.pprint(req)
-        except ValidationError as e:
-            print(e)
-            return web.json_response({"error": str(e)}, status=400)
-
-        # translate to domain
-        i: ExtensionValidateInput = ExtensionInputMapper.extension_validate_to_domain(
-            req
-        )
-        o: str = await ext_service.validate(i)
-        res: ExtensionValidRes = ExtensionValidRes(valid=o)
-
-        return web.json_response(res.model_dump())
-
-    app.add_routes(
-        [
-            web.get("/", health_check),
-            web.post("/api/extension/init", ext_answer),
-            web.post("/api/extension/validate", ext_validate),
         ]
     )
 
