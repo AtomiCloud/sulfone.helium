@@ -1,5 +1,9 @@
+from typing import cast
 from cyanprintsdk.api.core.answer_req import (
     AnswerReq,
+    BoolAnswerReq,
+    StringAnswerReq,
+    StringArrayAnswerReq,
     is_bool_answer_req,
     is_string_answer_req,
     is_string_array_answer_req,
@@ -200,11 +204,14 @@ class AnswerMapper:
     @staticmethod
     def to_domain(req: AnswerReq) -> Answer:
         if is_bool_answer_req(req):
-            return BoolAnswer(answer=req.answer)
+            bool_answer = cast(BoolAnswerReq, req)
+            return BoolAnswer(answer=bool_answer.answer)
         elif is_string_answer_req(req):
-            return StringAnswer(answer=req.answer)
+            string_answer = cast(StringAnswerReq, req)
+            return StringAnswer(answer=string_answer.answer)
         elif is_string_array_answer_req(req):
-            return StringArrayAnswer(answer=req.answer)
+            string_array_answer = cast(StringArrayAnswerReq, req)
+            return StringArrayAnswer(answer=string_array_answer.answer)
         else:
             raise ValueError(f"Invalid answer request type: {req}")
 

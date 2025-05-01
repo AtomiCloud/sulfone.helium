@@ -2,7 +2,14 @@ from cyanprintsdk.api.core.core_mapper import AnswerMapper, QuestionMapper, Cyan
 from cyanprintsdk.api.template.req import TemplateAnswerReq, TemplateValidateReq
 from cyanprintsdk.api.template.res import TemplateRes, TemplateQnARes, TemplateFinalRes
 from cyanprintsdk.domain.template.input import TemplateInput, TemplateValidateInput
-from cyanprintsdk.domain.template.output import TemplateOutput, is_qna, is_final
+from cyanprintsdk.domain.template.output import (
+    TemplateOutput,
+    is_qna,
+    is_final,
+    TemplateQnAOutput,
+    TemplateFinalOutput,
+)
+from typing import cast
 
 
 class TemplateInputMapper:
@@ -34,14 +41,16 @@ class TemplateOutputMapper:
     @staticmethod
     def to_resp(output: TemplateOutput) -> TemplateRes:
         if is_qna(output):
+            qna_output = cast(TemplateQnAOutput, output)
             return TemplateQnARes(
                 type="questionnaire",
-                deterministic_state=output.deterministic_state,
-                question=QuestionMapper.question_to_resp(output.question),
+                deterministic_state=qna_output.deterministic_state,
+                question=QuestionMapper.question_to_resp(qna_output.question),
             )
         elif is_final(output):
+            final_output = cast(TemplateFinalOutput, output)
             return TemplateFinalRes(
-                cyan=CyanMapper.cyan_to_resp(output.data), type="final"
+                cyan=CyanMapper.cyan_to_resp(final_output.data), type="final"
             )
         else:
             raise ValueError(f"Invalid output type {output}")

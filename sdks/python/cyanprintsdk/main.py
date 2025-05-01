@@ -1,7 +1,7 @@
 import pprint
 
-from aiohttp import web
-from pydantic import ValidationError
+from aiohttp import web  # type: ignore
+from pydantic import ValidationError  # type: ignore
 
 from cyanprintsdk.api.plugin.fn import LambdaPluginFn, LambdaPlugin
 from cyanprintsdk.api.plugin.mapper import PluginMapper
