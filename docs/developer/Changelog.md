@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.8.0...v1.8.1) (2025-05-02)
+
+
+### 🐛 Bug Fixes 🐛
+
+* use correct keys for ci and cd ([44b6ee9](https://github.com/AtomiCloud/sulfone.helium/commit/44b6ee96076c4601384e0af8ae90a41cf3e0d165))
+
 ## [1.8.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.7.0...v1.8.0) (2025-05-02)
 
 
