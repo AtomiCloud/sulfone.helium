@@ -1,3 +1,10 @@
+## [2.0.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.8.1...v2.0.0) (2025-05-02)
+
+
+### 🚀 Features 🚀
+
+* **breaking:** lost backward compatibility due to ref-based questions ([3af73d1](https://github.com/AtomiCloud/sulfone.helium/commit/3af73d1bff24eb187e7fa882f7267f0eb12c8b06))
+
 ## [1.8.1](https://github.com/AtomiCloud/sulfone.helium/compare/v1.8.0...v1.8.1) (2025-05-02)
 
 
