@@ -35,9 +35,11 @@ plugins:
   - module: '@semantic-release/git'
     version: 10.0.1
     config:
-      message: "release(no-release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      message: "release(no-release): ${nextRelease.version}\n\n${nextRelease.notes}"
       assets:
+        # dotnet
         - sdks/dotnet/sulfone-helium/sulfone-helium.csproj
+
         # node
         - sdks/node/bun.lockb
         - sdks/node/package.json

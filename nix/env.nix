@@ -42,6 +42,8 @@ with packages;
     golangci-lint
     sg
     biome
+    ruff
+    mypy
   ];
 
   ci = [

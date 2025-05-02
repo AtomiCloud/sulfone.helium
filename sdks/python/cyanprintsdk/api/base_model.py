@@ -1,5 +1,5 @@
-from pydantic import BaseModel, ConfigDict
-from pydantic.alias_generators import to_camel
+from pydantic import BaseModel, ConfigDict  # type: ignore
+from pydantic.alias_generators import to_camel  # type: ignore
 
 
 class CyanBaseModel(BaseModel):

@@ -1,7 +1,10 @@
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, cast
 
 from cyanprintsdk.domain.core.answer import (
     Answer,
+    BoolAnswer,
+    StringAnswer,
+    StringArrayAnswer,
     is_string_array_answer,
     is_bool_answer,
     is_string_answer,
@@ -42,7 +45,8 @@ class StatelessInquirer(IInquirer):
     async def checkboxQ(self, q: CheckboxQ) -> List[str]:
         answer = self._get_answer(q)
         if is_string_array_answer(answer):
-            return answer.answer
+            a = cast(StringArrayAnswer, answer)
+            return a.answer
 
         raise TypeError(
             "Incorrect answer type. Expected: StringArrayAnswer. Got: "
@@ -56,7 +60,8 @@ class StatelessInquirer(IInquirer):
     async def confirmQ(self, q: ConfirmQ) -> bool:
         answer = self._get_answer(q)
         if is_bool_answer(answer):
-            return answer.answer
+            b = cast(BoolAnswer, answer)
+            return b.answer
 
         raise TypeError(
             "Incorrect answer type. Expected: BoolAnswer. Got: " + str(type(answer))
@@ -69,7 +74,8 @@ class StatelessInquirer(IInquirer):
     async def passwordQ(self, q: PasswordQ) -> str:
         answer = self._get_answer(q)
         if is_string_answer(answer):
-            return answer.answer
+            s = cast(StringAnswer, answer)
+            return s.answer
 
         raise TypeError(
             "Incorrect answer type. Expected: StringAnswer. Got: " + str(type(answer))
@@ -88,7 +94,8 @@ class StatelessInquirer(IInquirer):
     async def selectQ(self, q: SelectQ) -> str:
         answer = self._get_answer(q)
         if is_string_answer(answer):
-            return answer.answer
+            s = cast(StringAnswer, answer)
+            return s.answer
 
         raise TypeError(
             "Incorrect answer type. Expected: StringAnswer. Got: " + str(type(answer))
@@ -106,7 +113,8 @@ class StatelessInquirer(IInquirer):
     async def textQ(self, q: TextQ) -> str:
         answer = self._get_answer(q)
         if is_string_answer(answer):
-            return answer.answer
+            s = cast(StringAnswer, answer)
+            return s.answer
 
         raise TypeError(
             "Incorrect answer type. Expected: StringAnswer. Got: " + str(type(answer))
@@ -121,7 +129,8 @@ class StatelessInquirer(IInquirer):
     async def date_selectQ(self, q: DateQ) -> str:
         answer = self._get_answer(q)
         if is_string_answer(answer):
-            return answer.answer
+            s = cast(StringAnswer, answer)
+            return s.answer
 
         raise TypeError(
             "Incorrect answer type. Expected: StringAnswer. Got: " + str(type(answer))

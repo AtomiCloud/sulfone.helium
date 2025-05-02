@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Union, Optional
+from typing import List, Optional
 
 from cyanprintsdk.domain.core.question import (
     CheckboxQ,

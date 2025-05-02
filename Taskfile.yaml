@@ -14,3 +14,8 @@ includes:
   python:
     taskfile: sdks/python/Taskfile.yaml
     dir: sdks/python
+  template:
+    taskfile: tasks/Taskfile.test.yaml
+    vars:
+      COMPOSE_FILE: docker-compose.template.yaml
+      K6_FILE: template-api-test.js

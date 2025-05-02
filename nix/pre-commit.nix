@@ -14,6 +14,24 @@ pre-commit-lib.run {
       enable = false;
     };
 
+    a-ruff = {
+      enable = true;
+      name = "Ruff Lint";
+      entry = "${packages.ruff}/bin/ruff check";
+      files = ".*py$";
+      language = "system";
+      pass_filenames = true;
+    };
+
+    a-mypy = {
+      enable = true;
+      name = "Mypy";
+      entry = "${packages.mypy}/bin/mypy --check-untyped-defs ./sdks/python";
+      files = ".*py$";
+      language = "system";
+      pass_filenames = false;
+    };
+
     a-dotnet-lint = {
       enable = true;
       name = ".NET Lint";

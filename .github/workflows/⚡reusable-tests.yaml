@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  workflow_call:
+    inputs:
+      atomi_platform:
+        required: true
+        type: string
+      atomi_service:
+        required: true
+        type: string
+      docker_compose:
+        required: true
+        type: string
+      k6:
+        required: true
+        type: string
+
+jobs:
+  test:
+    name: ${{ inputs.docker_compose }}
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-${{ inputs.atomi_platform }}-${{ inputs.atomi_service }}-nix-store-cache
+    steps:
+      # Setup
+      - uses: AtomiCloud/actions.setup-nix@v2
+      # Test
+      - name: Run Test
+        run: nix develop .#ci -c ./scripts/test.sh "${{ inputs.docker_compose }}" "${{ inputs.k6 }}"

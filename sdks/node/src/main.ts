@@ -1,7 +1,6 @@
 import type { Application, Request, Response } from 'express';
+import type http from 'node:http';
 import express from 'express';
-// The following imports are deprecated as the extension functionality is being removed
-// in favor of composite templates
 import type { ICyanPlugin, ICyanProcessor, ICyanTemplate } from './domain/core/cyan_script.js';
 import { LambdaPlugin, type LambdaPluginFn } from './api/plugin/lambda.js';
 import { LambdaProcessor, type LambdaProcessorFn } from './api/processor/lambda.js';
@@ -35,6 +34,27 @@ function createApp(): Application {
   return app;
 }
 
+// Helper function to set up signal handling for server
+function setupGracefulShutdown(server: http.Server, serviceName: string): void {
+  // Handle SIGTERM and SIGINT
+  const signals = ['SIGTERM', 'SIGINT'];
+
+  for (const signal of signals) {
+    process.on(signal, () => {
+      console.log(`${signal} received, shutting down ${serviceName} gracefully...`);
+
+      server.close((err?: Error) => {
+        if (err) {
+          console.error(`Error during ${serviceName} shutdown:`, err);
+          process.exit(1);
+        }
+        console.log(`${serviceName} shutdown complete`);
+        process.exit(0);
+      });
+    });
+  }
+}
+
 function StartPlugin(plugin: ICyanPlugin): void {
   const app = createApp();
   const port = 5552;
@@ -47,9 +67,11 @@ function StartPlugin(plugin: ICyanPlugin): void {
     res.end();
   });
 
-  app.listen(port, '0.0.0.0', () => {
+  const server = app.listen(port, '0.0.0.0', () => {
     console.log(`Plugin listening on port ${port}`);
   });
+
+  setupGracefulShutdown(server, 'Plugin Server');
 }
 
 function StartPluginWithLambda(f: LambdaPluginFn): void {
@@ -69,9 +91,11 @@ function StartProcessor(processor: ICyanProcessor): void {
     res.end();
   });
 
-  app.listen(port, '0.0.0.0', () => {
+  const server = app.listen(port, '0.0.0.0', () => {
     console.log(`Processor listening on port ${port}`);
   });
+
+  setupGracefulShutdown(server, 'Processor Server');
 }
 
 function StartProcessorWithLambda(f: LambdaProcessorFn): void {
@@ -101,9 +125,11 @@ function StartTemplate(template: ICyanTemplate): void {
     res.end();
   });
 
-  app.listen(port, '0.0.0.0', () => {
+  const server = app.listen(port, '0.0.0.0', () => {
     console.log(`Template listening on port ${port}`);
   });
+
+  setupGracefulShutdown(server, 'Template Server');
 }
 
 function StartTemplateWithLambda(f: LambdaTemplateFn): void {

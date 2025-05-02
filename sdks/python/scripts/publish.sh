@@ -4,11 +4,6 @@
 
 set -eou pipefail
 
-# skip dir
-echo "📂 Going to directory: sdks/python"
-cd sdks/python || exit
-echo "✅ In directory: $(pwd)"
-
 echo "🛠️ Configuring poetry token"
 poetry config pypi-token.pypi "${PYPI_TOKEN}"
 echo "✅ Poetry token configured"

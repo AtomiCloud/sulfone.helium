@@ -17,6 +17,9 @@ let
     nix-2411 = (
       with pkgs-2411;
       {
+        ruff = python312Packages.ruff;
+        mypy = python311Packages.mypy;
+
         inherit
           infisical
           git

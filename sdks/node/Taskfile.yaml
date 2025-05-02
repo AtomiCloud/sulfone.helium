@@ -1,14 +1,14 @@
 version: '3'
 
 tasks:
+  setup:
+    desc: Setup the project
+    cmds:
+      - bun install
   version:
     desc: Update package version
     cmds:
-      - ./scripts/ci/update_version.sh {{.CLI_ARGS}}
-  package:
-    desc: Package the .NET version
-    cmds:
-      - ./scripts/ci/publish.sh {{.CLI_ARGS}}
+      - ./scripts/update_version.sh {{.CLI_ARGS}}
   template:
     desc: Run a test template
     cmds:

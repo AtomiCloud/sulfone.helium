@@ -1,15 +1,19 @@
 version: '3'
 
 tasks:
-  template:
-    desc: Run the template
+  setup:
+    desc: Setup the project
     cmds:
-      - poetry run python template_test.py
-  version:
-    desc: Update package version
-    cmds:
-      - ./scripts/ci/update_version.sh {{.CLI_ARGS}}
+      - poetry install
   build:
     desc: Build the package
     cmds:
       - poetry build
+  version:
+    desc: Update package version
+    cmds:
+      - ./scripts/update_version.sh {{.CLI_ARGS}}
+  template:
+    desc: Run the template
+    cmds:
+      - poetry run python template_test.py
