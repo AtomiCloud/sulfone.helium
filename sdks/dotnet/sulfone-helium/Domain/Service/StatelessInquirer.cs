@@ -4,14 +4,9 @@ using sulfone_helium.Domain.Core.Questions;
 
 namespace sulfone_helium.Domain.Service;
 
-public class StatelessInquirer : IInquirer
+public class StatelessInquirer(Dictionary<string, IAnswer> answers) : IInquirer
 {
-    private readonly Dictionary<string, IAnswer> _answers;
-
-    public StatelessInquirer(Dictionary<string, IAnswer> answers)
-    {
-        _answers = answers;
-    }
+    private readonly Dictionary<string, IAnswer> _answers = answers;
 
     private IAnswer GetAnswer(IQuestion q)
     {

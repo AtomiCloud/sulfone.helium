@@ -14,6 +14,24 @@ pre-commit-lib.run {
       enable = false;
     };
 
+    a-dotnet-lint = {
+      enable = true;
+      name = ".NET Lint";
+      entry = "${packages.dotnetlint}/bin/dotnetlint";
+      files = ".*cs$";
+      language = "system";
+      pass_filenames = false;
+    };
+
+    a-biome = {
+      enable = true;
+      name = "Biome Lint";
+      entry = "${packages.biome}/bin/biome lint --write";
+      files = ".*[tj]s$";
+      language = "system";
+      pass_filenames = true;
+    };
+
     a-infisical = {
       enable = true;
       name = "Secrets Scanning";

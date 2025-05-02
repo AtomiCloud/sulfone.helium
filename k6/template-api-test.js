@@ -2,7 +2,7 @@ import { check, group } from 'k6';
 import { describe, expect } from 'https://jslib.k6.io/k6chaijs/4.5.0.1/index.js';
 import http from 'k6/http';
 
-export let options = {
+export const options = {
   vus: 1,
   iterations: 1,
   thresholds: {

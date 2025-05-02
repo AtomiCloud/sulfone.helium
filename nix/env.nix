@@ -41,6 +41,7 @@ with packages;
     shellcheck
     golangci-lint
     sg
+    biome
   ];
 
   ci = [

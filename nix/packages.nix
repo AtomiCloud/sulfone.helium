@@ -1,9 +1,10 @@
 { pkgs, atomi, pkgs-2411 }:
 let
-  all = {
+  all = rec {
     atomipkgs = (
       with atomi;
       {
+        dotnetlint = atomi.dotnetlint.override { dotnetPackage = nix-2411.dotnet; };
         inherit
           atomiutils
           infrautils
@@ -33,6 +34,7 @@ let
           go
 
           bun
+          biome
           ;
 
         python = python312;

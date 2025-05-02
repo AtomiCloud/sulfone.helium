@@ -1,4 +1,4 @@
-import { AnswerReq } from '../core/answer_req.js';
+import type { AnswerReq } from '../core/answer_req.js';
 
 interface TemplateValidateReq {
   answers: Record<string, AnswerReq>;

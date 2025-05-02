@@ -1,4 +1,4 @@
-import { QuestionType, StartTemplateWithLambda, GlobType, Cyan } from './src/main.js';
+import { QuestionType, StartTemplateWithLambda, GlobType, type Cyan } from './src/main.js';
 
 StartTemplateWithLambda(async (i, d) => {
   const name = await i.text('What is your name?', 'q1');
@@ -13,7 +13,7 @@ StartTemplateWithLambda(async (i, d) => {
     validate: x => {
       try {
         const num = Number(x);
-        if (isNaN(num)) return 'Needs to be a number';
+        if (Number.isNaN(num)) return 'Needs to be a number';
         return null;
       } catch (e) {
         return 'Needs to be a number';
@@ -55,7 +55,7 @@ StartTemplateWithLambda(async (i, d) => {
     validate: x => {
       try {
         const date = new Date(x);
-        if (isNaN(date.getTime())) return 'Needs to be a date';
+        if (Number.isNaN(date.getTime())) return 'Needs to be a date';
         return date.getMonth() === 11 ? null : 'Needs to be in December';
       } catch (e) {
         return 'Needs to be a date';

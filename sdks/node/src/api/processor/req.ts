@@ -1,4 +1,4 @@
-import { CyanGlobReq } from '../core/cyan_req.js';
+import type { CyanGlobReq } from '../core/cyan_req.js';
 
 interface ProcessorReq {
   readDir: string;

@@ -29,12 +29,8 @@ CyanEngine.StartProcessor(
             {
                 return x with
                 {
-                    Relative = handlebars.Compile(x.Relative)(
-                        handleBarsConfig?.Vars ?? new Dictionary<string, string>()
-                    ),
-                    Content = handlebars.Compile(x.Content)(
-                        handleBarsConfig?.Vars ?? new Dictionary<string, string>()
-                    ),
+                    Relative = handlebars.Compile(x.Relative)(handleBarsConfig?.Vars ?? []),
+                    Content = handlebars.Compile(x.Content)(handleBarsConfig?.Vars ?? []),
                 };
             }
             catch (Exception e)

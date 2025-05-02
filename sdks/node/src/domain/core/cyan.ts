@@ -1,6 +1,6 @@
 enum GlobType {
-  Template,
-  Copy,
+  Template = 0,
+  Copy = 1,
 }
 
 interface CyanGlob {

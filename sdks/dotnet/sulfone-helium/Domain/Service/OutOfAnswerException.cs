@@ -2,13 +2,7 @@ using sulfone_helium.Domain.Core.Questions;
 
 namespace sulfone_helium.Domain.Service;
 
-public class OutOfAnswerException : Exception
+public class OutOfAnswerException(string? message, IQuestion question) : Exception(message)
 {
-    public OutOfAnswerException(string? message, IQuestion question)
-        : base(message)
-    {
-        Question = question;
-    }
-
-    public IQuestion Question { get; }
+    public IQuestion Question { get; } = question;
 }

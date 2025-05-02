@@ -41,7 +41,7 @@ class StatelessInquirer implements IInquirer {
     const answer = this.getAnswer(q);
     if (isStringArrayAnswer(answer)) return Promise.resolve(answer.answer);
 
-    throw new Error('Incorrect answer type. Expected: StringArrayAnswer. Got: ' + typeof answer);
+    throw new Error(`Incorrect answer type. Expected: StringArrayAnswer. Got: ${typeof answer}`);
   }
 
   confirm(q: ConfirmQ): Promise<boolean>;
@@ -62,7 +62,7 @@ class StatelessInquirer implements IInquirer {
     const answer = this.getAnswer(q);
 
     if (isBoolAnswer(answer)) return Promise.resolve(answer.answer);
-    throw new Error('Incorrect answer type. Expected: BoolAnswer. Got: ' + typeof answer);
+    throw new Error(`Incorrect answer type. Expected: BoolAnswer. Got: ${typeof answer}`);
   }
 
   password(q: string, id: string, help?: string | null): Promise<string>;
@@ -82,7 +82,7 @@ class StatelessInquirer implements IInquirer {
     const answer = this.getAnswer(q);
 
     if (isStringAnswer(answer)) return Promise.resolve(answer.answer);
-    throw new Error('Incorrect answer type. Expected: StringAnswer. Got: ' + typeof answer);
+    throw new Error(`Incorrect answer type. Expected: StringAnswer. Got: ${typeof answer}`);
   }
 
   select(q: SelectQ): Promise<string>;
@@ -106,7 +106,7 @@ class StatelessInquirer implements IInquirer {
     const answer = this.getAnswer(q);
 
     if (isStringAnswer(answer)) return Promise.resolve(answer.answer);
-    throw new Error('Incorrect answer type. Expected: StringAnswer. Got: ' + typeof answer);
+    throw new Error(`Incorrect answer type. Expected: StringAnswer. Got: ${typeof answer}`);
   }
 
   text(q: TextQ): Promise<string>;
@@ -126,7 +126,7 @@ class StatelessInquirer implements IInquirer {
     const answer = this.getAnswer(q);
 
     if (isStringAnswer(answer)) return Promise.resolve(answer.answer);
-    throw new Error('Incorrect answer type. Expected: StringAnswer. Got: ' + typeof answer);
+    throw new Error(`Incorrect answer type. Expected: StringAnswer. Got: ${typeof answer}`);
   }
 
   dateSelect(q: DateQ): Promise<string>;
@@ -146,7 +146,7 @@ class StatelessInquirer implements IInquirer {
     }
     const answer = this.getAnswer(q);
     if (isStringAnswer(answer)) return Promise.resolve(answer.answer);
-    throw new Error('Incorrect answer type. Expected: StringAnswer. Got: ' + typeof answer);
+    throw new Error(`Incorrect answer type. Expected: StringAnswer. Got: ${typeof answer}`);
   }
 }
 

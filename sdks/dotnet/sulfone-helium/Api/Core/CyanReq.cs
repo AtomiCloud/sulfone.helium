@@ -2,7 +2,7 @@ using System.Dynamic;
 
 namespace sulfone_helium.Api.Core;
 
-public struct CyanGlobReq
+public readonly struct CyanGlobReq
 {
     public string? Root { get; init; }
     public string Glob { get; init; }
@@ -10,13 +10,13 @@ public struct CyanGlobReq
     public string Type { get; init; }
 }
 
-public struct CyanPluginReq
+public readonly struct CyanPluginReq
 {
     public string Name { get; init; }
     public ExpandoObject Config { get; init; }
 }
 
-public struct CyanProcessorReq
+public readonly struct CyanProcessorReq
 {
     public string Name { get; init; }
     public ExpandoObject Config { get; init; }
@@ -24,7 +24,7 @@ public struct CyanProcessorReq
     public CyanGlobReq[] Files { get; init; }
 }
 
-public struct CyanReq
+public readonly struct CyanReq
 {
     public CyanProcessorReq[] Processors { get; init; }
     public CyanPluginReq[] Plugins { get; init; }
