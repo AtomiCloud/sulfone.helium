@@ -7,9 +7,9 @@ on:
 
 jobs:
   publish:
-    name: Publish NuGet Package
+    name: Publish Packages
     uses: ./.github/workflows/⚡reusable-cd.yaml
     secrets: inherit
     with:
-      atomi_platform: carboxylic
-      atomi_service: boron
+      atomi_platform: sulfone
+      atomi_service: helium
