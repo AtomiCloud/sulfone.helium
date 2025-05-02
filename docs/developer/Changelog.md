@@ -1,3 +1,29 @@
+## [1.8.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.7.0...v1.8.0) (2025-05-02)
+
+
+### 🚀 Features 🚀
+
+* **atomi_release:** change answers to use referenced-id ([5a83778](https://github.com/AtomiCloud/sulfone.helium/commit/5a83778f84a4a796336c630ad8c0b56032518d1e))
+* include deterministic feature in the test templates ([8355d20](https://github.com/AtomiCloud/sulfone.helium/commit/8355d207b6170e8cc5a82d937f46155684ece9fb))
+* migrate to use ID ([74cad07](https://github.com/AtomiCloud/sulfone.helium/commit/74cad07f0f062f5bf876ba76f5d95888fc814680))
+* templates with full-platform compatibility ([46c4ef3](https://github.com/AtomiCloud/sulfone.helium/commit/46c4ef37940cecc6312eac6241ea780f2d0c0c85))
+
+
+### 🐛 Bug Fixes 🐛
+
+* compatible test for node, python and dotnet ([de33ffa](https://github.com/AtomiCloud/sulfone.helium/commit/de33ffa8b6743768b41937e88ecb7f7bc7c81e5c))
+* git ignored items ([91a037a](https://github.com/AtomiCloud/sulfone.helium/commit/91a037a864d8f245f9a79718bcd072cd9e3ca5b4))
+* improve code quality and change CI methodology ([bf6717b](https://github.com/AtomiCloud/sulfone.helium/commit/bf6717bda616485d43ecd9ec1392c2c44612ea66))
+* incorrect check of workflow success ([b39a9e1](https://github.com/AtomiCloud/sulfone.helium/commit/b39a9e18518fdccf401cbc3851cdb40b880f36ab))
+* python typing errors ([a9977dc](https://github.com/AtomiCloud/sulfone.helium/commit/a9977dcf7baa5e09421719fb8af07364ce27ddbb))
+* **default:** tests and inconsistency between sdks ([deb192f](https://github.com/AtomiCloud/sulfone.helium/commit/deb192f9e568d4a7baff042a2b5e08f5dc72a03d))
+* **default:** type error with node sdk ([debfd68](https://github.com/AtomiCloud/sulfone.helium/commit/debfd68043ec8e46480308cdcb45fea0e4a3b7cd))
+
+
+### 🧪 Tests 🧪
+
+* **default:** includdes deterministic states ([a11da18](https://github.com/AtomiCloud/sulfone.helium/commit/a11da1839e247274d37473b82fc5ae8cfeede14c))
+
 ## [1.7.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.6.0...v1.7.0) (2025-04-23)
 
 
