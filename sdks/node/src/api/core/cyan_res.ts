@@ -1,5 +1,5 @@
 interface CyanGlobRes {
-  readonly root?: string;
+  readonly root?: string | null;
   glob: string;
   exclude: string[];
   type: string;

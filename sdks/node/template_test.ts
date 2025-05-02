@@ -1,4 +1,4 @@
-import { QuestionType, StartTemplateWithLambda, GlobType } from './src/main.js';
+import { QuestionType, StartTemplateWithLambda, GlobType, Cyan } from './src/main.js';
 
 StartTemplateWithLambda(async (i, d) => {
   const name = await i.text('What is your name?', 'q1');
@@ -166,5 +166,5 @@ StartTemplateWithLambda(async (i, d) => {
         },
       },
     ],
-  };
+  } satisfies Cyan;
 });
