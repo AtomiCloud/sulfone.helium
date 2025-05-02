@@ -13,7 +13,6 @@ on:
 jobs:
   release:
     name: Semantic Release
-    if: github.ref == 'refs/heads/main' && github.event.workflow_run.conclusion == 'success'
     runs-on:
       - nscloud-ubuntu-22.04-amd64-4x8-with-cache
       - nscloud-cache-size-50gb
