@@ -40,6 +40,35 @@ const testCases = [
       },
     },
   ],
+
+  // New test case for deterministicState - Q1 with deterministic state
+  [
+    'Q1 with deterministic state',
+    TEMPLATE_INIT,
+    {
+      answers: {},
+      deterministicStates: {
+        time: '42',
+      },
+    },
+    200,
+    {
+      type: 'questionnaire',
+      deterministicState: {
+        time: '42',
+      },
+      question: {
+        type: 'text',
+        message: 'What is your name?',
+        id: 'q1',
+        default: null,
+        desc: null,
+        initial: null,
+      },
+    },
+  ],
+
+  // Regular test cases continue...
   [
     'Q1 validate',
     TEMPLATE_VALIDATE,
@@ -76,6 +105,35 @@ const testCases = [
       },
     },
   ],
+
+  // New test case for deterministicState - Q2 with deterministic state
+  [
+    'Q2 with deterministic state',
+    TEMPLATE_INIT,
+    {
+      answers: { q1: { type: 'string', answer: 'John Doe' } },
+      deterministicStates: {
+        time: '42',
+      },
+    },
+    200,
+    {
+      type: 'questionnaire',
+      deterministicState: {
+        time: '42',
+      },
+      question: {
+        type: 'text',
+        message: 'What is your age?',
+        id: 'q2',
+        default: '20',
+        desc: 'The age of the person',
+        initial: '18',
+      },
+    },
+  ],
+
+  // Regular test cases continue...
   [
     'Q2 validate - pass',
     TEMPLATE_VALIDATE,
@@ -647,6 +705,66 @@ const testCases = [
               Car: 'BMW',
               Plane: 'Boeing',
               Time: '7',
+            },
+            files: [
+              {
+                root: null,
+                glob: '**/*.*',
+                exclude: [],
+                type: 'template',
+              },
+            ],
+          },
+        ],
+        plugins: [],
+      },
+      type: 'final',
+    },
+  ],
+
+  // New test case for complete questionnaire with deterministic state - should override the "time" value
+  [
+    'Complete questionnaire with deterministic state',
+    TEMPLATE_INIT,
+    {
+      answers: {
+        q1: { type: 'string', answer: 'John Doe' },
+        q2: { type: 'string', answer: '25' },
+        q3: { type: 'str_array', answer: ['apple', 'orange'] },
+        q4: { type: 'str_array', answer: ['red', 'blue'] },
+        q5: { type: 'boolean', answer: true },
+        q6: { type: 'boolean', answer: false },
+        q7: { type: 'string', answer: '1990-01-15' },
+        q8: { type: 'string', answer: '1965-05-10' },
+        q9: { type: 'string', answer: 'password123' },
+        q10: { type: 'string', answer: 'Password123' },
+        q11: { type: 'string', answer: 'BMW' },
+        q12: { type: 'string', answer: 'Boeing' },
+      },
+      deterministicStates: {
+        time: '42',
+      },
+    },
+    200,
+    {
+      cyan: {
+        processors: [
+          {
+            name: 'hello',
+            config: {
+              Name: 'John Doe',
+              Age: '25',
+              Food: ['apple', 'orange'],
+              Color: ['red', 'blue'],
+              Beef: true,
+              Pork: false,
+              Birthday: '1990-01-15',
+              MumBirthday: '1965-05-10',
+              Password: 'password123',
+              Pin: 'Password123',
+              Car: 'BMW',
+              Plane: 'Boeing',
+              Time: '42',
             },
             files: [
               {
