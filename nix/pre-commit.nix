@@ -14,6 +14,42 @@ pre-commit-lib.run {
       enable = false;
     };
 
+    a-ruff = {
+      enable = true;
+      name = "Ruff Lint";
+      entry = "${packages.ruff}/bin/ruff check";
+      files = ".*py$";
+      language = "system";
+      pass_filenames = true;
+    };
+
+    a-mypy = {
+      enable = true;
+      name = "Mypy";
+      entry = "${packages.mypy}/bin/mypy --check-untyped-defs ./sdks/python";
+      files = ".*py$";
+      language = "system";
+      pass_filenames = false;
+    };
+
+    a-dotnet-lint = {
+      enable = true;
+      name = ".NET Lint";
+      entry = "${packages.dotnetlint}/bin/dotnetlint";
+      files = ".*cs$";
+      language = "system";
+      pass_filenames = false;
+    };
+
+    a-biome = {
+      enable = true;
+      name = "Biome Lint";
+      entry = "${packages.biome}/bin/biome lint --write";
+      files = ".*[tj]s$";
+      language = "system";
+      pass_filenames = true;
+    };
+
     a-infisical = {
       enable = true;
       name = "Secrets Scanning";
@@ -74,7 +110,7 @@ pre-commit-lib.run {
     a-hadolint = {
       enable = true;
       name = "Docker Linter";
-      entry = "${packages.hadolint}/bin/hadolint";
+      entry = "${packages.infralint}/bin/hadolint";
       files = ".*Dockerfile$";
       language = "system";
       pass_filenames = true;

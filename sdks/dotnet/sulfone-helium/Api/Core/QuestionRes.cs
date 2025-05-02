@@ -22,14 +22,16 @@ public abstract class QuestionRes { }
 public class ConfirmQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
+    public required string Id { get; set; }
     public string? Desc { get; set; }
-    public string? Default { get; set; }
+    public bool? Default { get; set; }
     public string? ErrorMessage { get; set; }
 }
 
 public class DateQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
+    public required string Id { get; set; }
     public string? Default { get; set; }
     public string? Desc { get; set; }
     public string? MinDate { get; set; }
@@ -39,6 +41,7 @@ public class DateQuestionRes : QuestionRes
 public class CheckboxQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
+    public required string Id { get; set; }
     public string? Desc { get; set; }
     public required string[] Options { get; set; }
 }
@@ -46,6 +49,7 @@ public class CheckboxQuestionRes : QuestionRes
 public class PasswordQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
+    public required string Id { get; set; }
     public string? Desc { get; set; }
     public bool? Confirmation { get; set; }
 }
@@ -53,6 +57,7 @@ public class PasswordQuestionRes : QuestionRes
 public class SelectQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
+    public required string Id { get; set; }
     public required string[] Options { get; set; }
 
     public string? Desc { get; set; }
@@ -61,6 +66,7 @@ public class SelectQuestionRes : QuestionRes
 public class TextQuestionRes : QuestionRes
 {
     public required string Message { get; set; }
+    public required string Id { get; set; }
 
     public string? Default { get; set; }
     public string? Desc { get; set; }

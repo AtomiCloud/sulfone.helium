@@ -16,5 +16,6 @@ public interface IQuestion
     QuestionType Type { get; }
     string Message { get; }
     string? Desc { get; }
+    string Id { get; } // Unique identifier for the question
     public Func<string, string?>? Validate { get; }
 }

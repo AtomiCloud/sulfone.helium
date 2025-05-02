@@ -1,10 +1,10 @@
 enum GlobType {
-  Template,
-  Copy,
+  Template = 0,
+  Copy = 1,
 }
 
 interface CyanGlob {
-  root?: string;
+  root?: string | null;
   glob: string;
   exclude: string[];
   type: GlobType;

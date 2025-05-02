@@ -1,5 +1,9 @@
+from typing import cast
 from cyanprintsdk.api.core.answer_req import (
     AnswerReq,
+    BoolAnswerReq,
+    StringAnswerReq,
+    StringArrayAnswerReq,
     is_bool_answer_req,
     is_string_answer_req,
     is_string_array_answer_req,
@@ -144,6 +148,7 @@ class QuestionMapper:
         return ConfirmQuestionRes(
             default=q.default,
             message=q.message,
+            id=q.id,
             error_message=q.error_message,
             desc=q.desc,
             type="confirm",
@@ -152,19 +157,20 @@ class QuestionMapper:
     @staticmethod
     def checkbox_to_resp(q: CheckboxQ) -> CheckboxQuestionRes:
         return CheckboxQuestionRes(
-            message=q.message, desc=q.desc, options=q.options, type="checkbox"
+            message=q.message, id=q.id, desc=q.desc, options=q.options, type="checkbox"
         )
 
     @staticmethod
     def select_to_resp(q: SelectQ) -> SelectQuestionRes:
         return SelectQuestionRes(
-            message=q.message, desc=q.desc, options=q.options, type="select"
+            message=q.message, id=q.id, desc=q.desc, options=q.options, type="select"
         )
 
     @staticmethod
     def text_to_resp(q: TextQ) -> TextQuestionRes:
         return TextQuestionRes(
             message=q.message,
+            id=q.id,
             desc=q.desc,
             default=q.default,
             initial=q.initial,
@@ -174,13 +180,18 @@ class QuestionMapper:
     @staticmethod
     def password_to_resp(q: PasswordQ) -> PasswordQuestionRes:
         return PasswordQuestionRes(
-            message=q.message, desc=q.desc, confirmation=q.confirmation, type="password"
+            message=q.message,
+            id=q.id,
+            desc=q.desc,
+            confirmation=q.confirmation,
+            type="password",
         )
 
     @staticmethod
     def date_to_resp(q: DateQ) -> DateQuestionRes:
         return DateQuestionRes(
             message=q.message,
+            id=q.id,
             desc=q.desc,
             default=q.default.isoformat() if q.default else None,
             maxDate=q.max_date.isoformat() if q.max_date else None,
@@ -193,11 +204,14 @@ class AnswerMapper:
     @staticmethod
     def to_domain(req: AnswerReq) -> Answer:
         if is_bool_answer_req(req):
-            return BoolAnswer(answer=req.answer)
+            bool_answer = cast(BoolAnswerReq, req)
+            return BoolAnswer(answer=bool_answer.answer)
         elif is_string_answer_req(req):
-            return StringAnswer(answer=req.answer)
+            string_answer = cast(StringAnswerReq, req)
+            return StringAnswer(answer=string_answer.answer)
         elif is_string_array_answer_req(req):
-            return StringArrayAnswer(answer=req.answer)
+            string_array_answer = cast(StringArrayAnswerReq, req)
+            return StringArrayAnswer(answer=string_array_answer.answer)
         else:
             raise ValueError(f"Invalid answer request type: {req}")
 

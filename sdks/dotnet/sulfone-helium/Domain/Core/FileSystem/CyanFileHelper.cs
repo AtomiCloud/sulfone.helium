@@ -2,21 +2,14 @@ using Microsoft.Extensions.FileSystemGlobbing;
 
 namespace sulfone_helium.Domain.Core.FileSystem;
 
-public class CyanFileHelper
+public class CyanFileHelper(string readDir, string writeDir, IEnumerable<CyanGlob> globs)
 {
-    private readonly string _readDir;
-    private readonly string _writeDir;
-    private readonly IEnumerable<CyanGlob> _globs;
+    private readonly string _readDir = readDir;
+    private readonly string _writeDir = writeDir;
+    private readonly IEnumerable<CyanGlob> _globs = globs;
 
     public string ReadDir => Path.GetFullPath(this._readDir);
     public string WriteDir => Path.GetFullPath(this._writeDir);
-
-    public CyanFileHelper(string readDir, string writeDir, IEnumerable<CyanGlob> globs)
-    {
-        this._readDir = readDir;
-        this._writeDir = writeDir;
-        _globs = globs;
-    }
 
     public IEnumerable<VirtualFile> ResolveAll()
     {

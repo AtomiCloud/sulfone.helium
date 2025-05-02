@@ -13,7 +13,7 @@ with packages;
   ];
 
   infra = [
-    docker
+    infrautils
   ];
 
   main = [
@@ -29,16 +29,21 @@ with packages;
     bun
 
     infisical
+
+    k6
   ];
 
   lint = [
     # core
     treefmt
-    hadolint
+    infralint
     gitlint
     shellcheck
     golangci-lint
     sg
+    biome
+    ruff
+    mypy
   ];
 
   ci = [

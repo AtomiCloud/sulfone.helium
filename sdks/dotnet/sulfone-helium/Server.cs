@@ -1,13 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using sulfone_helium.Api.Extension;
 using sulfone_helium.Api.Plugin;
 using sulfone_helium.Api.Processor;
 using sulfone_helium.Api.Template;
 using sulfone_helium.Domain;
 using sulfone_helium.Domain.Core;
 using sulfone_helium.Domain.Core.FileSystem;
-using sulfone_helium.Domain.Extension;
 using sulfone_helium.Domain.Plugin;
 using sulfone_helium.Domain.Processor;
 using sulfone_helium.Domain.Template;
@@ -135,7 +133,7 @@ public static class CyanEngine
             async Task<TemplateValidRes> (TemplateValidateReq req) =>
             {
                 var a = await h.Validate(req.ToDomain());
-                return new TemplateValidRes() { Valid = a };
+                return new TemplateValidRes { Valid = a };
             }
         );
         app.Run();
@@ -145,52 +143,5 @@ public static class CyanEngine
     {
         var lambda = new LambdaTemplate(f);
         StartTemplate(args, lambda);
-    }
-
-    public static void StartExtension(string[] args, ICyanExtension ext)
-    {
-        var builder = WebApplication.CreateBuilder(args);
-        var h = new ExtensionService { Ext = ext };
-
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(c =>
-            c.EnableAnnotations(
-                enableAnnotationsForInheritance: true,
-                enableAnnotationsForPolymorphism: true
-            )
-        );
-        var app = builder.Build();
-
-        app.UseSwagger();
-        app.UseSwaggerUI();
-
-        app.MapGet("/", StatusMessage () => new StatusMessage { Status = "OK", Message = "OK" });
-
-        app.MapPost(
-            "/api/extension/init",
-            async Task<ExtensionRes> (ExtensionAnswerReq answers) =>
-            {
-                var resp = await h.Extend(answers.ToDomain());
-                return resp.ToResp();
-            }
-        );
-
-        app.MapPost(
-            "/api/extension/validate",
-            async Task<ExtensionValidRes> (ExtensionValidateReq req) =>
-            {
-                var a = await h.Validate(req.ToDomain());
-                return new ExtensionValidRes() { Valid = a };
-            }
-        );
-        app.Run();
-    }
-
-    public static void StartExtension(
-        string[] args,
-        Func<IInquirer, IDeterminism, CyanExtensionInput, Task<Cyan>> f
-    )
-    {
-        StartExtension(args, new LambdaExtension(f));
     }
 }

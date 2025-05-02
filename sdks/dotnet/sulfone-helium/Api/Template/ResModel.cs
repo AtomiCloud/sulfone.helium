@@ -24,6 +24,6 @@ public class TemplateFinalRes : TemplateRes
 
 public class TemplateQnARes : TemplateRes
 {
-    public required Dictionary<string, string>[] DeterministicState { get; set; }
+    public required Dictionary<string, string> DeterministicState { get; set; }
     public required QuestionRes Question { get; set; }
 }

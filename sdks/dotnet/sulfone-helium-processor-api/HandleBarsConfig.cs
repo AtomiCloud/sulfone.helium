@@ -2,5 +2,5 @@ namespace sulfone_helium_processor_console;
 
 public class HandleBarsConfig
 {
-    public Dictionary<string, string> Vars { get; init; } = new();
+    public Dictionary<string, string> Vars { get; init; } = [];
 }

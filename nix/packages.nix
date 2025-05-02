@@ -1,11 +1,14 @@
 { pkgs, atomi, pkgs-2411 }:
 let
-  all = {
+  all = rec {
     atomipkgs = (
       with atomi;
       {
+        dotnetlint = atomi.dotnetlint.override { dotnetPackage = nix-2411.dotnet; };
         inherit
           atomiutils
+          infrautils
+          infralint
           toml-cli
           sg
           pls;
@@ -14,13 +17,14 @@ let
     nix-2411 = (
       with pkgs-2411;
       {
+        ruff = python312Packages.ruff;
+        mypy = python311Packages.mypy;
+
         inherit
           infisical
-          hadolint
-          k3d
-          bun
           git
           gcc
+          k6
           # lint
           treefmt
           gitlint
@@ -32,15 +36,15 @@ let
           golangci-lint
           go
 
-          #infra
-          docker
+          bun
+          biome
           ;
 
         python = python312;
         poetry = (poetry.override { python3 = python312; });
         npm = nodePackages.npm;
         nodejs = nodejs_22;
-        dotnet = dotnet-sdk_9;
+        dotnet = dotnet-sdk_8;
       }
     );
   };

@@ -18,9 +18,8 @@ class TemplateService:
         self._template = template
 
     async def template(self, answer: TemplateInput) -> TemplateOutput:
-        pointer = -1
-        i = StatelessInquirer(answer.answers, pointer)
-        d = StatelessDeterminism(answer.deterministic_state, pointer)
+        i = StatelessInquirer(answer.answers)
+        d = StatelessDeterminism(answer.deterministic_state)
 
         try:
             r = await self._template.template(i, d)
@@ -32,9 +31,8 @@ class TemplateService:
             raise e
 
     async def validate(self, answer: TemplateValidateInput) -> Optional[str]:
-        pointer = -1
-        i = StatelessInquirer(answer.answers, pointer)
-        d = StatelessDeterminism(answer.deterministic_state, pointer)
+        i = StatelessInquirer(answer.answers)
+        d = StatelessDeterminism(answer.deterministic_state)
 
         try:
             await self._template.template(i, d)

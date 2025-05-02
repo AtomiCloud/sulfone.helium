@@ -7,22 +7,27 @@ from typing import Optional, List, Union, Callable
 class CheckboxQ:
     message: str
     options: List[str]
+    id: str  # Unique identifier for the question
     desc: Optional[str] = None
-    validate: Optional[Callable[[str], Optional[str]]] = None
+    validate: None = None
+    # validate: Optional[Callable[[str], Optional[str]]] = None
 
 
 @dataclass
 class ConfirmQ:
     message: str
+    id: str  # Unique identifier for the question
     desc: Optional[str] = None
-    validate: Optional[Callable[[str], Optional[str]]] = None
-    default: Optional[str] = None
+    default: Optional[bool] = None
     error_message: Optional[str] = None
+    validate: None = None
+    # validate: Optional[Callable[[str], Optional[str]]] = None
 
 
 @dataclass
 class DateQ:
     message: str
+    id: str  # Unique identifier for the question
     desc: Optional[str] = None
     validate: Optional[Callable[[str], Optional[str]]] = None
     default: Optional[date] = None
@@ -33,6 +38,7 @@ class DateQ:
 @dataclass
 class PasswordQ:
     message: str
+    id: str  # Unique identifier for the question
     desc: Optional[str] = None
     validate: Optional[Callable[[str], Optional[str]]] = None
     confirmation: Optional[bool] = None
@@ -42,13 +48,16 @@ class PasswordQ:
 class SelectQ:
     message: str
     options: List[str]
+    id: str  # Unique identifier for the question
     desc: Optional[str] = None
-    validate: Optional[Callable[[str], Optional[str]]] = None
+    validate: None = None
+    # validate: Optional[Callable[[str], Optional[str]]] = None
 
 
 @dataclass
 class TextQ:
     message: str
+    id: str  # Unique identifier for the question
     desc: Optional[str] = None
     validate: Optional[Callable[[str], Optional[str]]] = None
     default: Optional[str] = None

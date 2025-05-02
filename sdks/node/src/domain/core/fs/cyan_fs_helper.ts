@@ -1,8 +1,8 @@
 import type { CyanGlob } from '../cyan.js';
 import { GlobType } from '../cyan.js';
-import * as path from 'path';
-import * as fs from 'fs';
-import { VirtualFile, VirtualFileReference, VirtualFileStream } from './virtual_file.js';
+import path from 'node:path';
+import fs from 'node:fs';
+import { type VirtualFile, VirtualFileReference, VirtualFileStream } from './virtual_file.js';
 import { glob } from 'glob';
 
 export class CyanFileHelper {

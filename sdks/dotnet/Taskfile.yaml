@@ -1,27 +1,27 @@
 version: '3'
 
 tasks:
+  setup:
+    desc: Setup the project
+    cmds:
+      - dotnet restore
   version:
     desc: Update package version
     cmds:
-      - ./sdks/dotnet/scripts/ci/update_version.sh {{.CLI_ARGS}}
-  package:
-    desc: Package the .NET version
-    cmds:
-      - ./sdks/dotnet/scripts/ci/publish.sh {{.CLI_ARGS}}
+      - ./scripts/update_version.sh {{.CLI_ARGS}}
   template:
     desc: Run a sample dotnet template
-    dir: sdks/dotnet/sulfone-helium-template-api
+    dir: sulfone-helium-template-api
     env:
       DOTNET_WATCH_RESTART_ON_RUDE_EDIT: 'true'
-      ASPNETCORE_URLS: http://+:5001
+      ASPNETCORE_URLS: http://+:5550
     cmds:
       - dotnet watch
-  extension:
-    desc: Run a sample dotnet extension
-    dir: sdks/dotnet/sulfone-helium-extension-api
+  processor:
+    desc: Run a sample dotnet processor
+    dir: sulfone-helium-processor-api
     env:
       DOTNET_WATCH_RESTART_ON_RUDE_EDIT: 'true'
-      ASPNETCORE_URLS: http://+:5002
+      ASPNETCORE_URLS: http://+:5551
     cmds:
       - dotnet watch

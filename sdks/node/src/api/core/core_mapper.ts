@@ -13,9 +13,9 @@ import type {
   SelectQuestionRes,
   TextQuestionRes,
 } from './question_res.js';
-import { Answer, isBoolAnswer, isStringAnswer, isStringArrayAnswer } from '../../domain/core/answer.js';
-import { AnswerRes } from './answer_res.js';
-import { AnswerReq, isBoolAnswerReq, isStringAnswerReq } from './answer_req.js';
+import { type Answer, isBoolAnswer, isStringAnswer, isStringArrayAnswer } from '../../domain/core/answer.js';
+import type { AnswerRes } from './answer_res.js';
+import { type AnswerReq, isBoolAnswerReq, isStringAnswerReq } from './answer_req.js';
 import { QuestionType } from '../../domain/core/question.js';
 
 export class CyanMapper {
@@ -49,21 +49,21 @@ export class CyanMapper {
     return {
       name: req.name,
       config: req.config,
-      files: req.files.map(x => this.globReqToDomain(x)),
+      files: req.files.map(x => CyanMapper.globReqToDomain(x)),
     };
   }
 
   static cyanReqToDomain(req: CyanReq): Cyan {
     return {
-      processors: req.processors.map(x => this.processorReqToDomain(x)),
-      plugins: req.plugins.map(x => this.pluginReqToDomain(x)),
+      processors: req.processors.map(x => CyanMapper.processorReqToDomain(x)),
+      plugins: req.plugins.map(x => CyanMapper.pluginReqToDomain(x)),
     };
   }
 
   static cyanToResp(data: Cyan): CyanRes {
     return {
-      processors: data.processors.map(x => this.processorToResp(x)),
-      plugins: data.plugins.map(x => this.pluginToResp(x)),
+      processors: data.processors.map(x => CyanMapper.processorToResp(x)),
+      plugins: data.plugins.map(x => CyanMapper.pluginToResp(x)),
     };
   }
 
@@ -71,7 +71,7 @@ export class CyanMapper {
     return {
       name: data.name,
       config: data.config,
-      files: data.files.map(x => this.globToResp(x)),
+      files: data.files.map(x => CyanMapper.globToResp(x)),
     };
   }
 
@@ -98,7 +98,7 @@ export class CyanMapper {
       root: data.root,
       glob: data.glob,
       exclude: data.exclude,
-      type: this.globTypeToResp(data.type),
+      type: CyanMapper.globTypeToResp(data.type),
     };
   }
 }
@@ -107,17 +107,17 @@ export class QuestionMapper {
   static questionToResp(q: Question): QuestionRes {
     switch (q.type) {
       case QuestionType.Select:
-        return this.selectToResp(q);
+        return QuestionMapper.selectToResp(q);
       case QuestionType.Text:
-        return this.textToResp(q);
+        return QuestionMapper.textToResp(q);
       case QuestionType.Password:
-        return this.passwordToResp(q);
+        return QuestionMapper.passwordToResp(q);
       case QuestionType.DateSelect:
-        return this.dateToResp(q);
+        return QuestionMapper.dateToResp(q);
       case QuestionType.Confirm:
-        return this.confirmToResp(q);
+        return QuestionMapper.confirmToResp(q);
       case QuestionType.Checkbox:
-        return this.checkboxToResp(q);
+        return QuestionMapper.checkboxToResp(q);
       default:
         throw new Error(`Invalid question type: ${q}`);
     }
@@ -125,10 +125,11 @@ export class QuestionMapper {
 
   static confirmToResp(q: ConfirmQ): ConfirmQuestionRes {
     return {
-      default: q.default,
+      default: q.default ?? null,
       message: q.message,
-      errorMessage: q.errorMessage,
-      desc: q.desc,
+      id: q.id,
+      errorMessage: q.errorMessage ?? null,
+      desc: q.desc ?? null,
       type: 'confirm',
     };
   }
@@ -136,7 +137,8 @@ export class QuestionMapper {
   static checkboxToResp(q: CheckboxQ): CheckboxQuestionRes {
     return {
       message: q.message,
-      desc: q.desc,
+      id: q.id,
+      desc: q.desc ?? null,
       options: q.options,
       type: 'checkbox',
     };
@@ -145,7 +147,8 @@ export class QuestionMapper {
   static selectToResp(q: SelectQ): SelectQuestionRes {
     return {
       message: q.message,
-      desc: q.desc,
+      id: q.id,
+      desc: q.desc ?? null,
       options: q.options,
       type: 'select',
     };
@@ -154,9 +157,10 @@ export class QuestionMapper {
   static textToResp(q: TextQ): TextQuestionRes {
     return {
       message: q.message,
-      desc: q.desc,
-      default: q.default,
-      initial: q.initial,
+      id: q.id,
+      desc: q.desc ?? null,
+      default: q.default ?? null,
+      initial: q.initial ?? null,
       type: 'text',
     };
   }
@@ -164,8 +168,9 @@ export class QuestionMapper {
   static passwordToResp(q: PasswordQ): PasswordQuestionRes {
     return {
       message: q.message,
-      desc: q.desc,
-      confirmation: q.confirmation,
+      id: q.id,
+      desc: q.desc ?? null,
+      confirmation: q.confirmation ?? null,
       type: 'password',
     };
   }
@@ -173,10 +178,11 @@ export class QuestionMapper {
   static dateToResp(q: DateQ): DateQuestionRes {
     return {
       message: q.message,
-      desc: q.desc,
-      default: q.default?.toISOString(),
-      maxDate: q.maxDate?.toDateString(),
-      minDate: q.minDate?.toISOString(),
+      id: q.id,
+      desc: q.desc ?? null,
+      default: q.default ? q.default.toISOString().split('T')[0] : null,
+      maxDate: q.maxDate ? q.maxDate.toISOString().split('T')[0] : null,
+      minDate: q.minDate ? q.minDate.toISOString().split('T')[0] : null,
       type: 'date',
     };
   }
@@ -186,30 +192,26 @@ export class AnswerMapper {
   static toDomain(req: AnswerReq): Answer {
     if (isBoolAnswerReq(req)) {
       return { answer: req.answer };
-    } else if (isStringAnswerReq(req)) {
-      return { answer: req.answer };
-    } else if (isStringArrayAnswer(req)) {
-      return { answer: req.answer };
-    } else {
-      throw new Error(`Invalid answer request type: ${req}`);
     }
+    if (isStringAnswerReq(req)) {
+      return { answer: req.answer };
+    }
+    if (isStringArrayAnswer(req)) {
+      return { answer: req.answer };
+    }
+    throw new Error(`Invalid answer request type: ${req}`);
   }
 
   static toResp(answer: Answer): AnswerRes {
     if (isBoolAnswer(answer)) {
-      return {
-        answer: answer.answer,
-      };
-    } else if (isStringAnswer(answer)) {
-      return {
-        answer: answer.answer,
-      };
-    } else if (isStringArrayAnswer(answer)) {
-      return {
-        answer: answer.answer,
-      };
-    } else {
-      throw new Error(`Invalid answer type: ${answer}`);
+      return { answer: answer.answer };
     }
+    if (isStringAnswer(answer)) {
+      return { answer: answer.answer };
+    }
+    if (isStringArrayAnswer(answer)) {
+      return { answer: answer.answer };
+    }
+    throw new Error(`Invalid answer type: ${answer}`);
   }
 }

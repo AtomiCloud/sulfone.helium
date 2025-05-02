@@ -14,9 +14,8 @@ class TemplateService {
   }
 
   async template(answer: TemplateInput): Promise<TemplateOutput> {
-    let pointer: number = -1;
-    const i = new StatelessInquirer(answer.answers, pointer);
-    const d = new StatelessDeterminism(answer.deterministicState, pointer);
+    const i = new StatelessInquirer(answer.answers);
+    const d = new StatelessDeterminism(answer.deterministicState);
 
     try {
       const r = await this._template.template(i, d);
@@ -36,9 +35,8 @@ class TemplateService {
   }
 
   async validate(answer: TemplateValidateInput): Promise<string | null> {
-    let pointer: number = -1;
-    const i = new StatelessInquirer(answer.answers, pointer);
-    const d = new StatelessDeterminism(answer.deterministicState, pointer);
+    const i = new StatelessInquirer(answer.answers);
+    const d = new StatelessDeterminism(answer.deterministicState);
 
     try {
       await this._template.template(i, d);

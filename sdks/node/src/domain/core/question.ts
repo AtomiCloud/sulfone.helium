@@ -10,25 +10,28 @@ enum QuestionType {
 
 interface CheckboxQ {
   type: QuestionType.Checkbox;
+  id: string;
   message: string;
   desc?: string | null;
-  validate?: (input: string) => string | null;
+  validate?: null;
 
   options: string[];
 }
 
 interface ConfirmQ {
   type: QuestionType.Confirm;
+  id: string;
   message: string;
   desc?: string | null;
-  validate?: (input: string) => string | null;
+  validate?: null;
 
-  default?: string | null;
+  default?: boolean | null;
   errorMessage?: string | null;
 }
 
 interface DateQ {
   type: QuestionType.DateSelect;
+  id: string;
   message: string;
   desc?: string | null;
   validate?: (input: string) => string | null;
@@ -40,6 +43,7 @@ interface DateQ {
 
 interface PasswordQ {
   type: QuestionType.Password;
+  id: string;
   message: string;
   desc?: string | null;
   validate?: (input: string) => string | null;
@@ -49,15 +53,17 @@ interface PasswordQ {
 
 interface SelectQ {
   type: QuestionType.Select;
+  id: string;
   message: string;
   desc?: string | null;
-  validate?: (input: string) => string | null;
+  validate?: null;
 
   options: string[];
 }
 
 interface TextQ {
   type: QuestionType.Text;
+  id: string;
   message: string;
   desc?: string | null;
   validate?: (input: string) => string | null;

@@ -1,3 +1,11 @@
 .direnv
 .idea
 dist
+.mypy_cache
+.ruff_cache
+
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyz

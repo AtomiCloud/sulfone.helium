@@ -4,25 +4,18 @@ using sulfone_helium.Domain.Core.Questions;
 
 namespace sulfone_helium.Domain.Service;
 
-public class StatelessInquirer : IInquirer
+public class StatelessInquirer(Dictionary<string, IAnswer> answers) : IInquirer
 {
-    private readonly IAnswer[] _answers;
-    private short _pointer;
-
-    public StatelessInquirer(IAnswer[] answers, ref short pointer)
-    {
-        _answers = answers;
-        _pointer = pointer;
-    }
+    private readonly Dictionary<string, IAnswer> _answers = answers;
 
     private IAnswer GetAnswer(IQuestion q)
     {
-        if (this._pointer == this._answers.Length - 1)
+        if (!_answers.ContainsKey(q.Id))
         {
             throw new OutOfAnswerException("", q);
         }
 
-        return this._answers[++this._pointer];
+        return _answers[q.Id];
     }
 
     public Task<string[]> Checkbox(CheckboxQ q)
@@ -38,7 +31,7 @@ public class StatelessInquirer : IInquirer
         return Task.FromResult(a);
     }
 
-    public Task<string[]> Checkbox(string q, string[] options, string? help)
+    public Task<string[]> Checkbox(string q, string[] options, string id, string? help)
     {
         return this.Checkbox(
             new CheckboxQ()
@@ -46,6 +39,7 @@ public class StatelessInquirer : IInquirer
                 Message = q,
                 Options = options,
                 Desc = help,
+                Id = id,
             }
         );
     }
@@ -63,9 +57,16 @@ public class StatelessInquirer : IInquirer
         return Task.FromResult(a);
     }
 
-    public Task<bool> Confirm(string q, string? help)
+    public Task<bool> Confirm(string q, string id, string? help)
     {
-        return this.Confirm(new ConfirmQ() { Message = q, Desc = help });
+        return this.Confirm(
+            new ConfirmQ()
+            {
+                Message = q,
+                Desc = help,
+                Id = id,
+            }
+        );
     }
 
     public Task<string> Password(PasswordQ q)
@@ -81,9 +82,16 @@ public class StatelessInquirer : IInquirer
         return Task.FromResult(a);
     }
 
-    public Task<string> Password(string q, string? help)
+    public Task<string> Password(string q, string id, string? help)
     {
-        return this.Password(new PasswordQ() { Message = q, Desc = help });
+        return this.Password(
+            new PasswordQ()
+            {
+                Message = q,
+                Desc = help,
+                Id = id,
+            }
+        );
     }
 
     public Task<string> Select(SelectQ q)
@@ -99,7 +107,7 @@ public class StatelessInquirer : IInquirer
         return Task.FromResult(a);
     }
 
-    public Task<string> Select(string q, string[] options, string? help)
+    public Task<string> Select(string q, string[] options, string id, string? help)
     {
         return this.Select(
             new SelectQ()
@@ -107,6 +115,7 @@ public class StatelessInquirer : IInquirer
                 Message = q,
                 Desc = help,
                 Options = options,
+                Id = id,
             }
         );
     }
@@ -124,9 +133,16 @@ public class StatelessInquirer : IInquirer
         return Task.FromResult(a);
     }
 
-    public Task<string> Text(string q, string? help)
+    public Task<string> Text(string q, string id, string? help)
     {
-        return this.Text(new TextQ() { Message = q, Desc = help });
+        return this.Text(
+            new TextQ()
+            {
+                Message = q,
+                Desc = help,
+                Id = id,
+            }
+        );
     }
 
     public Task<DateOnly> DateSelect(DateQ q)
@@ -143,8 +159,15 @@ public class StatelessInquirer : IInquirer
         return Task.FromResult(d);
     }
 
-    public Task<DateOnly> DateSelect(string question, string? help)
+    public Task<DateOnly> DateSelect(string question, string id, string? help)
     {
-        return this.DateSelect(new DateQ() { Message = question, Desc = help });
+        return this.DateSelect(
+            new DateQ()
+            {
+                Message = question,
+                Desc = help,
+                Id = id,
+            }
+        );
     }
 }
