@@ -1,19 +1,15 @@
 version: '3'
 
 tasks:
-  run:
-    desc: Run the service
-    cmds:
-      - poetry run python main.py
   template:
     desc: Run the template
     cmds:
       - poetry run python template_test.py
+  version:
+    desc: Update package version
+    cmds:
+      - ./scripts/ci/update_version.sh {{.CLI_ARGS}}
   build:
     desc: Build the package
     cmds:
       - poetry build
-  publish:
-    desc: Publish the package
-    cmds:
-      - poetry publish

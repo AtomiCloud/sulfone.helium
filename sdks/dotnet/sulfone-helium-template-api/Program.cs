@@ -163,6 +163,7 @@ CyanEngine.StartTemplate(
                     [
                         new CyanGlob
                         {
+                            Root = null,
                             Glob = "**/*.*",
                             Exclude = [],
                             Type = GlobType.Template,

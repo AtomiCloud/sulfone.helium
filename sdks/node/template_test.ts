@@ -143,6 +143,7 @@ StartTemplateWithLambda(async (i, d) => {
         name: 'hello',
         files: [
           {
+            root: null,
             glob: '**/*.*',
             exclude: [],
             type: GlobType.Template,

@@ -10,7 +10,9 @@ export let options = {
   },
 };
 
-const BASE_URL = 'http://localhost:5550';
+const PORT = __ENV.PORT ?? 5550;
+
+const BASE_URL = `http://localhost:${PORT}`;
 const TEMPLATE_INIT = `${BASE_URL}/api/template/init`;
 const TEMPLATE_VALIDATE = `${BASE_URL}/api/template/validate`;
 const HEADERS = { headers: { 'Content-Type': 'application/json' } };
@@ -574,6 +576,91 @@ const testCases = [
         ],
         desc: 'The plane of the person',
       },
+    },
+  ],
+
+  // Q12 validate - pass
+  [
+    'Q12 validate - pass',
+    TEMPLATE_VALIDATE,
+    {
+      answers: {
+        q1: { type: 'string', answer: 'John Doe' },
+        q2: { type: 'string', answer: '25' },
+        q3: { type: 'str_array', answer: ['apple', 'orange'] },
+        q4: { type: 'str_array', answer: ['red', 'blue'] },
+        q5: { type: 'boolean', answer: true },
+        q6: { type: 'boolean', answer: false },
+        q7: { type: 'string', answer: '1990-01-15' },
+        q8: { type: 'string', answer: '1965-05-10' },
+        q9: { type: 'string', answer: 'password123' },
+        q10: { type: 'string', answer: 'Password123' },
+        q11: { type: 'string', answer: 'BMW' },
+      },
+      deterministicStates: {},
+      validate: 'Boeing',
+    },
+    200,
+    {
+      valid: null,
+    },
+  ],
+
+  // Complete questionnaire
+  [
+    'Complete questionnaire',
+    TEMPLATE_INIT,
+    {
+      answers: {
+        q1: { type: 'string', answer: 'John Doe' },
+        q2: { type: 'string', answer: '25' },
+        q3: { type: 'str_array', answer: ['apple', 'orange'] },
+        q4: { type: 'str_array', answer: ['red', 'blue'] },
+        q5: { type: 'boolean', answer: true },
+        q6: { type: 'boolean', answer: false },
+        q7: { type: 'string', answer: '1990-01-15' },
+        q8: { type: 'string', answer: '1965-05-10' },
+        q9: { type: 'string', answer: 'password123' },
+        q10: { type: 'string', answer: 'Password123' },
+        q11: { type: 'string', answer: 'BMW' },
+        q12: { type: 'string', answer: 'Boeing' },
+      },
+      deterministicStates: {},
+    },
+    200,
+    {
+      cyan: {
+        processors: [
+          {
+            name: 'hello',
+            config: {
+              Name: 'John Doe',
+              Age: '25',
+              Food: ['apple', 'orange'],
+              Color: ['red', 'blue'],
+              Beef: true,
+              Pork: false,
+              Birthday: '1990-01-15',
+              MumBirthday: '1965-05-10',
+              Password: 'password123',
+              Pin: 'Password123',
+              Car: 'BMW',
+              Plane: 'Boeing',
+              Time: '7',
+            },
+            files: [
+              {
+                root: null,
+                glob: '**/*.*',
+                exclude: [],
+                type: 'template',
+              },
+            ],
+          },
+        ],
+        plugins: [],
+      },
+      type: 'final',
     },
   ],
 ];
