@@ -6,3 +6,6 @@ nupkgs
 **/node_modules/**
 __pycache__
 CSharpier
+.mypy_cache
+.ruff_cache
+.DS_Store
