@@ -19,3 +19,10 @@ includes:
     vars:
       COMPOSE_FILE: docker-compose.template.yaml
       K6_FILE: template-api-test.js
+
+tasks:
+  setup:
+    cmds:
+      - task: dotnet:setup
+      - task: node:setup
+      - task: python:setup

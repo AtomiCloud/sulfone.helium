@@ -7,6 +7,7 @@ pre-commit-lib.run {
     # formatter
     treefmt = {
       enable = true;
+      package = formatter;
       excludes = [ ".*scaffold/templates/.*" ".*infra/.*" "pnpm-lock.yaml" "Changelog.md" "CommitConventions.md" ".*schema.json" ];
     };
     # linters From https://github.com/cachix/pre-commit-hooks.nix
@@ -114,12 +115,6 @@ pre-commit-lib.run {
       files = ".*Dockerfile$";
       language = "system";
       pass_filenames = true;
-    };
-  };
-
-  settings = {
-    treefmt = {
-      package = formatter;
     };
   };
 }
