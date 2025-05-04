@@ -2,7 +2,6 @@ from abc import abstractmethod, ABC
 
 from cyanprintsdk.domain.core.cyan import Cyan
 from cyanprintsdk.domain.core.cyan_script_model import (
-    CyanExtensionInput,
     CyanProcessorInput,
     CyanPluginInput,
 )
@@ -16,14 +15,6 @@ from cyanprintsdk.domain.processor.output import ProcessorOutput
 class ICyanTemplate(ABC):
     @abstractmethod
     async def template(self, inquirer: IInquirer, determinism: IDeterminism) -> Cyan:
-        pass
-
-
-class ICyanExtension(ABC):
-    @abstractmethod
-    async def extension(
-        self, inquirer: IInquirer, determinism: IDeterminism, i: CyanExtensionInput
-    ) -> Cyan:
         pass
 
 
