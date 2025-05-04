@@ -9,11 +9,6 @@ public interface ICyanTemplate
     Task<Cyan> Template(IInquirer inquirer, IDeterminism determinism);
 }
 
-public interface ICyanExtension
-{
-    Task<Cyan> Extension(IInquirer inquirer, IDeterminism determinism, CyanExtensionInput input);
-}
-
 public interface ICyanProcessor
 {
     Task<ProcessorOutput> Process(CyanProcessorInput input, CyanFileHelper fileHelper);
