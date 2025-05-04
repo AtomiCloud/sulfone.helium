@@ -1,6 +1,6 @@
 {
   "name": "@atomicloud/cyan-sdk",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "CyanPrint SDK for building templates, extensions, plugins or processors",
   "type": "module",
   "main": "./dist/main.cjs",

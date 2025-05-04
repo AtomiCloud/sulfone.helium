@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/AtomiCloud/sulfone.helium/compare/v2.0.0...v2.0.1) (2025-05-04)
+
+
+### 🐛 Bug Fixes 🐛
+
+* remove non-existing extensions ([#3](https://github.com/AtomiCloud/sulfone.helium/issues/3)) ([ce914e7](https://github.com/AtomiCloud/sulfone.helium/commit/ce914e7669b0d14ee68e1b1bb1ad7b7c5fcb78c3))
+* **default:** remove non-existing extensions ([56d087a](https://github.com/AtomiCloud/sulfone.helium/commit/56d087a0a1461c34ff2bb5ebfc790358190797ff))
+
 ## [2.0.0](https://github.com/AtomiCloud/sulfone.helium/compare/v1.8.1...v2.0.0) (2025-05-02)
 
 
