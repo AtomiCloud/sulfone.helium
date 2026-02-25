@@ -1,6 +1,6 @@
 # Modules Overview
 
-Brief description of what this section contains.
+This section covers the three main modules of the Helium SDK architecture: Core Types (shared interfaces), Domain Layer (business logic services), and API Layer (HTTP endpoints).
 
 ## Map
 

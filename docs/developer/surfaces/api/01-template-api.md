@@ -74,9 +74,9 @@ Validate user input for the current question.
 
 **Response** `200 OK` (`TemplateValidRes`):
 
-| Field | Type             | Description                                              |
-| ----- | ---------------- | -------------------------------------------------------- |
-| valid | `string \| null` | Error message if invalid, null if valid (optional field) |
+| Field | Type             | Description                             |
+| ----- | ---------------- | --------------------------------------- |
+| valid | `string \| null` | Error message if invalid, null if valid |
 
 **Key Files**:
 

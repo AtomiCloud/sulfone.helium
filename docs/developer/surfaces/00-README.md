@@ -1,6 +1,6 @@
 # Surfaces Overview
 
-Brief description of what this section contains.
+This section documents the HTTP API surfaces exposed by Helium SDKs for communication with the Boron coordinator, including Template, Processor, and Plugin endpoints.
 
 ## Map
 

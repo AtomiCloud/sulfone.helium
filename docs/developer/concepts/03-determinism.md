@@ -22,7 +22,7 @@ The `IDeterminism` interface solves this by caching non-deterministic values usi
 For example, when generating a unique project ID:
 
 ```typescript
-const projectId = await determinism.get('project-id', () => randomUUID());
+const projectId = determinism.get('project-id', () => randomUUID());
 ```
 
 The first execution calls `randomUUID()` and caches the result. On subsequent executions (or when navigating back and retrying), the cached value is returned, ensuring the same project ID is used.

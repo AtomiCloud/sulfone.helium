@@ -138,7 +138,7 @@ Modify existing files:
 ```typescript
 // Format code with Prettier
 const content = await fs.readFile(path.join(directory, 'index.ts'), 'utf-8');
-const formatted = prettier.format(content, { parser: 'typescript' });
+const formatted = await prettier.format(content, { parser: 'typescript' });
 await fs.writeFile(path.join(directory, 'index.ts'), formatted);
 ```
 

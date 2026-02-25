@@ -27,7 +27,7 @@ What this module is responsible for:
 
 ## Structure
 
-```
+```text
 domain/
 ├── template/
 │   ├── service.ts          # TemplateService

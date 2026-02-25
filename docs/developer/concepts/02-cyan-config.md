@@ -100,6 +100,7 @@ const cyan: Cyan = {
         {
           glob: '**/*.json',
           root: './template',
+          exclude: [],
           type: GlobType.Copy,
         },
       ],
