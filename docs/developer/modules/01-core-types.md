@@ -57,18 +57,15 @@ domain/core/
 
 ## Dependencies
 
+Core Types is a foundational module with no upstream dependencies.
+
 ```mermaid
 flowchart LR
-    A[Core Types] --> B[Domain Layer]
+    B[Domain Layer] --> A[Core Types]
     C[API Layer] --> A
 ```
 
-| Dependency   | Why                                    |
-| ------------ | -------------------------------------- |
-| Domain Layer | Domain layer services use core types   |
-| API Layer    | API layer maps DTOs to/from core types |
-
-| Dependent    | Why                                                  |
+| Consumer     | Why                                                  |
 | ------------ | ---------------------------------------------------- |
 | Domain Layer | Implements business logic using core type interfaces |
 | API Layer    | Maps HTTP requests/responses to core types           |
