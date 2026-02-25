@@ -47,7 +47,7 @@ poetry add cyanprintsdk
 
 **Python Version**: Requires Python 3.12+
 
-### .NET / C#
+### .NET/C#
 
 **Package**: `AtomiCloud.CyanPrint` on NuGet
 
