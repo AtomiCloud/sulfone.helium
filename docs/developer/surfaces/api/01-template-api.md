@@ -3,6 +3,7 @@
 **Base Path**: `http://localhost:5550`
 
 **Key Files**:
+
 - Node: `sdks/node/src/main.ts` → `StartTemplate()`
 - Python: `sdks/python/cyanprintsdk/main.py` → `start_template()`
 - .NET: `sdks/dotnet/sulfone-helium/Server.cs` → `StartTemplate()`
@@ -15,16 +16,16 @@ Execute template with accumulated answers.
 
 **Parameters**:
 
-| Name | In | Type | Required | Description |
-|------|-----|------|----------|-------------|
-| body | body | `TemplateAnswerReq` | Yes | Answers and deterministic state |
+| Name | In   | Type                | Required | Description                     |
+| ---- | ---- | ------------------- | -------- | ------------------------------- |
+| body | body | `TemplateAnswerReq` | Yes      | Answers and deterministic state |
 
 **Request Body** (`TemplateAnswerReq`):
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| answers | `Record<string, AnswerReq>` | Yes | Accumulated answers from previous questions |
-| deterministicStates | `Record<string, string>` | Yes | Cached non-deterministic values |
+| Field               | Type                        | Required | Description                                 |
+| ------------------- | --------------------------- | -------- | ------------------------------------------- |
+| answers             | `Record<string, AnswerReq>` | Yes      | Accumulated answers from previous questions |
+| deterministicStates | `Record<string, string>`    | Yes      | Cached non-deterministic values             |
 
 **Response** `200 OK`:
 
@@ -32,20 +33,21 @@ Returns either a question response (questionnaire) or final response (final).
 
 **Questionnaire Response** (`TemplateQnARes`):
 
-| Field | Type | Description |
-|-------|------|-------------|
-| type | `"questionnaire"` | Discriminator indicating question response |
-| deterministicState | `Record<string, string>` | Updated deterministic state |
-| question | `QuestionRes` | Next question to ask |
+| Field              | Type                     | Description                                |
+| ------------------ | ------------------------ | ------------------------------------------ |
+| type               | `"questionnaire"`        | Discriminator indicating question response |
+| deterministicState | `Record<string, string>` | Updated deterministic state                |
+| question           | `QuestionRes`            | Next question to ask                       |
 
 **Final Response** (`TemplateFinalRes`):
 
-| Field | Type | Description |
-|-------|------|-------------|
-| type | `"final"` | Discriminator indicating final response |
-| cyan | `CyanRes` | Completed Cyan config |
+| Field | Type      | Description                             |
+| ----- | --------- | --------------------------------------- |
+| type  | `"final"` | Discriminator indicating final response |
+| cyan  | `CyanRes` | Completed Cyan config                   |
 
 **Key Files**:
+
 - Node: `sdks/node/src/api/template/req.ts` → `TemplateAnswerReq`
 - Node: `sdks/node/src/api/template/res.ts` → `TemplateRes`, `TemplateQnARes`, `TemplateFinalRes`
 - Node: `sdks/node/src/main.ts` → Endpoint handler
@@ -58,25 +60,26 @@ Validate user input for the current question.
 
 **Parameters**:
 
-| Name | In | Type | Required | Description |
-|------|-----|------|----------|-------------|
-| body | body | `TemplateValidateReq` | Yes | Answers and value to validate |
+| Name | In   | Type                  | Required | Description                   |
+| ---- | ---- | --------------------- | -------- | ----------------------------- |
+| body | body | `TemplateValidateReq` | Yes      | Answers and value to validate |
 
 **Request Body** (`TemplateValidateReq`):
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| answers | `Record<string, AnswerReq>` | Yes | Accumulated answers |
-| deterministicStates | `Record<string, string>` | Yes | Cached non-deterministic values |
-| validate | `string` | Yes | User input to validate |
+| Field               | Type                        | Required | Description                     |
+| ------------------- | --------------------------- | -------- | ------------------------------- |
+| answers             | `Record<string, AnswerReq>` | Yes      | Accumulated answers             |
+| deterministicStates | `Record<string, string>`    | Yes      | Cached non-deterministic values |
+| validate            | `string`                    | Yes      | User input to validate          |
 
 **Response** `200 OK` (`TemplateValidRes`):
 
-| Field | Type | Description |
-|-------|------|-------------|
+| Field | Type             | Description                                              |
+| ----- | ---------------- | -------------------------------------------------------- |
 | valid | `string \| null` | Error message if invalid, null if valid (optional field) |
 
 **Key Files**:
+
 - Node: `sdks/node/src/api/template/req.ts` → `TemplateValidateReq`
 - Node: `sdks/node/src/api/template/res.ts` → `TemplateValidRes`
 - Node: `sdks/node/src/main.ts` → Endpoint handler
@@ -120,7 +123,7 @@ interface TemplateFinalRes {
 ### AnswerReq
 
 ```typescript
-// Discriminated union with answer field
+// Structural union — differentiated by the type of the answer field
 type AnswerReq = StringAnswerReq | StringArrayAnswerReq | BoolAnswerReq;
 
 interface StringAnswerReq {
@@ -175,7 +178,7 @@ interface CyanGlobRes {
   glob: string;
   root?: string | null;
   exclude: string[];
-  type: string;  // "template" or "copy"
+  type: string; // "template" or "copy"
 }
 ```
 
@@ -185,7 +188,7 @@ interface CyanGlobRes {
 
 ## Error Codes
 
-| Code | Meaning | Resolution |
-|------|---------|------------|
-| 400 | Bad request | Check request body format |
-| 500 | Internal error | Check container logs |
+| Code | Meaning        | Resolution                |
+| ---- | -------------- | ------------------------- |
+| 400  | Bad request    | Check request body format |
+| 500  | Internal error | Check container logs      |

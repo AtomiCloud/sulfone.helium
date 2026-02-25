@@ -5,6 +5,7 @@
 **Why**: Provides common data structures that enable consistent interaction between templates, processors, and plugins across all SDK languages.
 
 **Key Files**:
+
 - `sdks/node/src/domain/core/cyan_script.ts` - ICyanTemplate, ICyanProcessor, ICyanPlugin
 - `sdks/node/src/domain/core/cyan.ts` - Cyan, CyanGlob, GlobType
 - `sdks/node/src/domain/core/cyan_script_model.ts` - CyanProcessorInput, CyanPluginInput
@@ -19,6 +20,7 @@
 ## Responsibilities
 
 What this module is responsible for:
+
 - Defining core interfaces (ICyanTemplate, ICyanProcessor, ICyanPlugin)
 - Providing shared data structures (Cyan, CyanGlob, CyanProcessorInput, CyanPluginInput)
 - Specifying question types for interactive prompting
@@ -27,7 +29,7 @@ What this module is responsible for:
 
 ## Structure
 
-```
+```text
 domain/core/
 ├── cyan_script.ts          # Core interfaces (ICyanTemplate, ICyanProcessor, ICyanPlugin)
 ├── cyan.ts                 # Cyan config types (Cyan, CyanProcessor, CyanPlugin, CyanGlob)
@@ -41,17 +43,17 @@ domain/core/
     └── virtual_file.ts     # Virtual file representation
 ```
 
-| File | Purpose |
-|------|---------|
-| `cyan_script.ts` | Core interfaces defining Template, Processor, Plugin contracts |
-| `cyan.ts` | Output structure from templates (Cyan config) |
-| `cyan_script_model.ts` | Input structures for processors and plugins |
-| `inquirer.ts` | Interface for interactive prompting (6 question types) |
-| `deterministic.ts` | Interface for caching non-deterministic values |
-| `question.ts` | Question type definitions |
-| `answer.ts` | Answer type definitions |
-| `fs/cyan_fs_helper.ts` | Virtual file system abstraction |
-| `fs/virtual_file.ts` | Virtual file data structure |
+| File                   | Purpose                                                        |
+| ---------------------- | -------------------------------------------------------------- |
+| `cyan_script.ts`       | Core interfaces defining Template, Processor, Plugin contracts |
+| `cyan.ts`              | Output structure from templates (Cyan config)                  |
+| `cyan_script_model.ts` | Input structures for processors and plugins                    |
+| `inquirer.ts`          | Interface for interactive prompting (6 question types)         |
+| `deterministic.ts`     | Interface for caching non-deterministic values                 |
+| `question.ts`          | Question type definitions                                      |
+| `answer.ts`            | Answer type definitions                                        |
+| `fs/cyan_fs_helper.ts` | Virtual file system abstraction                                |
+| `fs/virtual_file.ts`   | Virtual file data structure                                    |
 
 ## Dependencies
 
@@ -61,15 +63,15 @@ flowchart LR
     C[API Layer] --> A
 ```
 
-| Dependency | Why |
-|------------|-----|
-| Domain Layer | Domain layer services use core types |
-| API Layer | API layer maps DTOs to/from core types |
+| Dependency   | Why                                    |
+| ------------ | -------------------------------------- |
+| Domain Layer | Domain layer services use core types   |
+| API Layer    | API layer maps DTOs to/from core types |
 
-| Dependent | Why |
-|-----------|-----|
+| Dependent    | Why                                                  |
+| ------------ | ---------------------------------------------------- |
 | Domain Layer | Implements business logic using core type interfaces |
-| API Layer | Maps HTTP requests/responses to core types |
+| API Layer    | Maps HTTP requests/responses to core types           |
 
 ## Key Interfaces
 

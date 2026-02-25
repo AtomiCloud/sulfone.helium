@@ -5,6 +5,7 @@
 **Why**: Enables post-processing tasks like cleanup, formatting, or file addition after the main file generation is complete.
 
 **Key Files**:
+
 - `sdks/node/src/domain/plugin/service.ts` → `PluginService.plug()`
 - `sdks/node/src/domain/core/cyan_script.ts` → `ICyanPlugin` interface
 - `sdks/node/src/api/plugin/lambda.ts` → `LambdaPlugin`
@@ -19,6 +20,7 @@
 The Plugin API enables post-processing utilities to modify the output from processors. Plugins run after all processors have completed and receive a `CyanPluginInput` containing the output directory and configuration.
 
 Plugins can perform three types of operations:
+
 - **Add**: Insert new files (e.g., .gitignore, LICENSE)
 - **Remove**: Delete files (e.g., template files, temporary files)
 - **Transform**: Modify existing files (e.g., format code, update imports)
@@ -58,15 +60,15 @@ sequenceDiagram
     PS-->>C: 7. PluginRes
 ```
 
-| # | Step | What | Why | Key File |
-|---|------|------|-----|----------|
-| 1 | POST /api/plug | Coordinator sends plugin request | Initiate plugin | `sdks/node/src/main.ts` |
-| 2 | plugin(input) | Service calls plugin with input | Begin plugin execution | `sdks/node/src/domain/core/cyan_script.ts` |
-| 3 | Read output directory | Plugin reads generated files | Access output | Plugin implementation |
-| 4 | Add/Remove/Transform | Plugin modifies files | Apply post-processing | Plugin implementation |
-| 5 | Write modifications | Plugin writes changes | Update output | Plugin implementation |
-| 6 | PluginOutput | Plugin returns output | Complete execution | `sdks/node/src/domain/plugin/output.ts` |
-| 7 | PluginRes | Service maps to response | Return to coordinator | `sdks/node/src/api/plugin/res.ts` |
+| #   | Step                  | What                             | Why                    | Key File                                   |
+| --- | --------------------- | -------------------------------- | ---------------------- | ------------------------------------------ |
+| 1   | POST /api/plug        | Coordinator sends plugin request | Initiate plugin        | `sdks/node/src/main.ts`                    |
+| 2   | plugin(input)         | Service calls plugin with input  | Begin plugin execution | `sdks/node/src/domain/core/cyan_script.ts` |
+| 3   | Read output directory | Plugin reads generated files     | Access output          | Plugin implementation                      |
+| 4   | Add/Remove/Transform  | Plugin modifies files            | Apply post-processing  | Plugin implementation                      |
+| 5   | Write modifications   | Plugin writes changes            | Update output          | Plugin implementation                      |
+| 6   | PluginOutput          | Plugin returns output            | Complete execution     | `sdks/node/src/domain/plugin/output.ts`    |
+| 7   | PluginRes             | Service maps to response         | Return to coordinator  | `sdks/node/src/api/plugin/res.ts`          |
 
 ## ICyanPlugin Interface
 
@@ -77,32 +79,34 @@ interface ICyanPlugin {
 ```
 
 **Key Files**:
+
 - Node: `sdks/node/src/domain/core/cyan_script.ts`
 - Python: `sdks/python/cyanprintsdk/domain/core/cyan_script.py`
 - .NET: `sdks/dotnet/sulfone-helium/Domain/Core/CyanScript.cs`
 
 ## CyanPluginInput
 
-| Field | Type | Description |
-|-------|------|-------------|
-| directory | `string` | Output directory containing processed files |
-| config | `dynamic` | Plugin-specific configuration |
+| Field     | Type      | Description                                 |
+| --------- | --------- | ------------------------------------------- |
+| directory | `string`  | Output directory containing processed files |
+| config    | `dynamic` | Plugin-specific configuration               |
 
 ## PluginOutput
 
-| Field | Type | Description |
-|-------|------|-------------|
+| Field     | Type     | Description                                 |
+| --------- | -------- | ------------------------------------------- |
 | directory | `string` | Output directory containing processed files |
 
 ## Entry Points
 
-| SDK | Interface Method | Lambda Method |
-|-----|------------------|---------------|
-| Node | `StartPlugin(ICyanPlugin)` | `StartPluginWithLambda(LambdaPluginFn)` |
-| Python | `start_plugin(ICyanPlugin)` | `start_plugin_with_fn(LambdaPluginFn)` |
-| .NET | `StartPlugin(ICyanPlugin)` | `StartPlugin(Func<CyanPluginInput, Task<PluginOutput>>)` |
+| SDK    | Interface Method            | Lambda Method                                            |
+| ------ | --------------------------- | -------------------------------------------------------- |
+| Node   | `StartPlugin(ICyanPlugin)`  | `StartPluginWithLambda(LambdaPluginFn)`                  |
+| Python | `start_plugin(ICyanPlugin)` | `start_plugin_with_fn(LambdaPluginFn)`                   |
+| .NET   | `StartPlugin(ICyanPlugin)`  | `StartPlugin(Func<CyanPluginInput, Task<PluginOutput>>)` |
 
 **Key Files**:
+
 - Node: `sdks/node/src/main.ts`
 - Python: `sdks/python/cyanprintsdk/main.py`
 - .NET: `sdks/dotnet/sulfone-helium/Server.cs`
@@ -112,6 +116,7 @@ interface ICyanPlugin {
 ### Add
 
 Insert new files into the output:
+
 ```typescript
 // Add .gitignore
 await fs.writeFile(path.join(directory, '.gitignore'), content);
@@ -120,6 +125,7 @@ await fs.writeFile(path.join(directory, '.gitignore'), content);
 ### Remove
 
 Delete files from the output:
+
 ```typescript
 // Remove template files
 await fs.unlink(path.join(directory, 'template.hbs'));
@@ -128,6 +134,7 @@ await fs.unlink(path.join(directory, 'template.hbs'));
 ### Transform
 
 Modify existing files:
+
 ```typescript
 // Format code with Prettier
 const content = await fs.readFile(path.join(directory, 'index.ts'), 'utf-8');

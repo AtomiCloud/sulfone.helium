@@ -4,11 +4,11 @@ Helium is the **Cyan SDK** collection for CyanPrint - providing multi-language S
 
 ## Package Information
 
-| Language | Package | Version |
-|----------|---------|---------|
-| Node.js | `@atomicloud/cyan-sdk` | 2.0.1 |
-| Python | `cyanprintsdk` | 2.0.1 |
-| .NET | `AtomiCloud.CyanPrint` | 2.0.1 |
+| Language | Package                | Version |
+| -------- | ---------------------- | ------- |
+| Node.js  | `@atomicloud/cyan-sdk` | 2.0.1   |
+| Python   | `cyanprintsdk`         | 2.0.1   |
+| .NET     | `AtomiCloud.CyanPrint` | 2.0.1   |
 
 ## Quick Links
 
@@ -37,8 +37,8 @@ Helium provides SDKs for building CyanPrint artifacts:
 
 ## SDK Locations
 
-| Language | Path |
-|----------|------|
-| .NET | `sdks/dotnet/sulfone-helium/` |
-| Node.js | `sdks/node/` |
-| Python | `sdks/python/cyanprintsdk/` |
+| Language | Path                          |
+| -------- | ----------------------------- |
+| .NET     | `sdks/dotnet/sulfone-helium/` |
+| Node.js  | `sdks/node/`                  |
+| Python   | `sdks/python/cyanprintsdk/`   |

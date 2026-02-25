@@ -5,6 +5,7 @@
 **Why**: Enables templates to ask users questions without blocking or managing state on the server, supporting back navigation and multi-client interfaces.
 
 **Key Files**:
+
 - `sdks/node/src/domain/template/service.ts` → `TemplateService.template()`
 - `sdks/node/src/domain/core/inquirer.ts` → `IInquirer` interface
 - `sdks/node/src/domain/service/stateless_inquirer.ts` → `StatelessInquirer`
@@ -71,38 +72,39 @@ sequenceDiagram
     TS-->>C: 15. Return FinalResponse
 ```
 
-| # | Step | What | Why | Key File |
-|---|------|------|-----|----------|
-| 1 | POST /api/template/init | Coordinator sends accumulated answers | Initiate checkpoint flow | `sdks/node/src/main.ts` |
-| 2 | template(inquirer, determinism) | Service calls template with interfaces | Begin template execution | `sdks/node/src/domain/template/service.ts` |
-| 3 | text("What is your name?") | Template prompts for input | Collect user answer | `sdks/node/src/domain/core/inquirer.ts` |
-| 4 | Check answers cache | Inquirer looks for cached answer | Reuse if exists | `sdks/node/src/domain/service/stateless_inquirer.ts` |
-| 5 | Throw OutOfAnswerException | Signal that answer is needed | Non-blocking checkpoint | `sdks/node/src/domain/service/out_of_answer_error.ts` |
-| 6 | Exception propagates | Exception bubbles to service | Signal coordinator | `sdks/node/src/domain/template/service.ts` |
-| 7 | Return QuestionResponse | Service returns question to coordinator | Prompt user | `sdks/node/src/api/template/res.ts` |
-| 8 | Display question | Coordinator shows UI | Collect user input | Coordinator |
-| 9 | User enters answer | User provides input | Get answer for retry | UI |
-| 10 | POST with new answer | Coordinator resends all answers | Retry checkpoint | `sdks/node/src/main.ts` |
-| 11 | Return "Alice" | Inquirer returns cached value | Continue execution | `sdks/node/src/domain/service/stateless_inquirer.ts` |
-| 12 | select("Language?", options) | Template prompts for selection | Collect more input | `sdks/node/src/domain/core/inquirer.ts` |
-| 13 | Build Cyan config | Template creates output config | Define processors/plugins | `sdks/node/src/domain/core/cyan.ts` |
-| 14 | Return Cyan | Template returns final config | Complete execution | `sdks/node/src/domain/template/service.ts` |
-| 15 | Return FinalResponse | Service returns final config | Signal completion | `sdks/node/src/api/template/res.ts` |
+| #   | Step                            | What                                    | Why                       | Key File                                              |
+| --- | ------------------------------- | --------------------------------------- | ------------------------- | ----------------------------------------------------- |
+| 1   | POST /api/template/init         | Coordinator sends accumulated answers   | Initiate checkpoint flow  | `sdks/node/src/main.ts`                               |
+| 2   | template(inquirer, determinism) | Service calls template with interfaces  | Begin template execution  | `sdks/node/src/domain/template/service.ts`            |
+| 3   | text("What is your name?")      | Template prompts for input              | Collect user answer       | `sdks/node/src/domain/core/inquirer.ts`               |
+| 4   | Check answers cache             | Inquirer looks for cached answer        | Reuse if exists           | `sdks/node/src/domain/service/stateless_inquirer.ts`  |
+| 5   | Throw OutOfAnswerException      | Signal that answer is needed            | Non-blocking checkpoint   | `sdks/node/src/domain/service/out_of_answer_error.ts` |
+| 6   | Exception propagates            | Exception bubbles to service            | Signal coordinator        | `sdks/node/src/domain/template/service.ts`            |
+| 7   | Return QuestionResponse         | Service returns question to coordinator | Prompt user               | `sdks/node/src/api/template/res.ts`                   |
+| 8   | Display question                | Coordinator shows UI                    | Collect user input        | Coordinator                                           |
+| 9   | User enters answer              | User provides input                     | Get answer for retry      | UI                                                    |
+| 10  | POST with new answer            | Coordinator resends all answers         | Retry checkpoint          | `sdks/node/src/main.ts`                               |
+| 11  | Return "Alice"                  | Inquirer returns cached value           | Continue execution        | `sdks/node/src/domain/service/stateless_inquirer.ts`  |
+| 12  | select("Language?", options)    | Template prompts for selection          | Collect more input        | `sdks/node/src/domain/core/inquirer.ts`               |
+| 13  | Build Cyan config               | Template creates output config          | Define processors/plugins | `sdks/node/src/domain/core/cyan.ts`                   |
+| 14  | Return Cyan                     | Template returns final config           | Complete execution        | `sdks/node/src/domain/template/service.ts`            |
+| 15  | Return FinalResponse            | Service returns final config            | Signal completion         | `sdks/node/src/api/template/res.ts`                   |
 
 ## IInquirer Interface
 
 The `IInquirer` interface provides 6 question types:
 
-| Method | Question Type | Return Type | Parameters |
-|--------|---------------|-------------|------------|
-| `text()` | TextQ | `Promise<string>` | message, id, help |
-| `password()` | PasswordQ | `Promise<string>` | message, id, help |
-| `confirm()` | ConfirmQ | `Promise<boolean>` | message, id, help |
-| `select()` | SelectQ | `Promise<string>` | message, options, id, help |
-| `checkbox()` | CheckboxQ | `Promise<string[]>` | message, options, id, help |
-| `dateSelect()` | DateQ | `Promise<string>` / `Promise<DateOnly>` | message, id, help |
+| Method         | Question Type | Return Type                             | Parameters                 |
+| -------------- | ------------- | --------------------------------------- | -------------------------- |
+| `text()`       | TextQ         | `Promise<string>`                       | message, id, help          |
+| `password()`   | PasswordQ     | `Promise<string>`                       | message, id, help          |
+| `confirm()`    | ConfirmQ      | `Promise<boolean>`                      | message, id, help          |
+| `select()`     | SelectQ       | `Promise<string>`                       | message, options, id, help |
+| `checkbox()`   | CheckboxQ     | `Promise<string[]>`                     | message, options, id, help |
+| `dateSelect()` | DateQ         | `Promise<string>` / `Promise<DateOnly>` | message, id, help          |
 
 **Key Files**:
+
 - Node: `sdks/node/src/domain/core/inquirer.ts`
 - Python: `sdks/python/cyanprintsdk/domain/core/inquirer.py`
 - .NET: `sdks/dotnet/sulfone-helium/Domain/Core/Inquirer.cs`
@@ -111,24 +113,26 @@ The `IInquirer` interface provides 6 question types:
 
 The `IDeterminism` interface provides cached non-deterministic values:
 
-| Method | Description |
-|--------|-------------|
+| Method             | Description                              |
+| ------------------ | ---------------------------------------- |
 | `get(key, origin)` | Get cached value or call origin function |
 
 **Key Files**:
+
 - Node: `sdks/node/src/domain/core/deterministic.ts`
 - Python: `sdks/python/cyanprintsdk/domain/core/deterministic.py`
 - .NET: `sdks/dotnet/sulfone-helium/Domain/Core/Deterministic.cs`
 
 ## Entry Points
 
-| SDK | Interface Method | Lambda Method |
-|-----|------------------|---------------|
-| Node | `StartTemplate(ICyanTemplate)` | `StartTemplateWithLambda(LambdaTemplateFn)` |
-| Python | `start_template(ICyanTemplate)` | `start_template_with_fn(LambdaTemplateFn)` |
-| .NET | `StartTemplate(ICyanTemplate)` | `StartTemplate(Func<IInquirer, IDeterminism, Task<Cyan>>)` |
+| SDK    | Interface Method                | Lambda Method                                              |
+| ------ | ------------------------------- | ---------------------------------------------------------- |
+| Node   | `StartTemplate(ICyanTemplate)`  | `StartTemplateWithLambda(LambdaTemplateFn)`                |
+| Python | `start_template(ICyanTemplate)` | `start_template_with_fn(LambdaTemplateFn)`                 |
+| .NET   | `StartTemplate(ICyanTemplate)`  | `StartTemplate(Func<IInquirer, IDeterminism, Task<Cyan>>)` |
 
 **Key Files**:
+
 - Node: `sdks/node/src/main.ts`
 - Python: `sdks/python/cyanprintsdk/main.py`
 - .NET: `sdks/dotnet/sulfone-helium/Server.cs`

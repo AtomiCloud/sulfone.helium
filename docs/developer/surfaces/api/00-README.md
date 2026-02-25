@@ -1,6 +1,7 @@
 # HTTP API Overview
 
 **Base Paths**:
+
 - Template: `http://localhost:5550`
 - Processor: `http://localhost:5551`
 - Plugin: `http://localhost:5552`
@@ -18,28 +19,28 @@ flowchart TD
     D --> H[POST /api/plug]
 ```
 
-| API | Port | Purpose |
-|-----|------|---------|
-| Template API | 5550 | Interactive questioning for Cyan config |
-| Processor API | 5551 | File transformation |
-| Plugin API | 5552 | Post-processing hooks |
+| API           | Port | Purpose                                 |
+| ------------- | ---- | --------------------------------------- |
+| Template API  | 5550 | Interactive questioning for Cyan config |
+| Processor API | 5551 | File transformation                     |
+| Plugin API    | 5552 | Post-processing hooks                   |
 
 ## All Endpoints
 
-| Endpoint | Method | Purpose | Key File |
-|----------|--------|---------|----------|
-| [Template Init](./01-template-api.md#post-apitemplateinit) | POST | Execute template with answers | `sdks/node/src/main.ts` |
-| [Template Validate](./01-template-api.md#post-apitemplatevalidate) | POST | Validate user input | `sdks/node/src/main.ts` |
-| [Process](./02-processor-api.md#post-apiprocess) | POST | Process files | `sdks/node/src/main.ts` |
-| [Plug](./03-plugin-api.md#post-apiplug) | POST | Apply plugin | `sdks/node/src/main.ts` |
+| Endpoint                                                           | Method | Purpose                       | Key File                |
+| ------------------------------------------------------------------ | ------ | ----------------------------- | ----------------------- |
+| [Template Init](./01-template-api.md#post-apitemplateinit)         | POST   | Execute template with answers | `sdks/node/src/main.ts` |
+| [Template Validate](./01-template-api.md#post-apitemplatevalidate) | POST   | Validate user input           | `sdks/node/src/main.ts` |
+| [Process](./02-processor-api.md#post-apiprocess)                   | POST   | Process files                 | `sdks/node/src/main.ts` |
+| [Plug](./03-plugin-api.md#post-apiplug)                            | POST   | Apply plugin                  | `sdks/node/src/main.ts` |
 
 ## Health Check
 
 All services provide a health check endpoint:
 
-| Endpoint | Method | Response |
-|----------|--------|----------|
-| `GET /` | GET | `{"Status": "OK", "Message": "OK"}` |
+| Endpoint | Method | Response                            |
+| -------- | ------ | ----------------------------------- |
+| `GET /`  | GET    | `{"Status": "OK", "Message": "OK"}` |
 
 **Key File**: `sdks/node/src/main.ts` → `createApp()`
 

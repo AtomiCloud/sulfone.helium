@@ -5,6 +5,7 @@
 **Why**: Exposes domain services via HTTP protocol, enabling communication with Boron coordinator.
 
 **Key Files**:
+
 - `sdks/node/src/api/template/` - Template API endpoints and DTOs
 - `sdks/node/src/api/processor/` - Processor API endpoints and DTOs
 - `sdks/node/src/api/plugin/` - Plugin API endpoints and DTOs
@@ -16,6 +17,7 @@
 ## Responsibilities
 
 What this module is responsible for:
+
 - HTTP server startup (Express/aiohttp/ASP.NET Core)
 - Endpoint registration for Template, Processor, Plugin
 - Request/response DTO mapping
@@ -24,7 +26,7 @@ What this module is responsible for:
 
 ## Structure
 
-```
+```text
 api/
 ├── template/
 │   ├── lambda.ts           # LambdaTemplate adapter
@@ -50,15 +52,15 @@ api/
     └── question_res.ts     # Question response DTOs
 ```
 
-| File | Purpose |
-|------|---------|
-| `main.ts` | Server startup, endpoint registration |
-| `template/mapper.ts` | Template request/response mapping |
-| `template/req.ts` | Template request DTOs |
-| `template/res.ts` | Template response DTOs |
-| `processor/mapper.ts` | Processor request/response mapping |
-| `plugin/mapper.ts` | Plugin request/response mapping |
-| `core/*` | Shared DTOs and mappers |
+| File                  | Purpose                               |
+| --------------------- | ------------------------------------- |
+| `main.ts`             | Server startup, endpoint registration |
+| `template/mapper.ts`  | Template request/response mapping     |
+| `template/req.ts`     | Template request DTOs                 |
+| `template/res.ts`     | Template response DTOs                |
+| `processor/mapper.ts` | Processor request/response mapping    |
+| `plugin/mapper.ts`    | Plugin request/response mapping       |
+| `core/*`              | Shared DTOs and mappers               |
 
 ## Dependencies
 
@@ -68,50 +70,51 @@ flowchart LR
     C[Boron Coordinator] --> A
 ```
 
-| Dependency | Why |
-|------------|-----|
+| Dependency   | Why                             |
+| ------------ | ------------------------------- |
 | Domain Layer | API layer calls domain services |
 
-| Dependent | Why |
-|-----------|-----|
+| Dependent         | Why                             |
+| ----------------- | ------------------------------- |
 | Boron Coordinator | Coordinator calls API endpoints |
 
 ## HTTP Endpoints
 
 ### Template API (Port 5550)
 
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/api/template/init` | POST | Execute template with answers |
-| `/api/template/validate` | POST | Validate user input |
+| Endpoint                 | Method | Purpose                       |
+| ------------------------ | ------ | ----------------------------- |
+| `/api/template/init`     | POST   | Execute template with answers |
+| `/api/template/validate` | POST   | Validate user input           |
 
 **Key File**: `sdks/node/src/main.ts` → `StartTemplate()`
 
 ### Processor API (Port 5551)
 
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/api/process` | POST | Process files |
+| Endpoint       | Method | Purpose       |
+| -------------- | ------ | ------------- |
+| `/api/process` | POST   | Process files |
 
 **Key File**: `sdks/node/src/main.ts` → `StartProcessor()`
 
 ### Plugin API (Port 5552)
 
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/api/plug` | POST | Apply plugin |
+| Endpoint    | Method | Purpose      |
+| ----------- | ------ | ------------ |
+| `/api/plug` | POST   | Apply plugin |
 
 **Key File**: `sdks/node/src/main.ts` → `StartPlugin()`
 
 ## Entry Points
 
-| SDK | Template | Processor | Plugin |
-|-----|----------|-----------|--------|
-| Node | `StartTemplate()`, `StartTemplateWithLambda()` | `StartProcessor()`, `StartProcessorWithLambda()` | `StartPlugin()`, `StartPluginWithLambda()` |
+| SDK    | Template                                       | Processor                                        | Plugin                                     |
+| ------ | ---------------------------------------------- | ------------------------------------------------ | ------------------------------------------ |
+| Node   | `StartTemplate()`, `StartTemplateWithLambda()` | `StartProcessor()`, `StartProcessorWithLambda()` | `StartPlugin()`, `StartPluginWithLambda()` |
 | Python | `start_template()`, `start_template_with_fn()` | `start_processor()`, `start_processor_with_fn()` | `start_plugin()`, `start_plugin_with_fn()` |
-| .NET | `StartTemplate()` | `StartProcessor()` | `StartPlugin()` |
+| .NET   | `StartTemplate()`                              | `StartProcessor()`                               | `StartPlugin()`                            |
 
 **Key Files**:
+
 - Node: `sdks/node/src/main.ts`
 - Python: `sdks/python/cyanprintsdk/main.py`
 - .NET: `sdks/dotnet/sulfone-helium/Server.cs`

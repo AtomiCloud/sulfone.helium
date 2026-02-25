@@ -19,6 +19,7 @@ npm install @atomicloud/cyan-sdk
 
 **TypeScript Configuration**:
 Ensure your `tsconfig.json` includes:
+
 ```json
 {
   "compilerOptions": {
@@ -39,6 +40,7 @@ pip install cyanprintsdk
 ```
 
 Or with Poetry:
+
 ```bash
 poetry add cyanprintsdk
 ```
@@ -59,29 +61,22 @@ dotnet add package AtomiCloud.CyanPrint
 
 For contributors working on Helium itself:
 
-### Using Direnv (Recommended)
+### Using Taskfile (Recommended)
 
 ```bash
-direnv allow
+pls setup
 ```
 
-Automatically loads the Nix development shell when entering the directory.
+This sets up the development environment with all required tools.
 
-This provides:
+If you have direnv installed, the Nix development shell will be automatically loaded when entering the directory, providing:
+
 - Node.js 22
 - Python 3.12
 - .NET 8
 - Go
 - Poetry
 - Bun
-
-### Running Commands with Direnv
-
-When running commands in a directory with `.envrc`, use `direnv exec . <command>` to ensure the environment is loaded:
-
-```bash
-direnv exec . <command>
-```
 
 ### Per-SDK Setup
 
@@ -126,17 +121,31 @@ npm install @atomicloud/cyan-sdk
 Create `template.ts`:
 
 ```typescript
-import { StartTemplateWithLambda, type IInquirer } from '@atomicloud/cyan-sdk';
+import { StartTemplateWithLambda, type IInquirer, type Cyan, GlobType } from '@atomicloud/cyan-sdk';
 
-const template = async (prompt: IInquirer) => {
+const template = async (prompt: IInquirer): Promise<Cyan> => {
   const name = await prompt.text('What is your name?', 'name', null);
   const language = await prompt.select('What programming language?', ['TypeScript', 'Python', 'Go'], 'lang', null);
   const useTests = await prompt.confirm('Include tests?', 'tests', null);
 
   return {
-    name,
-    language,
-    useTests,
+    processors: [
+      {
+        name: 'my-processor',
+        files: [
+          {
+            glob: '**/*',
+            type: GlobType.Template,
+          },
+        ],
+        config: {
+          name,
+          language,
+          useTests,
+        },
+      },
+    ],
+    plugins: [],
   };
 };
 
@@ -154,6 +163,7 @@ node dist/template.js
 ```
 
 The template server will start on port 5550 and listen for:
+
 - `POST /api/template/init` - Initialize with answers
 - `POST /api/template/validate` - Validate input
 
@@ -166,6 +176,7 @@ curl -X POST http://localhost:5550/api/template/init \
 ```
 
 Response:
+
 ```json
 {
   "deterministicStates": {},
@@ -179,6 +190,7 @@ Response:
 ## What You Just Did
 
 You created a CyanPrint template that:
+
 1. Prompts the user for their name using `prompt.text()`
 2. Offers a language selection using `prompt.select()`
 3. Asks a yes/no question using `prompt.confirm()`
@@ -191,18 +203,21 @@ The checkpoint-based flow means the template throws an exception when it needs i
 Verify your installation:
 
 ### Node.js
+
 ```typescript
 import { StartTemplateWithLambda } from '@atomicloud/cyan-sdk';
 console.log('Helium SDK loaded successfully');
 ```
 
 ### Python
+
 ```python
 from cyanprintsdk import start_template
 print("Helium SDK loaded successfully")
 ```
 
 ### .NET
+
 ```csharp
 using Sulfone.Helium;
 // SDK loads successfully
@@ -211,9 +226,9 @@ using Sulfone.Helium;
 ## Version Compatibility
 
 | Helium Version | CyanPrint Platform |
-|----------------|-------------------|
-| 2.0.x | Current |
-| 1.x | Deprecated |
+| -------------- | ------------------ |
+| 2.0.x          | Current            |
+| 1.x            | Deprecated         |
 
 All three SDKs are versioned in lockstep to ensure API compatibility.
 

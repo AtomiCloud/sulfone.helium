@@ -5,6 +5,7 @@
 **Why**: Enables templates to mix files that need transformation (e.g., Handlebars templates) with files that should be copied directly (e.g., images, binaries).
 
 **Key Files**:
+
 - `sdks/node/src/domain/core/cyan.ts` → `GlobType` enum, `CyanGlob` type
 - `sdks/python/cyanprintsdk/domain/core/cyan.py` → `GlobType` enum, `CyanGlob` class
 - `sdks/dotnet/sulfone-helium/Domain/Core/Cyan.cs` → `GlobType` enum, `CyanGlob` class
@@ -21,10 +22,10 @@ This separation enables templates to include static assets (images, configuratio
 
 ## Values
 
-| Value | Name | Description |
-|-------|------|-------------|
-| 0 | Template | Files will be processed by the processor |
-| 1 | Copy | Files will be copied as-is without modification |
+| Value | Name     | Description                                     |
+| ----- | -------- | ----------------------------------------------- |
+| 0     | Template | Files will be processed by the processor        |
+| 1     | Copy     | Files will be copied as-is without modification |
 
 ## Flow
 
@@ -38,11 +39,11 @@ flowchart TD
     E --> G[Processor receives via read]
 ```
 
-| Step | What | Key File |
-|-------|------|----------|
-| resolveAll | Resolve all glob patterns | `sdks/node/src/domain/core/fs/cyan_fs_helper.ts` → `resolveAll()` |
-| Copy type | Copy files without processing | `sdks/node/src/domain/core/fs/cyan_fs_helper.ts` → `copy()` |
-| Template type | Collect files for processor | `sdks/node/src/domain/core/fs/cyan_fs_helper.ts` → `read()` |
+| Step          | What                          | Key File                                                          |
+| ------------- | ----------------------------- | ----------------------------------------------------------------- |
+| resolveAll    | Resolve all glob patterns     | `sdks/node/src/domain/core/fs/cyan_fs_helper.ts` → `resolveAll()` |
+| Copy type     | Copy files without processing | `sdks/node/src/domain/core/fs/cyan_fs_helper.ts` → `copy()`       |
+| Template type | Collect files for processor   | `sdks/node/src/domain/core/fs/cyan_fs_helper.ts` → `read()`       |
 
 ## Example
 
@@ -50,25 +51,25 @@ flowchart TD
 const cyan: Cyan = {
   processors: [
     {
-      name: "handlebars",
+      name: 'handlebars',
       files: [
         // Template files - will be processed
         {
-          glob: "**/*.hbs",
-          root: "./template",
-          exclude: ["**/test/**"],
+          glob: '**/*.hbs',
+          root: './template',
+          exclude: ['**/test/**'],
           type: GlobType.Template,
         },
         // Static files - will be copied as-is
         {
-          glob: "**/*.png",
-          root: "./template/assets",
+          glob: '**/*.png',
+          root: './template/assets',
           type: GlobType.Copy,
         },
         // Config files - will be copied as-is
         {
-          glob: "**/*.json",
-          root: "./template",
+          glob: '**/*.json',
+          root: './template',
           type: GlobType.Copy,
         },
       ],
@@ -80,6 +81,7 @@ const cyan: Cyan = {
 ```
 
 In this example:
+
 - `**/*.hbs` files are processed by the Handlebars processor
 - `**/*.png` image files are copied directly
 - `**/*.json` files are copied directly without modification

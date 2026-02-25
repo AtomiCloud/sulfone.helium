@@ -5,6 +5,7 @@
 **Why**: Implements core functionality for each API, handling checkpoint flow, file operations, and post-processing logic.
 
 **Key Files**:
+
 - `sdks/node/src/domain/template/service.ts` → `TemplateService`
 - `sdks/node/src/domain/processor/service.ts` → `ProcessorService`
 - `sdks/node/src/domain/plugin/service.ts` → `PluginService`
@@ -17,6 +18,7 @@
 ## Responsibilities
 
 What this module is responsible for:
+
 - Template service: Checkpoint-based question flow, validation
 - Processor service: File transformation orchestration
 - Plugin service: Post-processing orchestration
@@ -45,14 +47,14 @@ domain/
     └── out_of_answer_error.ts   # OutOfAnswerException
 ```
 
-| File | Purpose |
-|------|---------|
-| `template/service.ts` | Template checkpoint flow and validation |
-| `processor/service.ts` | Processor file transformation orchestration |
-| `plugin/service.ts` | Plugin post-processing orchestration |
-| `service/stateless_inquirer.ts` | Stateless inquirer implementation |
-| `service/stateless_determinism.ts` | Stateless determinism implementation |
-| `service/out_of_answer_error.ts` | Checkpoint exception |
+| File                               | Purpose                                     |
+| ---------------------------------- | ------------------------------------------- |
+| `template/service.ts`              | Template checkpoint flow and validation     |
+| `processor/service.ts`             | Processor file transformation orchestration |
+| `plugin/service.ts`                | Plugin post-processing orchestration        |
+| `service/stateless_inquirer.ts`    | Stateless inquirer implementation           |
+| `service/stateless_determinism.ts` | Stateless determinism implementation        |
+| `service/out_of_answer_error.ts`   | Checkpoint exception                        |
 
 ## Dependencies
 
@@ -62,12 +64,12 @@ flowchart LR
     C[API Layer] --> A
 ```
 
-| Dependency | Why |
-|------------|-----|
+| Dependency | Why                                            |
+| ---------- | ---------------------------------------------- |
 | Core Types | Domain services implement core type interfaces |
 
-| Dependent | Why |
-|-----------|-----|
+| Dependent | Why                                               |
+| --------- | ------------------------------------------------- |
 | API Layer | API layer uses domain services for business logic |
 
 ## Key Services
@@ -86,6 +88,7 @@ class TemplateService {
 **Key File**: `sdks/node/src/domain/template/service.ts`
 
 **Methods**:
+
 - `template()`: Executes template with answers, returns final output or next question
 - `validate()`: Validates user input for current question
 
@@ -102,6 +105,7 @@ class ProcessorService {
 **Key File**: `sdks/node/src/domain/processor/service.ts`
 
 **Methods**:
+
 - `process()`: Creates CyanFileHelper and calls processor
 
 ### PluginService
@@ -117,6 +121,7 @@ class PluginService {
 **Key File**: `sdks/node/src/domain/plugin/service.ts`
 
 **Methods**:
+
 - `plug()`: Calls plugin with directory and config
 
 ## Stateless Implementations
