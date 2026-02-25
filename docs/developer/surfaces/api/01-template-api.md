@@ -123,7 +123,7 @@ interface TemplateFinalRes {
 ### AnswerReq
 
 ```typescript
-// Structural union — differentiated by the type of the answer field
+// Structural union — variants differ only by the shape of the answer field
 type AnswerReq = StringAnswerReq | StringArrayAnswerReq | BoolAnswerReq;
 
 interface StringAnswerReq {

@@ -22,6 +22,8 @@ The `IDeterminism` interface solves this by caching non-deterministic values usi
 For example, when generating a unique project ID:
 
 ```typescript
+import { randomUUID } from 'node:crypto';
+
 const projectId = determinism.get('project-id', () => randomUUID());
 ```
 
