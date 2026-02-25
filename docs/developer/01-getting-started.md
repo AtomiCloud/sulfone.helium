@@ -155,8 +155,8 @@ StartTemplateWithLambda(template);
 ### 3. Build and Run
 
 ```bash
-# Build the TypeScript
-npx tsc template.ts
+# Build the TypeScript (uses tsconfig.json)
+npx tsc
 
 # Run the template server (typically via Docker in actual use)
 node dist/template.js
