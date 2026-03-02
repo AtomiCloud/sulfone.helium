@@ -28,10 +28,10 @@ import type { ResolverInput } from './domain/resolver/input.js';
 import type { CheckboxQ, ConfirmQ, DateQ, PasswordQ, SelectQ, TextQ } from './domain/core/question.js';
 import { QuestionType } from './domain/core/question.js';
 
-function createApp(): Application {
+function createApp(jsonLimit = '10mb'): Application {
   const app = express();
 
-  app.use(express.json());
+  app.use(express.json({ limit: jsonLimit }));
 
   app.get('/', (_: Request, res: Response) => {
     res.json({ Status: 'OK', Message: 'OK' });

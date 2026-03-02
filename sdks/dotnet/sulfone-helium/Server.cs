@@ -179,7 +179,7 @@ public static class CyanEngine
                 return resp.ToRes();
             }
         );
-        app.Run();
+        app.Run("http://0.0.0.0:5553");
     }
 
     public static void StartResolver(string[] args, Func<ResolverInput, Task<ResolverOutput>> f)
