@@ -178,7 +178,7 @@ pls resolver:test
 
 ### Flow
 
-```
+```text
 pls resolver:test
         │
         ▼
