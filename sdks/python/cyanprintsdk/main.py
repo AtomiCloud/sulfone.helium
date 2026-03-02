@@ -11,6 +11,10 @@ from cyanprintsdk.api.processor.fn import LambdaProcessorFn, LambdaProcessor
 from cyanprintsdk.api.processor.mapper import ProcessorMapper
 from cyanprintsdk.api.processor.req import ProcessorReq
 from cyanprintsdk.api.processor.res import ProcessorRes
+from cyanprintsdk.api.resolver.fn import LambdaResolverFn, LambdaResolver
+from cyanprintsdk.api.resolver.mapper import ResolverMapper
+from cyanprintsdk.api.resolver.req import ResolverReq
+from cyanprintsdk.api.resolver.res import ResolverRes
 from cyanprintsdk.api.template.fn import LambdaTemplate, LambdaTemplateFn
 from cyanprintsdk.api.template.mapper import TemplateInputMapper, TemplateOutputMapper
 from cyanprintsdk.api.template.req import TemplateAnswerReq, TemplateValidateReq
@@ -18,6 +22,7 @@ from cyanprintsdk.api.template.res import TemplateRes, TemplateValidRes
 from cyanprintsdk.domain.core.cyan_script import (
     ICyanPlugin,
     ICyanProcessor,
+    ICyanResolver,
     ICyanTemplate,
 )
 
@@ -27,6 +32,9 @@ from cyanprintsdk.domain.plugin.service import PluginService
 from cyanprintsdk.domain.processor.input import ProcessorInput
 from cyanprintsdk.domain.processor.output import ProcessorOutput
 from cyanprintsdk.domain.processor.service import ProcessorService
+from cyanprintsdk.domain.resolver.input import ResolverInput
+from cyanprintsdk.domain.resolver.output import ResolverOutput
+from cyanprintsdk.domain.resolver.service import ResolverService
 from cyanprintsdk.domain.template.input import TemplateInput, TemplateValidateInput
 from cyanprintsdk.domain.template.output import TemplateOutput
 from cyanprintsdk.domain.template.service import TemplateService
@@ -168,3 +176,38 @@ def start_template(template: ICyanTemplate):
     )
 
     web.run_app(app, port=5550)
+
+
+def start_resolver_with_fn(f: LambdaResolverFn):
+    start_resolver(LambdaResolver(f))
+
+
+def start_resolver(resolver: ICyanResolver):
+    app = web.Application()
+
+    resolver_service = ResolverService(resolver)
+
+    async def resolve(request):
+        try:
+            json = await request.json()
+            req = ResolverReq(**json)
+            pprint.pprint(req)
+        except ValidationError as e:
+            print(e)
+            return web.json_response({"error": str(e)}, status=400)
+
+        # translate to domain
+        i: ResolverInput = ResolverMapper.to_domain(req)
+        o: ResolverOutput = await resolver_service.resolve(i)
+        res: ResolverRes = ResolverMapper.to_res(o)
+
+        return web.json_response(res.model_dump(by_alias=True))
+
+    app.add_routes(
+        [
+            web.get("/", health_check),
+            web.post("/api/resolve", resolve),
+        ]
+    )
+
+    web.run_app(app, port=5553)

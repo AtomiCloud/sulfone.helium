@@ -13,3 +13,7 @@ tasks:
     desc: Run a test template
     cmds:
       - bun template_test.ts
+  resolver:
+    desc: Run a test resolver
+    cmds:
+      - bun resolver_test.ts

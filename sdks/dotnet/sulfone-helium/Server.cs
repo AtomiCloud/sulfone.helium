@@ -1,21 +1,27 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using sulfone_helium.Api.Plugin;
 using sulfone_helium.Api.Processor;
+using sulfone_helium.Api.Resolver;
 using sulfone_helium.Api.Template;
 using sulfone_helium.Domain;
 using sulfone_helium.Domain.Core;
 using sulfone_helium.Domain.Core.FileSystem;
 using sulfone_helium.Domain.Plugin;
 using sulfone_helium.Domain.Processor;
+using sulfone_helium.Domain.Resolver;
 using sulfone_helium.Domain.Template;
 
 namespace sulfone_helium;
 
 public struct StatusMessage
 {
-    public string Message { get; set; }
+    [JsonPropertyName("Status")]
     public string Status { get; set; }
+
+    [JsonPropertyName("Message")]
+    public string Message { get; set; }
 }
 
 public static class CyanEngine
@@ -143,5 +149,43 @@ public static class CyanEngine
     {
         var lambda = new LambdaTemplate(f);
         StartTemplate(args, lambda);
+    }
+
+    public static void StartResolver(string[] args, ICyanResolver resolver)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        var p = new ResolverService { Resolver = resolver };
+
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(c =>
+            c.EnableAnnotations(
+                enableAnnotationsForInheritance: true,
+                enableAnnotationsForPolymorphism: true
+            )
+        );
+
+        var app = builder.Build();
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
+        app.MapGet("/", StatusMessage () => new StatusMessage { Status = "OK", Message = "OK" });
+        app.MapPost(
+            "/api/resolve",
+            async Task<ResolverRes> (ResolverReq req) =>
+            {
+                Console.WriteLine("Received Request: {0}", req.ToJson());
+                var resp = await p.Resolve(req.ToDomain());
+                return resp.ToRes();
+            }
+        );
+        app.Run();
+    }
+
+    public static void StartResolver(string[] args, Func<ResolverInput, Task<ResolverOutput>> f)
+    {
+        var lambda = new LambdaResolver(f);
+        StartResolver(args, lambda);
     }
 }

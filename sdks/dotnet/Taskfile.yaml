@@ -25,3 +25,11 @@ tasks:
       ASPNETCORE_URLS: http://+:5551
     cmds:
       - dotnet watch
+  resolver:
+    desc: Run a sample dotnet resolver
+    dir: sulfone-helium-resolver-api
+    env:
+      DOTNET_WATCH_RESTART_ON_RUDE_EDIT: 'true'
+      ASPNETCORE_URLS: http://+:5553
+    cmds:
+      - dotnet watch

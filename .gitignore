@@ -10,3 +10,4 @@ CSharpier
 .ruff_cache
 .DS_Store
 .idea/.kagent
+.kagent/

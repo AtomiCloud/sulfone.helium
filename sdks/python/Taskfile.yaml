@@ -17,3 +17,7 @@ tasks:
     desc: Run the template
     cmds:
       - poetry run python template_test.py
+  resolver:
+    desc: Run the resolver
+    cmds:
+      - poetry run python resolver_test.py

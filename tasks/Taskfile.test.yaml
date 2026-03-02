@@ -4,4 +4,4 @@ tasks:
   test:
     desc: 'Runs K6 Tests'
     cmds:
-      - ./scripts/test.sh {{.COMPOSE_FILE}} {{.K6_FILE}} {{.CLI_ARGS}}
+      - ./scripts/test.sh {{.COMPOSE_FILE}} {{.K6_FILE}} {{.PORT_DOTNET}} {{.PORT_NODE}} {{.PORT_PYTHON}}

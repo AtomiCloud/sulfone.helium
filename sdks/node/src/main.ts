@@ -1,16 +1,19 @@
 import type { Application, Request, Response } from 'express';
 import type http from 'node:http';
 import express from 'express';
-import type { ICyanPlugin, ICyanProcessor, ICyanTemplate } from './domain/core/cyan_script.js';
+import type { ICyanPlugin, ICyanProcessor, ICyanTemplate, ICyanResolver } from './domain/core/cyan_script.js';
 import { LambdaPlugin, type LambdaPluginFn } from './api/plugin/lambda.js';
 import { LambdaProcessor, type LambdaProcessorFn } from './api/processor/lambda.js';
 import { LambdaTemplate, type LambdaTemplateFn } from './api/template/lambda.js';
+import { LambdaResolver, type LambdaResolverFn } from './api/resolver/lambda.js';
 import { PluginService } from './domain/plugin/service.js';
 import { ProcessorService } from './domain/processor/service.js';
 import { TemplateService } from './domain/template/service.js';
+import { ResolverService } from './domain/resolver/service.js';
 import { PluginMapper } from './api/plugin/mapper.js';
 import { ProcessorMapper } from './api/processor/mapper.js';
 import { TemplateInputMapper, TemplateOutputMapper } from './api/template/mapper.js';
+import { ResolverMapper } from './api/resolver/mapper.js';
 import type { TemplateValidRes } from './api/template/res.js';
 import type { IInquirer } from './domain/core/inquirer.js';
 import { CyanFileHelper } from './domain/core/fs/cyan_fs_helper.js';
@@ -20,6 +23,8 @@ import type { Cyan, CyanGlob } from './domain/core/cyan.js';
 import { GlobType } from './domain/core/cyan.js';
 import type { ProcessorOutput } from './domain/processor/output.js';
 import type { PluginOutput } from './domain/plugin/output.js';
+import type { ResolverOutput } from './domain/resolver/output.js';
+import type { ResolverInput } from './domain/resolver/input.js';
 import type { CheckboxQ, ConfirmQ, DateQ, PasswordQ, SelectQ, TextQ } from './domain/core/question.js';
 import { QuestionType } from './domain/core/question.js';
 
@@ -137,6 +142,30 @@ function StartTemplateWithLambda(f: LambdaTemplateFn): void {
   StartTemplate(lambda);
 }
 
+function StartResolver(resolver: ICyanResolver): void {
+  const app = createApp();
+  const port = 5553;
+
+  const resolverService = new ResolverService(resolver);
+  app.post('/api/resolve', async (req: Request, res: Response) => {
+    console.log(req.body);
+    const result = await resolverService.resolve(ResolverMapper.toDomain(req.body));
+    res.json(ResolverMapper.toRes(result));
+    res.end();
+  });
+
+  const server = app.listen(port, '0.0.0.0', () => {
+    console.log(`Resolver listening on port ${port}`);
+  });
+
+  setupGracefulShutdown(server, 'Resolver Server');
+}
+
+function StartResolverWithLambda(f: LambdaResolverFn): void {
+  const lambda = new LambdaResolver(f);
+  StartResolver(lambda);
+}
+
 // export all
 export {
   StartProcessor,
@@ -145,6 +174,8 @@ export {
   StartTemplateWithLambda,
   StartPlugin,
   StartPluginWithLambda,
+  StartResolver,
+  StartResolverWithLambda,
   CyanFileHelper,
   GlobType,
   QuestionType,
@@ -154,8 +185,10 @@ export type {
   ICyanTemplate,
   ICyanProcessor,
   ICyanPlugin,
+  ICyanResolver,
   LambdaTemplateFn,
   LambdaPluginFn,
+  LambdaResolverFn,
   IInquirer,
   IDeterminism,
   CyanPluginInput,
@@ -164,6 +197,8 @@ export type {
   CyanGlob,
   ProcessorOutput,
   PluginOutput,
+  ResolverOutput,
+  ResolverInput,
   CheckboxQ,
   ConfirmQ,
   DateQ,

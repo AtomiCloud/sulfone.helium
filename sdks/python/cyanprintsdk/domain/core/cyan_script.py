@@ -10,6 +10,8 @@ from cyanprintsdk.domain.core.fs.cyan_fs_helper import CyanFileHelper
 from cyanprintsdk.domain.core.inquirer import IInquirer
 from cyanprintsdk.domain.plugin.output import PluginOutput
 from cyanprintsdk.domain.processor.output import ProcessorOutput
+from cyanprintsdk.domain.resolver.input import ResolverInput
+from cyanprintsdk.domain.resolver.output import ResolverOutput
 
 
 class ICyanTemplate(ABC):
@@ -29,4 +31,10 @@ class ICyanProcessor(ABC):
 class ICyanPlugin(ABC):
     @abstractmethod
     async def plugin(self, i: CyanPluginInput) -> PluginOutput:
+        pass
+
+
+class ICyanResolver(ABC):
+    @abstractmethod
+    async def resolve(self, i: ResolverInput) -> ResolverOutput:
         pass
