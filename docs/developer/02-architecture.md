@@ -2,7 +2,7 @@
 
 ## Overview
 
-Helium provides identical functionality across three programming languages (Node.js, Python, .NET), enabling template authors to work with their preferred language while maintaining API compatibility through a shared HTTP protocol. Each SDK implements three core APIs: Template (interactive prompting), Processor (file transformation), and Plugin (post-processing).
+Helium provides identical functionality across three programming languages (Node.js, Python, .NET), enabling template authors to work with their preferred language while maintaining API compatibility through a shared HTTP protocol. Each SDK implements four core APIs: Template (interactive prompting), Processor (file transformation), Plugin (post-processing), and Resolver (conflict resolution).
 
 ## System Context
 
@@ -13,10 +13,12 @@ flowchart LR
     A[Boron Coordinator] --> B[Helium Template]
     A --> C[Helium Processor]
     A --> D[Helium Plugin]
+    A --> E[Helium Resolver]
 
-    B --> E[Cyan Config]
-    C --> F[Processed Files]
-    D --> G[Final Output]
+    B --> F[Cyan Config]
+    C --> G[Processed Files]
+    D --> H[Final Output]
+    E --> I[Merged Files]
 ```
 
 | Component         | Role                                                   |
@@ -25,9 +27,11 @@ flowchart LR
 | Helium Template   | Interactive prompting for Cyan config generation       |
 | Helium Processor  | File transformation based on template output           |
 | Helium Plugin     | Post-processing and file modifications                 |
+| Helium Resolver   | Conflict resolution for multi-layer files              |
 | Cyan Config       | Structured output defining processors and plugins      |
 | Processed Files   | Transformed files from processor execution             |
 | Final Output      | Complete output after all plugins execute              |
+| Merged Files      | Files merged from multiple template layers             |
 
 ### Component Interaction
 
@@ -84,6 +88,7 @@ sequenceDiagram
 | Template Service  | Manages checkpoint-based questioning flow | `sdks/node/src/domain/template/service.ts`<br>`sdks/python/cyanprintsdk/domain/template/service.py`<br>`sdks/dotnet/sulfone-helium/Domain/Template/Service.cs`                              |
 | Processor Service | Manages file transformation               | `sdks/node/src/domain/processor/service.ts`<br>`sdks/python/cyanprintsdk/domain/processor/service.py`<br>`sdks/dotnet/sulfone-helium/Domain/Processor/Service.cs`                           |
 | Plugin Service    | Manages post-processing hooks             | `sdks/node/src/domain/plugin/service.ts`<br>`sdks/python/cyanprintsdk/domain/plugin/service.py`<br>`sdks/dotnet/sulfone-helium/Domain/Plugin/Service.cs`                                    |
+| Resolver Service  | Manages conflict resolution for files     | `sdks/node/src/domain/resolver/service.ts`<br>`sdks/python/cyanprintsdk/domain/resolver/service.py`<br>`sdks/dotnet/sulfone-helium/Domain/Resolver/Service.cs`                              |
 | StatelessInquirer | Caches answers for checkpoint flow        | `sdks/node/src/domain/service/stateless_inquirer.ts`<br>`sdks/python/cyanprintsdk/domain/service/stateless_inquirer.py`<br>`sdks/dotnet/sulfone-helium/Domain/Service/StatelessInquirer.cs` |
 | CyanFileHelper    | Virtual file system abstraction           | `sdks/node/src/domain/core/fs/cyan_fs_helper.ts`<br>`sdks/python/cyanprintsdk/domain/core/fs/cyan_fs_helper.py`<br>`sdks/dotnet/sulfone-helium/Domain/Core/FileSystem/CyanFileHelper.cs`    |
 
