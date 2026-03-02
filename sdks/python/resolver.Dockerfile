@@ -14,5 +14,9 @@ RUN poetry config virtualenvs.create false && poetry install --no-dev
 # Copy application code
 COPY . .
 
+# Create non-root user for security
+RUN useradd --create-home --shell /bin/bash appuser
+USER appuser
+
 # Default command to run the resolver test
 CMD ["python", "resolver_test.py"]

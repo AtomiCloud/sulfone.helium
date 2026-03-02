@@ -16,4 +16,9 @@ RUN dotnet publish "sulfone-helium-resolver-api/sulfone-helium-resolver-api.cspr
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Create non-root user for security
+RUN adduser --disabled-password --gecos '' appuser
+USER appuser
+
 ENTRYPOINT ["dotnet", "sulfone-helium-resolver-api.dll"]

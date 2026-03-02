@@ -148,7 +148,6 @@ function StartResolver(resolver: ICyanResolver): void {
 
   const resolverService = new ResolverService(resolver);
   app.post('/api/resolve', async (req: Request, res: Response) => {
-    console.log(req.body);
     const result = await resolverService.resolve(ResolverMapper.toDomain(req.body));
     res.json(ResolverMapper.toRes(result));
     res.end();

@@ -175,7 +175,6 @@ public static class CyanEngine
             "/api/resolve",
             async Task<ResolverRes> (ResolverReq req) =>
             {
-                Console.WriteLine("Received Request: {0}", req.ToJson());
                 var resp = await p.Resolve(req.ToDomain());
                 return resp.ToRes();
             }

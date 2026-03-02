@@ -150,8 +150,13 @@ export default function () {
         [`${name} status 200`]: r => r.status === status,
         [`${name} response structure`]: r => {
           const body = r.json();
-          // Check that path and content are present
-          return typeof body.path === 'string' && typeof body.content === 'string';
+          // Check that path and content match expected values
+          return (
+            typeof body.path === 'string' &&
+            typeof body.content === 'string' &&
+            body.path === expected.path &&
+            body.content === expected.content
+          );
         },
       });
     });

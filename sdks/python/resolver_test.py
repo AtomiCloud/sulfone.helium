@@ -15,4 +15,5 @@ async def resolver(i: ResolverInput) -> ResolverOutput:
     return ResolverOutput(path=first_file.path, content=first_file.content)
 
 
-start_resolver_with_fn(resolver)
+if __name__ == "__main__":
+    start_resolver_with_fn(resolver)

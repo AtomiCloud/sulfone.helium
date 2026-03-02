@@ -191,7 +191,6 @@ def start_resolver(resolver: ICyanResolver):
         try:
             json = await request.json()
             req = ResolverReq(**json)
-            pprint.pprint(req)
         except ValidationError as e:
             print(e)
             return web.json_response({"error": str(e)}, status=400)
