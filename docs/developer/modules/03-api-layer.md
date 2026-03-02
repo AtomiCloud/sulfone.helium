@@ -1,6 +1,6 @@
 # API Layer Module
 
-**What**: HTTP endpoints and DTOs for Template, Processor, and Plugin services.
+**What**: HTTP endpoints and DTOs for Template, Processor, Plugin, and Resolver services.
 
 **Why**: Exposes domain services via HTTP protocol, enabling communication with Boron coordinator.
 
@@ -9,6 +9,7 @@
 - `sdks/node/src/api/template/` - Template API endpoints and DTOs
 - `sdks/node/src/api/processor/` - Processor API endpoints and DTOs
 - `sdks/node/src/api/plugin/` - Plugin API endpoints and DTOs
+- `sdks/node/src/api/resolver/` - Resolver API endpoints and DTOs
 - `sdks/node/src/api/core/` - Shared DTOs
 - `sdks/node/src/main.ts` - Server startup and endpoint registration
 - `sdks/python/cyanprintsdk/api/` - Python equivalents
@@ -19,7 +20,7 @@
 What this module is responsible for:
 
 - HTTP server startup (Express/aiohttp/ASP.NET Core)
-- Endpoint registration for Template, Processor, Plugin
+- Endpoint registration for Template, Processor, Plugin, Resolver
 - Request/response DTO mapping
 - Health check endpoints
 - Graceful shutdown handling
@@ -43,6 +44,11 @@ api/
 │   ├── mapper.ts           # Request/response mappers
 │   ├── req.ts              # PluginRequest DTOs
 │   └── res.ts              # PluginResponse DTOs
+├── resolver/
+│   ├── lambda.ts           # LambdaResolver adapter
+│   ├── mapper.ts           # Request/response mappers
+│   ├── req.ts              # ResolverRequest DTOs
+│   └── res.ts              # ResolverResponse DTOs
 └── core/
     ├── answer_req.ts       # Answer request DTOs
     ├── answer_res.ts       # Answer response DTOs
@@ -60,6 +66,7 @@ api/
 | `template/res.ts`     | Template response DTOs                |
 | `processor/mapper.ts` | Processor request/response mapping    |
 | `plugin/mapper.ts`    | Plugin request/response mapping       |
+| `resolver/mapper.ts`  | Resolver request/response mapping     |
 | `core/*`              | Shared DTOs and mappers               |
 
 ## Dependencies
@@ -105,13 +112,21 @@ flowchart LR
 
 **Key File**: `sdks/node/src/main.ts` → `StartPlugin()`
 
+### Resolver API (Port 5553)
+
+| Endpoint       | Method | Purpose                |
+| -------------- | ------ | ---------------------- |
+| `/api/resolve` | POST   | Resolve file conflicts |
+
+**Key File**: `sdks/node/src/main.ts` → `StartResolver()`
+
 ## Entry Points
 
-| SDK    | Template                                       | Processor                                        | Plugin                                     |
-| ------ | ---------------------------------------------- | ------------------------------------------------ | ------------------------------------------ |
-| Node   | `StartTemplate()`, `StartTemplateWithLambda()` | `StartProcessor()`, `StartProcessorWithLambda()` | `StartPlugin()`, `StartPluginWithLambda()` |
-| Python | `start_template()`, `start_template_with_fn()` | `start_processor()`, `start_processor_with_fn()` | `start_plugin()`, `start_plugin_with_fn()` |
-| .NET   | `StartTemplate()`                              | `StartProcessor()`                               | `StartPlugin()`                            |
+| SDK    | Template                                       | Processor                                        | Plugin                                     | Resolver                                       |
+| ------ | ---------------------------------------------- | ------------------------------------------------ | ------------------------------------------ | ---------------------------------------------- |
+| Node   | `StartTemplate()`, `StartTemplateWithLambda()` | `StartProcessor()`, `StartProcessorWithLambda()` | `StartPlugin()`, `StartPluginWithLambda()` | `StartResolver()`, `StartResolverWithLambda()` |
+| Python | `start_template()`, `start_template_with_fn()` | `start_processor()`, `start_processor_with_fn()` | `start_plugin()`, `start_plugin_with_fn()` | `start_resolver()`, `start_resolver_with_fn()` |
+| .NET   | `StartTemplate()`                              | `StartProcessor()`                               | `StartPlugin()`                            | `StartResolver()`                              |
 
 **Key Files**:
 
