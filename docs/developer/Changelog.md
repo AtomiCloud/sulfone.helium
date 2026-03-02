@@ -1,3 +1,31 @@
+## [2.1.0](https://github.com/AtomiCloud/sulfone.helium/compare/v2.0.1...v2.1.0) (2026-03-02)
+
+
+### 📜 Documentation 📜
+
+* add Helium multi-language library architecture and usage documentation ([c43c9f0](https://github.com/AtomiCloud/sulfone.helium/commit/c43c9f0f571603204ce4644b3280f3794166d975))
+* add language to fenced code block in spec [CU-86ewrbr69] ([7ae5f77](https://github.com/AtomiCloud/sulfone.helium/commit/7ae5f775aed3ed912d0b99c01d420e4072b3d549))
+* add task spec for CU-86ewrbr69 ([baab8b8](https://github.com/AtomiCloud/sulfone.helium/commit/baab8b8801c2e3361e45e1ebd529a13be015f4be))
+* address additional CodeRabbitAI feedback ([adb7545](https://github.com/AtomiCloud/sulfone.helium/commit/adb7545122ee326933357b07d65ae71472aae50d))
+* address CodeRabbitAI review feedback ([7a6d390](https://github.com/AtomiCloud/sulfone.helium/commit/7a6d390b7c8262e97cdb617df5b8a3fdf7d813ea))
+* clarify TypeScript DoD scope in spec [CU-86ewrbr69] ([70e24c4](https://github.com/AtomiCloud/sulfone.helium/commit/70e24c4090abf8092f4f24e63cb35fefc6de5ecb))
+* fix dependency section in core-types module ([8cf5543](https://github.com/AtomiCloud/sulfone.helium/commit/8cf554339803925c93148eff3bb0e3a0837c96d6))
+* fix tsc command to use tsconfig.json ([695acb9](https://github.com/AtomiCloud/sulfone.helium/commit/695acb9936e4cf49ae653e6f481384b2206ac99d))
+* remove space before # in .NET heading to avoid MD020 ([f30694d](https://github.com/AtomiCloud/sulfone.helium/commit/f30694dd64014341746fb5b184294b3b2179471b))
+* update and correct inaccuracy in docs ([cb566ff](https://github.com/AtomiCloud/sulfone.helium/commit/cb566ff8136078e5dc5bbcab93001bd4f6935c28))
+
+
+### 🚀 Features 🚀
+
+* **resolver:** implement Resolver SDK for Node.js, Python, and .NET ([528d8d9](https://github.com/AtomiCloud/sulfone.helium/commit/528d8d9ab7a723a22b9a5bf79d03129de07fc90f))
+
+
+### 🐛 Bug Fixes 🐛
+
+* add timeout to health check loops in test.sh ([a621563](https://github.com/AtomiCloud/sulfone.helium/commit/a6215634b14932108e5d719cd7359111b8e50887))
+* address CodeRabbit review feedback [CU-86ewrbr69] ([33d54bd](https://github.com/AtomiCloud/sulfone.helium/commit/33d54bd05306e32ee80349a1a89453a78dc00150))
+* address remaining CodeRabbit feedback [CU-86ewrbr69] ([cd1a16a](https://github.com/AtomiCloud/sulfone.helium/commit/cd1a16a3b4fde611b4b84d5ec67153d2629200e2))
+
 ## [2.0.1](https://github.com/AtomiCloud/sulfone.helium/compare/v2.0.0...v2.0.1) (2025-05-04)
 
 
