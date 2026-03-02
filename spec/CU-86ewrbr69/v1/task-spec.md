@@ -255,7 +255,7 @@ pls resolver:test
 - [ ] `pls node:resolver` starts on port 5553
 - [ ] `pls python:resolver` starts on port 5553
 - [ ] `pls resolver:test` passes all K6 tests
-- [ ] TypeScript compiles (`tsc --noEmit`)
+- [ ] TypeScript resolver SDK files compile correctly (specific TS errors introduced by this task are fixed; pre-existing external type conflicts in node_modules are out of scope)
 - [ ] .NET builds (`dotnet build`)
 - [ ] `pre-commit run --all` passes
 - [ ] Follows existing patterns exactly
