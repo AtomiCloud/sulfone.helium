@@ -1,0 +1,21 @@
+services:
+  resolver-dotnet:
+    build:
+      context: ./sdks/dotnet
+      dockerfile: resolver.Dockerfile
+    ports:
+      - '5553:5553'
+    environment:
+      - ASPNETCORE_URLS=http://+:5553
+  resolver-node:
+    build:
+      context: ./sdks/node
+      dockerfile: resolver.Dockerfile
+    ports:
+      - '5554:5553'
+  resolver-python:
+    build:
+      context: ./sdks/python
+      dockerfile: resolver.Dockerfile
+    ports:
+      - '5555:5553'

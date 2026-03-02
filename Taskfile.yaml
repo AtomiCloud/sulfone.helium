@@ -19,6 +19,17 @@ includes:
     vars:
       COMPOSE_FILE: docker-compose.template.yaml
       K6_FILE: template-api-test.js
+      PORT_DOTNET: '5550'
+      PORT_NODE: '5551'
+      PORT_PYTHON: '5552'
+  resolver:
+    taskfile: tasks/Taskfile.test.yaml
+    vars:
+      COMPOSE_FILE: docker-compose.resolver.yaml
+      K6_FILE: resolver-api-test.js
+      PORT_DOTNET: '5553'
+      PORT_NODE: '5554'
+      PORT_PYTHON: '5555'
 
 tasks:
   setup:

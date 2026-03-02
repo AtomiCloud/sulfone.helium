@@ -2,6 +2,9 @@
 
 compose_file="$1"
 k6_file="$2"
+port_dotnet="${3:-5550}"
+port_node="${4:-5551}"
+port_python="${5:-5552}"
 
 set -eou pipefail
 
@@ -25,35 +28,54 @@ cleanup() {
 }
 trap "cleanup" EXIT
 
-echo "🔥 Starting all langauges' test templates..."
+echo "🔥 Starting all languages' test templates..."
 docker compose -f "$compose_file" up -d --build
 echo "🔥 All test templates started"
 
-# wait till all containers are ready, use curl to ping :5550, :5551, :5552
-while ! curl -s http://localhost:5550 | grep -q "OK"; do
+# wait till all containers are ready (with timeout)
+max_attempts=60
+attempt=0
+while ! curl -s --max-time 2 "http://localhost:$port_dotnet" | grep -q "OK"; do
   sleep 1
+  attempt=$((attempt + 1))
+  if [ $attempt -ge $max_attempts ]; then
+    echo "❌ Timeout waiting for .NET container on port $port_dotnet"
+    exit 1
+  fi
 done
 
-while ! curl -s http://localhost:5551 | grep -q "OK"; do
+attempt=0
+while ! curl -s --max-time 2 "http://localhost:$port_node" | grep -q "OK"; do
   sleep 1
+  attempt=$((attempt + 1))
+  if [ $attempt -ge $max_attempts ]; then
+    echo "❌ Timeout waiting for Node container on port $port_node"
+    exit 1
+  fi
 done
 
-while ! curl -s http://localhost:5552 | grep -q "OK"; do
+attempt=0
+while ! curl -s --max-time 2 "http://localhost:$port_python" | grep -q "OK"; do
   sleep 1
+  attempt=$((attempt + 1))
+  if [ $attempt -ge $max_attempts ]; then
+    echo "❌ Timeout waiting for Python container on port $port_python"
+    exit 1
+  fi
 done
 
 echo "🎉 All test templates are ready"
 
 echo "🏃‍➡️ Running C# API test"
-PORT=5550 k6 run "k6/$k6_file"
+PORT="$port_dotnet" k6 run "k6/$k6_file"
 echo "🎉 C# API test completed"
 
 echo "🏃‍➡️ Running Node API test"
-PORT=5551 k6 run "k6/$k6_file"
+PORT="$port_node" k6 run "k6/$k6_file"
 echo "🎉 Node API test completed"
 
 echo "🏃‍➡️ Running Python API test"
-PORT=5552 k6 run "k6/$k6_file"
+PORT="$port_python" k6 run "k6/$k6_file"
 echo "🎉 Python API test completed"
 
 echo "✅ All tests completed"
