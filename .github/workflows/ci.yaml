@@ -11,3 +11,11 @@ jobs:
     with:
       atomi_platform: sulfone
       atomi_service: helium
+
+  cyanprint-test:
+    name: CyanPrint Test
+    uses: ./.github/workflows/⚡reusable-cyanprint-test.yaml
+    secrets: inherit
+    with:
+      atomi_platform: sulfone
+      atomi_service: helium

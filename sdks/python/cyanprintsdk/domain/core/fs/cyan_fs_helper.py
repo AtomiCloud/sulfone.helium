@@ -42,7 +42,10 @@ class CyanFileHelper:
         gr: str = self._glob_dir(g)
         includes = set(glob.glob(g.glob, recursive=True, root_dir=gr))
         excludes = set.union(
-            *[set(glob.glob(ex, recursive=True, root_dir=gr)) for ex in g.exclude]
+            *[
+                set(glob.glob(ex, recursive=True, root_dir=gr))
+                for ex in (g.exclude or [])
+            ]
         )
         matched = [Path(gr, x) for x in list(includes - excludes)]
 
@@ -60,7 +63,7 @@ class CyanFileHelper:
         excludes = set.union(
             *[
                 set(glob.glob(ex, recursive=True, root_dir=glob_root))
-                for ex in copy.exclude
+                for ex in (copy.exclude or [])
             ]
         )
         files = list(includes - excludes)

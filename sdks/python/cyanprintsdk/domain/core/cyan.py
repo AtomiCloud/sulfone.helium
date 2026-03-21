@@ -11,10 +11,10 @@ class GlobType(Enum):
 
 @dataclass
 class CyanGlob:
-    root: Optional[str]
     glob: str
-    exclude: List[str]
     type: GlobType
+    root: Optional[str] = None
+    exclude: Optional[List[str]] = None
 
 
 @dataclass

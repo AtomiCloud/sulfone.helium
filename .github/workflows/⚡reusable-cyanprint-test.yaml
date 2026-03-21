@@ -1,0 +1,39 @@
+name: CyanPrint Test
+
+on:
+  workflow_call:
+    inputs:
+      atomi_platform:
+        required: true
+        type: string
+      atomi_service:
+        required: true
+        type: string
+
+jobs:
+  cyanprint-test:
+    name: CyanPrint Test
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-${{ inputs.atomi_platform }}-${{ inputs.atomi_service }}-nix-store-cache
+    steps:
+      # Setup
+      - uses: AtomiCloud/actions.setup-nix@v2
+      - uses: AtomiCloud/actions.cache-nuget@v1
+
+      # Run all CyanPrint tests
+      - name: Run CyanPrint tests
+        run: |
+          cyanprint test template sdks/dotnet/template
+          cyanprint test processor sdks/dotnet/processor
+          cyanprint test plugin sdks/dotnet/plugin
+          cyanprint test resolver sdks/dotnet/resolver
+          cyanprint test template sdks/node/template
+          cyanprint test processor sdks/node/processor
+          cyanprint test plugin sdks/node/plugin
+          cyanprint test resolver sdks/node/resolver
+          cyanprint test template sdks/python/template
+          cyanprint test processor sdks/python/processor
+          cyanprint test plugin sdks/python/plugin
+          cyanprint test resolver sdks/python/resolver

@@ -1,0 +1,16 @@
+tests:
+  - name: basic_merge
+    expected:
+      type: snapshot
+      value:
+        path: ./snapshots/basic_merge
+    config: {}
+    resolver_inputs:
+      - path: ./inputs/basic_merge/template-a
+        origin:
+          template: template-a
+          layer: 0
+      - path: ./inputs/basic_merge/template-b
+        origin:
+          template: template-b
+          layer: 1

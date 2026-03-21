@@ -1,0 +1,26 @@
+username: kirinnee
+name: template-node
+description: CyanPrint template SDK for Node.js
+project: https://github.com/AtomiCloud/sulfone.helium
+source: https://github.com/AtomiCloud/sulfone.helium
+email: kirinnee97@gmail.com
+tags: []
+readme: README.md
+processors: []
+plugins: []
+templates: []
+resolvers: []
+
+build:
+  registry: kirinnee
+  platforms:
+    - linux/amd64
+  images:
+    template:
+      image: template-node
+      dockerfile: Dockerfile
+      context: ..
+    blob:
+      image: blob-node
+      dockerfile: blob.Dockerfile
+      context: ..

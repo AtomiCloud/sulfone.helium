@@ -21,3 +21,34 @@ tasks:
       - task: dotnet:setup
       - task: node:setup
       - task: python:setup
+
+  test:all:
+    desc: 'Run all artifact tests across all 3 languages'
+    cmds:
+      - task: test:dotnet
+      - task: test:node
+      - task: test:python
+
+  test:dotnet:
+    desc: 'Test all .NET artifacts'
+    cmds:
+      - cyanprint test template sdks/dotnet/template
+      - cyanprint test processor sdks/dotnet/processor
+      - cyanprint test plugin sdks/dotnet/plugin
+      - cyanprint test resolver sdks/dotnet/resolver
+
+  test:node:
+    desc: 'Test all Node.js artifacts'
+    cmds:
+      - cyanprint test template sdks/node/template
+      - cyanprint test processor sdks/node/processor
+      - cyanprint test plugin sdks/node/plugin
+      - cyanprint test resolver sdks/node/resolver
+
+  test:python:
+    desc: 'Test all Python artifacts'
+    cmds:
+      - cyanprint test template sdks/python/template
+      - cyanprint test processor sdks/python/processor
+      - cyanprint test plugin sdks/python/plugin
+      - cyanprint test resolver sdks/python/resolver

@@ -10,7 +10,7 @@ public class CyanGlob
 {
     public string? Root { get; init; }
     public required string Glob { get; init; }
-    public required string[] Exclude { get; init; }
+    public string[]? Exclude { get; init; }
     public required GlobType Type { get; init; }
 }
 
