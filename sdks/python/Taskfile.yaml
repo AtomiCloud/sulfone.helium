@@ -13,11 +13,3 @@ tasks:
     desc: Update package version
     cmds:
       - ./scripts/update_version.sh {{.CLI_ARGS}}
-  template:
-    desc: Run the template
-    cmds:
-      - poetry run python template_test.py
-  resolver:
-    desc: Run the resolver
-    cmds:
-      - poetry run python resolver_test.py
