@@ -34,8 +34,7 @@ public class CyanFileHelper(string readDir, string writeDir, IEnumerable<CyanGlo
     {
         Matcher matcher = new();
         matcher.AddIncludePatterns(new[] { glob.Glob });
-        if (glob.Exclude != null)
-            matcher.AddExcludePatterns(glob.Exclude);
+        matcher.AddExcludePatterns(glob.Exclude);
 
         var globRoot = this.GlobDir(glob);
 
@@ -55,8 +54,7 @@ public class CyanFileHelper(string readDir, string writeDir, IEnumerable<CyanGlo
     {
         Matcher matcher = new();
         matcher.AddIncludePatterns(new[] { glob.Glob });
-        if (glob.Exclude != null)
-            matcher.AddExcludePatterns(glob.Exclude);
+        matcher.AddExcludePatterns(glob.Exclude);
 
         var globRoot = this.GlobDir(glob);
         var matchingFiles = matcher
@@ -76,8 +74,7 @@ public class CyanFileHelper(string readDir, string writeDir, IEnumerable<CyanGlo
     {
         Matcher matcher = new();
         matcher.AddIncludePatterns(new[] { copy.Glob });
-        if (copy.Exclude != null)
-            matcher.AddExcludePatterns(copy.Exclude);
+        matcher.AddExcludePatterns(copy.Exclude);
 
         var globRoot = this.GlobDir(copy);
 

@@ -41,16 +41,8 @@ class CyanFileHelper:
     def get(self, g: CyanGlob) -> List[VirtualFileReference]:
         gr: str = self._glob_dir(g)
         includes = set(glob.glob(g.glob, recursive=True, root_dir=gr))
-        exclude_patterns = g.exclude or []
-        excludes = (
-            set.union(
-                *[
-                    set(glob.glob(ex, recursive=True, root_dir=gr))
-                    for ex in exclude_patterns
-                ]
-            )
-            if exclude_patterns
-            else set()
+        excludes = set.union(
+            *[set(glob.glob(ex, recursive=True, root_dir=gr)) for ex in g.exclude]
         )
         matched = [Path(gr, x) for x in list(includes - excludes)]
 
@@ -65,16 +57,11 @@ class CyanFileHelper:
     def copy(self, copy: CyanGlob) -> None:
         glob_root = self._glob_dir(copy)
         includes = set(glob.glob(copy.glob, recursive=True, root_dir=glob_root))
-        exclude_patterns = copy.exclude or []
-        excludes = (
-            set.union(
-                *[
-                    set(glob.glob(ex, recursive=True, root_dir=glob_root))
-                    for ex in exclude_patterns
-                ]
-            )
-            if exclude_patterns
-            else set()
+        excludes = set.union(
+            *[
+                set(glob.glob(ex, recursive=True, root_dir=glob_root))
+                for ex in copy.exclude
+            ]
         )
         files = list(includes - excludes)
 
