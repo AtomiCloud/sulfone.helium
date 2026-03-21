@@ -171,7 +171,7 @@ Each artifact gets its **own subdirectory** under each SDK. Each subdirectory co
 
 ### The 12 Subdirectories
 
-```
+```text
 sdks/dotnet/template/   — cyan.yaml + Dockerfile
 sdks/dotnet/processor/  — cyan.yaml + Dockerfile
 sdks/dotnet/plugin/     — cyan.yaml + Dockerfile
