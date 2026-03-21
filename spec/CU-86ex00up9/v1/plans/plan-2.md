@@ -8,7 +8,7 @@ Create the build infrastructure for all 12 artifact-language combinations. This 
 
 ### New Directory Structure:
 
-```
+```text
 sdks/{dotnet,node,python}/
 ├── template/              # Create cyan.yaml and Dockerfile
 ├── processor/             # Create cyan.yaml and Dockerfile

@@ -60,7 +60,7 @@ Document the complete pattern so it can be reused. The skill should cover:
 
 Each artifact gets its **own subdirectory** with its own `cyan.yaml`, `Dockerfile`, `test.cyan.yaml`, `snapshots/`, and `inputs/`. This keeps test infrastructure isolated from core SDK source code.
 
-```
+```text
 sdks/{dotnet,node,python}/
 ├── template/              # Template artifact test directory
 │   ├── cyan.yaml           # Build config for this artifact

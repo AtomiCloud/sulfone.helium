@@ -21,7 +21,7 @@ Run regression tests for all 4 artifacts (Template, Processor, Plugin, Resolver)
 
 Each artifact gets its **own subdirectory** with its own `cyan.yaml`, `Dockerfile`, `test.cyan.yaml`, `snapshots/`, and `inputs/`. This keeps test infrastructure isolated from core SDK source code.
 
-```
+```text
 sdks/{dotnet,node,python}/
 ├── template/              # Template artifact test directory
 │   ├── cyan.yaml           # Build config for this artifact
@@ -132,6 +132,7 @@ LABEL cyanprint.dev=true
 COPY ../package.json ../bun.lockb ./
 RUN bun install --frozen-lockfile
 COPY ../ . .
+USER bun
 CMD ["bun", "run", "../src/{artifact}_entry.ts"]
 EXPOSE {port}
 ```
@@ -145,6 +146,8 @@ LABEL cyanprint.dev=true
 COPY ../pyproject.toml ../poetry.lock* ./
 RUN pip install poetry && poetry install --no-root
 COPY ../ . .
+RUN useradd -m appuser && chown -R appuser /app
+USER appuser
 CMD ["python", "-c", "from cyanprintsdk.main import start_{artifact}; start_{artifact}()"]
 EXPOSE {port}
 ```
