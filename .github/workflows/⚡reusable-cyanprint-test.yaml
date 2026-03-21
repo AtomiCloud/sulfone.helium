@@ -25,15 +25,15 @@ jobs:
       # Run all CyanPrint tests
       - name: Run CyanPrint tests
         run: |
-          cyanprint test template sdks/dotnet/template
-          cyanprint test processor sdks/dotnet/processor
-          cyanprint test plugin sdks/dotnet/plugin
-          cyanprint test resolver sdks/dotnet/resolver
-          cyanprint test template sdks/node/template
-          cyanprint test processor sdks/node/processor
-          cyanprint test plugin sdks/node/plugin
-          cyanprint test resolver sdks/node/resolver
-          cyanprint test template sdks/python/template
-          cyanprint test processor sdks/python/processor
-          cyanprint test plugin sdks/python/plugin
-          cyanprint test resolver sdks/python/resolver
+          nix develop .#ci -c cyanprint test template sdks/dotnet/template
+          nix develop .#ci -c cyanprint test processor sdks/dotnet/processor
+          nix develop .#ci -c cyanprint test plugin sdks/dotnet/plugin
+          nix develop .#ci -c cyanprint test resolver sdks/dotnet/resolver
+          nix develop .#ci -c cyanprint test template sdks/node/template
+          nix develop .#ci -c cyanprint test processor sdks/node/processor
+          nix develop .#ci -c cyanprint test plugin sdks/node/plugin
+          nix develop .#ci -c cyanprint test resolver sdks/node/resolver
+          nix develop .#ci -c cyanprint test template sdks/python/template
+          nix develop .#ci -c cyanprint test processor sdks/python/processor
+          nix develop .#ci -c cyanprint test plugin sdks/python/plugin
+          nix develop .#ci -c cyanprint test resolver sdks/python/resolver
