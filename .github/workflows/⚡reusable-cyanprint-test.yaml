@@ -25,4 +25,4 @@ jobs:
 
       # Run all CyanPrint tests
       - name: Run CyanPrint tests
-        run: nix develop .#ci -c bash scripts/ci-cyanprint-tests.sh
+        run: nix develop .#ci -c ./scripts/ci-cyanprint-tests.sh
