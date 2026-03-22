@@ -16,8 +16,6 @@ FROM base AS final
 LABEL cyanprint.dev=true
 ENV ASPNETCORE_URLS=http://+:5551
 WORKDIR /app
-RUN useradd -m appuser && chown -R appuser:appuser /app
-USER appuser
 COPY --from=publish /app/publish .
 EXPOSE 5551
 ENTRYPOINT ["dotnet", "sulfone-helium-processor-api.dll"]

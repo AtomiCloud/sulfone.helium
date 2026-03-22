@@ -5,5 +5,4 @@ COPY package.json bun.lockb ./
 RUN bun install --frozen-lockfile
 COPY . .
 EXPOSE 5551
-USER bun
 CMD ["bun", "run", "src/processor_entry.ts"]
