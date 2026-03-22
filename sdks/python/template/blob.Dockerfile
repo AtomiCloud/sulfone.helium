@@ -1,5 +1,4 @@
 FROM alpine:3.21 AS base
-RUN apk add --no-cache tar=1.35
 
 FROM base AS build
 WORKDIR /src
