@@ -88,9 +88,17 @@ public static class CyanEngine
             "/api/process",
             async Task<ProcessorRes> (ProcessorReq req) =>
             {
-                Console.WriteLine("Received Request: {0}", req.ToJson());
-                var resp = await p.Process(req.ToDomain());
-                return resp.ToRes();
+                try
+                {
+                    Console.WriteLine("Received Request: {0}", req.ToJson());
+                    var resp = await p.Process(req.ToDomain());
+                    return resp.ToRes();
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine("Processor error: {0}", ex);
+                    throw;
+                }
             }
         );
         app.Run();
