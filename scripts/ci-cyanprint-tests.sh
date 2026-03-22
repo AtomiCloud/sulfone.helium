@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Ensure template snapshot directories exist (git can't track empty dirs)
+for lang in dotnet node python; do
+  mkdir -p "sdks/$lang/template/snapshots/default_answers"
+done
+
 echo "Running CyanPrint tests for all 12 artifact-language combinations"
 echo "==============================================================="
 
