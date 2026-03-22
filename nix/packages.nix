@@ -10,7 +10,6 @@ let
           infrautils
           infralint
           toml-cli
-          cyanprint
           sg
           pls;
       }
@@ -52,4 +51,6 @@ let
 in
 with all;
 
-atomipkgs // nix-2411
+atomipkgs //
+nix-2411
+

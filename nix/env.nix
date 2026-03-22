@@ -3,7 +3,6 @@ with packages;
 {
   system = [
     atomiutils
-    cyanprint
     xmlstarlet
     toml-cli
   ];
