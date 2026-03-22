@@ -23,21 +23,6 @@ jobs:
       - uses: AtomiCloud/actions.setup-nix@v2
       - uses: AtomiCloud/actions.cache-nuget@v1
 
-      # Run all CyanPrint tests via Taskfile
-      # cyanprint is only available in local dev (atomiutils on macOS)
-      - name: Check cyanprint availability
-        id: check-cyanprint
-        run: |
-          if nix develop .#default -c which cyanprint >/dev/null 2>&1; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-          fi
-
+      # Run all CyanPrint tests
       - name: Run CyanPrint tests
-        if: steps.check-cyanprint.outputs.available == 'true'
-        run: nix develop .#default -c task test:all
-
-      - name: CyanPrint skipped
-        if: steps.check-cyanprint.outputs.available == 'false'
-        run: echo "::warning::cyanprint CLI not available in CI — tests skipped"
+        run: nix develop .#ci -c bash scripts/ci-cyanprint-tests.sh
