@@ -29,8 +29,7 @@ with packages;
     bun
 
     infisical
-
-    k6
+    cyanprint
   ];
 
   lint = [
