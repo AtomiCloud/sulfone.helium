@@ -4,9 +4,9 @@ from cyanprintsdk.api.base_model import CyanBaseModel
 
 
 class CyanGlobReq(CyanBaseModel):
-    root: Optional[str] = None
+    root: Optional[str]
     glob: str
-    exclude: List[str] = []
+    exclude: List[str]
     type: str
 
 
