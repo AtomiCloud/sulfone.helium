@@ -17,7 +17,7 @@ public static class CyanMapper
         {
             Root = req.Root,
             Glob = req.Glob,
-            Exclude = req.Exclude,
+            Exclude = req.Exclude ?? [],
             Type = req.Type switch
             {
                 "template" => GlobType.Template,
