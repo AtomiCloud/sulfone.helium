@@ -4,7 +4,7 @@ LABEL cyanprint.dev=true
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends gcc && rm -rf /var/lib/apt/lists/*
 COPY pyproject.toml poetry.lock* ./
-RUN pip install --no-cache-dir poetry==1.8.5 && poetry config virtualenvs.in-project true && poetry install --no-root --only main --no-cache-dir
+RUN pip install --no-cache-dir poetry==1.8.5 && poetry config virtualenvs.in-project true && poetry install --no-root --only main
 COPY . .
 RUN useradd -m appuser && chown -R appuser:appuser /app
 USER appuser
