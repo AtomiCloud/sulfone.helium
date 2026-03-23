@@ -1,3 +1,42 @@
+## [2.2.0](https://github.com/AtomiCloud/sulfone.helium/compare/v2.1.0...v2.2.0) (2026-03-23)
+
+
+### 📜 Documentation 📜
+
+* add language identifiers to unlabeled code blocks in task-spec ([9997f4c](https://github.com/AtomiCloud/sulfone.helium/commit/9997f4cb6c4648986b3cd6a93d8d57b10be6c04b))
+* add Resolver SDK documentation [CU-86ewrbr69] ([045b1d2](https://github.com/AtomiCloud/sulfone.helium/commit/045b1d2bf6c962ad32c1827235881ab2a12bc01a))
+* add Resolver SDK documentation [CU-86ewrbr69] ([#6](https://github.com/AtomiCloud/sulfone.helium/issues/6)) ([2430b31](https://github.com/AtomiCloud/sulfone.helium/commit/2430b319d0a60dd1a3cd951004fb977ff9c35f71))
+* add task spec and implementation plans for CU-86ex00up9 v1 ([f36ce80](https://github.com/AtomiCloud/sulfone.helium/commit/f36ce8048a4819164ac520e7139effd70b5cca15))
+* update polish state to poll with pushCycle 3 ([af862c3](https://github.com/AtomiCloud/sulfone.helium/commit/af862c3227c27741495dbc24c402eff147561f2d))
+
+
+### 🚀 Features 🚀
+
+* **CU-86ex00up9:** add test configs and Dockerfiles for 12 artifacts ([1658834](https://github.com/AtomiCloud/sulfone.helium/commit/1658834eeb44f9ed77727b3931a4d51284990f66))
+* **cyanprint:** Remove old test infra, add CyanPrint docs ([2ec6b9f](https://github.com/AtomiCloud/sulfone.helium/commit/2ec6b9f22ae7c769e523d9fdfde3346bc5c0c620))
+
+
+### 🐛 Bug Fixes 🐛
+
+* **CU-86ex00up9:** add cyanprint to nix env, remove k6 ([8533576](https://github.com/AtomiCloud/sulfone.helium/commit/8533576e0478c16af48c31e107ee1dfbc7d85ba9))
+* **CU-86ex00up9:** add debug logging for processor test failures ([72590b0](https://github.com/AtomiCloud/sulfone.helium/commit/72590b0cc3408d43cc17727ee8784c56e5bf9e28))
+* **CU-86ex00up9:** add missing template snapshot directories ([5345902](https://github.com/AtomiCloud/sulfone.helium/commit/534590297b3475e0bfec802e88a3bf46c5f9d5bf))
+* **CU-86ex00up9:** address CodeRabbit feedback ([b129ec2](https://github.com/AtomiCloud/sulfone.helium/commit/b129ec25a11f70c118f8d02a5da7169b60475950))
+* **CU-86ex00up9:** ensure template snapshot dirs exist in CI ([ad1fedd](https://github.com/AtomiCloud/sulfone.helium/commit/ad1feddd109979fbe0d7d9f0bdcbc2ddb339d0ec))
+* **CU-86ex00up9:** ensure template snapshot dirs exist in local test ([d258511](https://github.com/AtomiCloud/sulfone.helium/commit/d25851177eca01ca490a9895e01eb835bc261a28))
+* **CU-86ex00up9:** fix template and processor test failures in CI ([ecfdace](https://github.com/AtomiCloud/sulfone.helium/commit/ecfdacefd70a6a0a2c2492b4f793f8d244dc640e))
+* **CU-86ex00up9:** fix test infra and add CI cyanprint script ([0201b84](https://github.com/AtomiCloud/sulfone.helium/commit/0201b842802d5f1a5a30bc1b10f7959d33f43829))
+* **CU-86ex00up9:** gracefully skip cyanprint tests when unavailable ([bea2170](https://github.com/AtomiCloud/sulfone.helium/commit/bea21704447ef4fb5e29bc46db8d8801523ca271))
+* **CU-86ex00up9:** remove .gitkeep from template snapshot dirs ([027082d](https://github.com/AtomiCloud/sulfone.helium/commit/027082d02f043593af7985c115cdd464e95604f5))
+* **CU-86ex00up9:** remove USER directive from processor Dockerfiles ([fc479cb](https://github.com/AtomiCloud/sulfone.helium/commit/fc479cb59ad95698ab7048a52fddd86bf0fc0b0e))
+* resolve CI and CodeRabbit review issues ([4ac5aed](https://github.com/AtomiCloud/sulfone.helium/commit/4ac5aedce37d44afb5b64aa8b7d5da54b8a06f7b))
+* **ci:** run cyanprint commands inside nix develop shell ([73ca158](https://github.com/AtomiCloud/sulfone.helium/commit/73ca1580bbfeacd01f2c46e471311d37054796af))
+
+
+### 🧪 Tests 🧪
+
+* **cu-86ex00up9:** add cyan output and test artifact ([43451d7](https://github.com/AtomiCloud/sulfone.helium/commit/43451d782d6b65a94fd3386a1b5f04548057dc48))
+
 ## [2.1.0](https://github.com/AtomiCloud/sulfone.helium/compare/v2.0.1...v2.1.0) (2026-03-02)
 
 
