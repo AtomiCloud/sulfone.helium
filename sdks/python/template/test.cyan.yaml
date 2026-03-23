@@ -1,0 +1,7 @@
+tests:
+  - name: default_answers
+    expected:
+      type: snapshot
+      value:
+        path: ./snapshots/default_answers
+    deterministic_state: {}

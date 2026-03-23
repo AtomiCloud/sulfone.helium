@@ -1,0 +1,48 @@
+tests:
+  - name: default_answers
+    expected:
+      type: snapshot
+      value:
+        path: ./snapshots/default_answers
+    answer_state:
+      q1:
+        type: String
+        value: 'Kirin'
+      q2:
+        type: String
+        value: '25'
+      q3:
+        type: StringArray
+        value:
+          - apple
+          - honeydew
+      q4:
+        type: StringArray
+        value:
+          - blue
+          - green
+      q5:
+        type: Bool
+        value: true
+      q6:
+        type: Bool
+        value: false
+      q7:
+        type: String
+        value: '1995-06-15'
+      q8:
+        type: String
+        value: '1980-12-25'
+      q9:
+        type: String
+        value: 'mypassword123'
+      q10:
+        type: String
+        value: 'MyPin123'
+      q11:
+        type: String
+        value: 'BMW'
+      q12:
+        type: String
+        value: 'Boeing'
+    deterministic_state: {}

@@ -1,0 +1,8 @@
+tests:
+  - name: runs_successfully
+    expected:
+      type: snapshot
+      value:
+        path: ./snapshots/runs_successfully
+    input: ./inputs/runs_successfully
+    config: {}

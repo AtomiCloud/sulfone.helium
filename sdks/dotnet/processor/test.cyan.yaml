@@ -1,0 +1,13 @@
+tests:
+  - name: basic_passthrough
+    expected:
+      type: snapshot
+      value:
+        path: ./snapshots/basic_passthrough
+    input: ./inputs/basic_passthrough
+    config:
+      vars:
+        name: 'World'
+    globs:
+      - pattern: '**/*.*'
+        type: template

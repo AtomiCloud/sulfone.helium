@@ -1,4 +1,8 @@
-{ pkgs, atomi, pkgs-2411 }:
+{ pkgs
+, atomi
+, pkgs-2411
+,
+}:
 let
   all = rec {
     atomipkgs = (
@@ -6,12 +10,14 @@ let
       {
         dotnetlint = atomi.dotnetlint.override { dotnetPackage = nix-2411.dotnet; };
         inherit
+          cyanprint
           atomiutils
           infrautils
           infralint
           toml-cli
           sg
-          pls;
+          pls
+          ;
       }
     );
     nix-2411 = (
@@ -24,7 +30,6 @@ let
           infisical
           git
           gcc
-          k6
           # lint
           treefmt
           gitlint
@@ -51,6 +56,4 @@ let
 in
 with all;
 
-atomipkgs //
-nix-2411
-
+atomipkgs // nix-2411

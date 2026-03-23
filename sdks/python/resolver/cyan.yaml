@@ -1,0 +1,18 @@
+username: kirinnee
+name: resolver-python
+description: CyanPrint resolver SDK for Python
+project: https://github.com/AtomiCloud/sulfone.helium
+source: https://github.com/AtomiCloud/sulfone.helium
+email: kirinnee97@gmail.com
+tags: []
+
+build:
+  registry: kirinnee
+  platforms:
+    - linux/amd64
+  images:
+    resolver:
+      image: resolver-python
+      dockerfile: Dockerfile
+      context: ..
+readme: README.md

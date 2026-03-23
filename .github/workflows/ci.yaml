@@ -12,12 +12,10 @@ jobs:
       atomi_platform: sulfone
       atomi_service: helium
 
-  template-test:
-    name: Template Test
-    uses: ./.github/workflows/⚡reusable-tests.yaml
+  cyanprint-test:
+    name: CyanPrint Test
+    uses: ./.github/workflows/⚡reusable-cyanprint-test.yaml
     secrets: inherit
     with:
       atomi_platform: sulfone
       atomi_service: helium
-      docker_compose: docker-compose.template.yaml
-      k6: template-api-test.js

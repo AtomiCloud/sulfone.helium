@@ -1,0 +1,18 @@
+username: kirinnee
+name: processor-node
+description: CyanPrint processor SDK for Node.js
+project: https://github.com/AtomiCloud/sulfone.helium
+source: https://github.com/AtomiCloud/sulfone.helium
+email: kirinnee97@gmail.com
+tags: []
+
+build:
+  registry: kirinnee
+  platforms:
+    - linux/amd64
+  images:
+    processor:
+      image: processor-node
+      dockerfile: Dockerfile
+      context: ..
+readme: README.md

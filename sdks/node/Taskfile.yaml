@@ -9,11 +9,3 @@ tasks:
     desc: Update package version
     cmds:
       - ./scripts/update_version.sh {{.CLI_ARGS}}
-  template:
-    desc: Run a test template
-    cmds:
-      - bun template_test.ts
-  resolver:
-    desc: Run a test resolver
-    cmds:
-      - bun resolver_test.ts

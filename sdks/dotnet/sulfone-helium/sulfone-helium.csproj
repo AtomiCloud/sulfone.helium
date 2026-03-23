@@ -15,12 +15,12 @@
     <PackageReadmeFile>README.MD</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="README.MD" Pack="true" PackagePath="\"/>
-    <None Include="LICENSE" Pack="true" PackagePath="\"/>
-    <None Include="Assets\cyanprint.png" Pack="true" PackagePath="\"/>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0"/>
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.2.0"/>
+    <None Include="README.MD" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" PackagePath="\" />
+    <None Include="Assets\cyanprint.png" Pack="true" PackagePath="\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -28,6 +28,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\"/>
+    <Folder Include="Assets\" />
   </ItemGroup>
 </Project>

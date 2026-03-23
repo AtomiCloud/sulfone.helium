@@ -1,0 +1,18 @@
+username: kirinnee
+name: plugin-dotnet
+description: CyanPrint plugin SDK for .NET
+project: https://github.com/AtomiCloud/sulfone.helium
+source: https://github.com/AtomiCloud/sulfone.helium
+email: kirinnee97@gmail.com
+tags: []
+
+build:
+  registry: kirinnee
+  platforms:
+    - linux/amd64
+  images:
+    plugin:
+      image: plugin-dotnet
+      dockerfile: Dockerfile
+      context: ..
+readme: README.md

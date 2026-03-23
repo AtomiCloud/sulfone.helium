@@ -1,0 +1,26 @@
+username: kirinnee
+name: template-python
+description: CyanPrint template SDK for Python
+project: https://github.com/AtomiCloud/sulfone.helium
+source: https://github.com/AtomiCloud/sulfone.helium
+email: kirinnee97@gmail.com
+tags: []
+readme: README.md
+processors: []
+plugins: []
+templates: []
+resolvers: []
+
+build:
+  registry: kirinnee
+  platforms:
+    - linux/amd64
+  images:
+    template:
+      image: template-python
+      dockerfile: Dockerfile
+      context: ..
+    blob:
+      image: blob-python
+      dockerfile: blob.Dockerfile
+      context: ..

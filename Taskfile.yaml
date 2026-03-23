@@ -14,22 +14,6 @@ includes:
   python:
     taskfile: sdks/python/Taskfile.yaml
     dir: sdks/python
-  template:
-    taskfile: tasks/Taskfile.test.yaml
-    vars:
-      COMPOSE_FILE: docker-compose.template.yaml
-      K6_FILE: template-api-test.js
-      PORT_DOTNET: '5550'
-      PORT_NODE: '5551'
-      PORT_PYTHON: '5552'
-  resolver:
-    taskfile: tasks/Taskfile.test.yaml
-    vars:
-      COMPOSE_FILE: docker-compose.resolver.yaml
-      K6_FILE: resolver-api-test.js
-      PORT_DOTNET: '5553'
-      PORT_NODE: '5554'
-      PORT_PYTHON: '5555'
 
 tasks:
   setup:
@@ -37,3 +21,38 @@ tasks:
       - task: dotnet:setup
       - task: node:setup
       - task: python:setup
+
+  test:all:
+    desc: 'Run all artifact tests across all 3 languages'
+    cmds:
+      - |
+        for lang in dotnet node python; do
+          mkdir -p "sdks/$lang/template/snapshots/default_answers"
+        done
+      - task: test:dotnet
+      - task: test:node
+      - task: test:python
+
+  test:dotnet:
+    desc: 'Test all .NET artifacts'
+    cmds:
+      - cyanprint test template sdks/dotnet/template
+      - cyanprint test processor sdks/dotnet/processor
+      - cyanprint test plugin sdks/dotnet/plugin
+      - cyanprint test resolver sdks/dotnet/resolver
+
+  test:node:
+    desc: 'Test all Node.js artifacts'
+    cmds:
+      - cyanprint test template sdks/node/template
+      - cyanprint test processor sdks/node/processor
+      - cyanprint test plugin sdks/node/plugin
+      - cyanprint test resolver sdks/node/resolver
+
+  test:python:
+    desc: 'Test all Python artifacts'
+    cmds:
+      - cyanprint test template sdks/python/template
+      - cyanprint test processor sdks/python/processor
+      - cyanprint test plugin sdks/python/plugin
+      - cyanprint test resolver sdks/python/resolver

@@ -1,0 +1,25 @@
+{
+  "step": "poll",
+  "devLoopInitialized": false,
+  "lastRunId": null,
+  "lastRunExitCode": null,
+  "lastRunStatus": null,
+  "pushCycles": 3,
+  "resolverOutputs": {
+    "ci": {
+      "code_fixes": [
+        {
+          "id": "ci-fix-1",
+          "file": ".github/workflows/reusable-cyanprint-test.yaml",
+          "line": 27,
+          "description": "Wrap cyanprint commands in nix develop .#ci -c to make the CLI available on PATH",
+          "priority": 1,
+          "source": "ci",
+          "source_detail": "cyanprint: command not found (exit code 127)"
+        }
+      ],
+      "applied": true
+    }
+  },
+  "postPushActions": []
+}

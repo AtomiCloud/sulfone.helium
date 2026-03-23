@@ -1,0 +1,18 @@
+username: kirinnee
+name: resolver-dotnet
+description: CyanPrint resolver SDK for .NET
+project: https://github.com/AtomiCloud/sulfone.helium
+source: https://github.com/AtomiCloud/sulfone.helium
+email: kirinnee97@gmail.com
+tags: []
+
+build:
+  registry: kirinnee
+  platforms:
+    - linux/amd64
+  images:
+    resolver:
+      image: resolver-dotnet
+      dockerfile: Dockerfile
+      context: ..
+readme: README.md

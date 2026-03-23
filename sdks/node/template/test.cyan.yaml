@@ -1,0 +1,19 @@
+tests:
+  - name: default_answers
+    expected:
+      type: snapshot
+      value:
+        path: ./snapshots/default_answers
+    answer_state:
+      q1:
+        type: String
+        value: 'Kirin'
+      q2:
+        type: String
+        value: '25'
+      q3:
+        type: StringArray
+        value:
+          - apple
+          - pear
+    deterministic_state: {}

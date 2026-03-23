@@ -6,7 +6,7 @@ public readonly struct CyanGlobReq
 {
     public string? Root { get; init; }
     public string Glob { get; init; }
-    public string[] Exclude { get; init; }
+    public string[]? Exclude { get; init; }
     public string Type { get; init; }
 }
 
