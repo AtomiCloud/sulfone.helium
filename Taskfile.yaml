@@ -25,6 +25,10 @@ tasks:
   test:all:
     desc: 'Run all artifact tests across all 3 languages'
     cmds:
+      - |
+        for lang in dotnet node python; do
+          mkdir -p "sdks/$lang/template/snapshots/default_answers"
+        done
       - task: test:dotnet
       - task: test:node
       - task: test:python
